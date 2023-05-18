@@ -1,0 +1,33 @@
+.container{
+    padding-top: 3%;
+}
+
+body{
+    background-image: url("../assets/vivid-blurred-colorful-background.jpg");
+    
+   
+}
+
+.login-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+.welcome-section {
+    text-align: center;
+    margin-top: 20vh;
+    margin-bottom: 20vh;
+
+}
+
+#errorMessage{
+    text-align: center;
+    color: red;
+    font-size: x-large;
+}
+
+.responseMessage{
+    text-align: center;
+}
+
+
