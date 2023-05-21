@@ -2,7 +2,7 @@
   //start session
   session_start();
   if(!isset($_SESSION['user'])) header('location: login.php');
-  $_SESSION['table'] = 'user';
+   $_SESSION['table'] = 'user';
   $user= $_SESSION['user'];
 
   
@@ -15,7 +15,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Registration Form</title>
   <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
     <div class="nav-bar">
@@ -25,7 +25,7 @@
         </div>
         </nav>
     </div>
-  <div class="container">
+  <div class="container pt-5 mt-5">
     <div class="row justify-content-center">
       <div class="col-md-6">
         <div class="card">

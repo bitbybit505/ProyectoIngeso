@@ -1,11 +1,11 @@
-.container{
-    padding-top: 3%;
-}
-
 body{
     background-image: url("../assets/vivid-blurred-colorful-background.jpg");
     
-   
+}
+
+.container-navbar{
+    display: flex;
+    justify-content: space-between;
 }
 
 .login-button {
@@ -29,5 +29,4 @@ body{
 .responseMessage{
     text-align: center;
 }
-
 
