@@ -35,7 +35,7 @@
     }
 
     $_SESSION['response'] = $response;
-    header('location: ../register.php');
+    header('location: ../add-user.php');
 
 
     

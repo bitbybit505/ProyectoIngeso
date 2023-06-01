@@ -1,7 +1,7 @@
 <?php
   session_start();
   if(!isset($_SESSION['user'])) header('location: login.php');
-  $_SESSION['table'] = 'user';
+  $_SESSION['table'] = 'supplier';
   $user = $_SESSION['user'];
 
 ?>
@@ -108,31 +108,24 @@
 
       <div class="container-fluid col-md-6 justify-content-center pt-5">
         <div class="card">
-          <div class="card-header fw-semibold ">Registration</div>
+          <div class="card-header fw-semibold ">Register supplier</div>
           <div class="card-body">
-            <form method="POST" action="database/validate-user.php">
+            <form method="POST" action="database/validate-supplier.php">
               <div class="form-group mb-3">
                 <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" required>
-              </div>
-              <div class="form-group mb-3">
-                <label for="last_name" class="mb-1">Last Name</label>
-                <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Enter your last name" required>
-              </div>
-              <div class="form-group mb-3">
-                <label for="username" class="mb-1">Username</label>
-                <input type="text" class="form-control" id="username" name="username" placeholder="Choose a username" required>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Enter the name" required>
               </div>
               <div class="form-group mb-3">
                 <label for="email" class="mb-1">Email address</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter the email" required>
               </div>
               <div class="form-group mb-3">
-                <label for="password" class="mb-1">Password</label>
-                <input type="password" class="form-control" id="password" name="password" placeholder="Choose a password" required>
+                <label for="phone_number" class="mb-1">Phone number</label>
+                <input type="text" class="form-control" id="phone_number" name="phone_number" placeholder="Enter the phone number" required>
               </div>
+              
               <!--<input type="hidden" name="table" value= "users" /> -->
-              <button type="submit" class="btn btn-primary mb-3 ">Register new user</button>
+              <button type="submit" class="btn btn-primary mb-3 ">Register new supplier</button>
             </form>
             <?php
               if(isset($_SESSION['response'])){

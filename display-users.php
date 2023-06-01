@@ -1,8 +1,18 @@
 <?php
   session_start();
   if(!isset($_SESSION['user'])) header('location: login.php');
-  $_SESSION['table'] = 'user';
+  
   $user = $_SESSION['user'];
+
+  // Include the connection.php file
+  require_once 'database/connection.php';
+
+  // Retrieve all users from the database
+  $users = array();
+
+  
+  
+  
 
 ?>
 
@@ -19,14 +29,15 @@
   <script src="css/bootstrap.bundle.min.js"></script>
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+  <!-- sweetAlert -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
   <!-- Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
-  
 
 </head>
 <body>
+
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
       <a class="navbar-brand" href="#">Dashboard</a>
@@ -106,54 +117,101 @@
       </div>
     </nav>
 
-      <div class="container-fluid col-md-6 justify-content-center pt-5">
-        <div class="card">
-          <div class="card-header fw-semibold ">Registration</div>
-          <div class="card-body">
-            <form method="POST" action="database/validate-user.php">
-              <div class="form-group mb-3">
-                <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" required>
-              </div>
-              <div class="form-group mb-3">
-                <label for="last_name" class="mb-1">Last Name</label>
-                <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Enter your last name" required>
-              </div>
-              <div class="form-group mb-3">
-                <label for="username" class="mb-1">Username</label>
-                <input type="text" class="form-control" id="username" name="username" placeholder="Choose a username" required>
-              </div>
-              <div class="form-group mb-3">
-                <label for="email" class="mb-1">Email address</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
-              </div>
-              <div class="form-group mb-3">
-                <label for="password" class="mb-1">Password</label>
-                <input type="password" class="form-control" id="password" name="password" placeholder="Choose a password" required>
-              </div>
-              <!--<input type="hidden" name="table" value= "users" /> -->
-              <button type="submit" class="btn btn-primary mb-3 ">Register new user</button>
-            </form>
-            <?php
-              if(isset($_SESSION['response'])){
-                $response_message= $_SESSION['response']['message'];
-                $is_success= $_SESSION['response']['success'];
-              
-            ?>
-            <div class="responseMessage text-center">
-              <p class="alert <?= $is_success ? 'alert-success' : 'alert-danger' ?>">
-                <?= $response_message ?>
-              </p>
-            </div>
+    
 
-            <?php unset($_SESSION['response']); }?>
-          </div>
-        </div>
-      </div>
+
+    <div class="container-fluid col-md-9 justify-content-center pt-5">
+      <table class="table">
+        <?php
+        //deleting a user
+          $userid = isset($_POST['userid']) ? $_POST['userid'] : "";
+          $btnAction = isset($_POST['btnAction']) ? $_POST['btnAction'] : "";
+          try{
+
+          include('database/connection.php');
+            
+          switch ($btnAction) {
+              
+            
+            case "Delete":
+              $id = $_POST['userid']; // Retrieve the user ID from the form
+              $stmt = $conn->prepare("DELETE FROM user WHERE id = :id");
+              $stmt->bindParam(':id', $userid);
+              $stmt->execute();
+              echo '<script>
+                      setTimeout(function() {
+                        Swal.fire({
+                          title: "Usuario eliminado",
+                          text: "El usuario ha sido eliminado correctamente.",
+                          icon: "error",
+                          timer: 1500,
+                          showConfirmButton: false
+                        });
+                      }, 150); // Retardo de 500 milisegundos antes de mostrar la ventana emergente
+                      </script>';
+
+              
+              break;
+            }
+                        
+          }
+          catch(PDOException $e){
+            $e->getMessage();
+          }
+          
+          try {
+            $stmt = $conn->prepare("SELECT * FROM user");
+            $stmt->execute();
+            $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+          } catch(PDOException $e) {
+              echo "Error: " . $e->getMessage();
+          }
+        ?>
+          <thead>
+              <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Last Name</th>
+                  <th scope="col">Username</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Role</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Created At</th>
+                  <th scope="col">Updated At</th>
+                  <th scope="col">Action</th>
+              </tr>
+          </thead>
+          <tbody>
+              <?php foreach($users as $user): ?>
+                  <tr>
+                    <td><?php echo $user['id']; ?></td>
+                    <td><?php echo $user['name']; ?></td>
+                    <td><?php echo $user['last_name']; ?></td>
+                    <td><?php echo $user['username']; ?></td>
+                    <td><?php echo $user['email']; ?></td>
+                    <td><?php echo $user['role']; ?></td>
+                    <td class="text-center">
+                        <?php if ($user['status'] == 1): ?>
+                            <input type="checkbox" checked disabled>
+                        <?php else: ?>
+                            <input type="checkbox" disabled>
+                        <?php endif; ?>
+                    </td>
+                    <td><?php echo $user['created_at']; ?></td>
+                    <td><?php echo $user['updated_at']; ?></td>
+                    <td>
+                      <form method="post">
+                        <input type="hidden" name="userid" id="userid" value="<?php echo $user['id']; ?>">
+                        <input type="summit" name="btnAction" value="Edit" class="btn btn-primary " style="height:38px; width:71.6167px">
+                        <input type="submit" name="btnAction" value="Delete" class="btn btn-danger" style="height:38px; width:71.6167px">
+                      </form>
+                    </td>
+                  </tr>
+              <?php endforeach; ?>
+          </tbody>
+      </table>
     </div>
-  </div>
-  
-</div>
+ </div>
 
 </div>
 

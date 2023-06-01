@@ -19,9 +19,11 @@
   <script src="css/bootstrap.bundle.min.js"></script>
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-  
+  <!-- sweetAlert -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <!-- Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
 
 </head>
 <body>
@@ -74,17 +76,28 @@
               <div class="collapse" id="productCollapse">
                 <ul class="nav flex-column ml-3">
                   <li class="nav-item">
-                    <a class="nav-link" href="products.php">View Products</a>
+                    <a class="nav-link" href="lista-productos.php">View Products</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#">Add Product</a>
+                    <a class="nav-link" href="products.php">Add Product</a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Delete Product</a>
-                  </li>
+                
                 </ul>
               </div>
             </li>
+            <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#suppliersCollapse"><i class="bi bi-building"></i> <span>Supplier</span> <i class="fas fa-angle-down"></i></a>
+            <div class="collapse" id="suppliersCollapse">
+              <ul class="nav flex-column ml-3">
+                <li class="nav-item">
+                  <a class="nav-link" href="display-suppliers.php">View Supplier</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="add-supplier.php">Add Supplier</a>
+                </li>
+              </ul>
+            </div>
+          </li>
             <li class="nav-item">
               <a class="nav-link" href="#"><i class="fas fa-cog"></i>Settings</a>
             </li>
@@ -116,7 +129,8 @@
             //echo $txtImagen."<br/>";
             //echo $txtCantidad."<br/>";
             //echo $accion."<br/>";
-
+          
+          try{
             include('database/connection.php');
             
 
@@ -129,7 +143,20 @@
                 $sentenciaSQL->bindParam(':cantidad',$txtCantidad);
                 $sentenciaSQL->bindParam(':imagen',$txtImagen);
                 $sentenciaSQL->execute();
+                //echo "<script>Swal.fire('¡Producto agregado!', 'El producto se agregó correctamente.', 'success');</script>";
+                echo '<script>
+                  setTimeout(function() {
+                    Swal.fire({
+                      title: "Producto agregado",
+                      text: "El producto se ha añadido correctamente.",
+                      icon: "success",
+                      timer: 1500,
+                      showConfirmButton: false
+                    });
+                  }, 150); // Retardo de 500 milisegundos antes de mostrar la ventana emergente
+                </script>';
                 
+               
                 break;
 
               case "Modificar":
@@ -152,11 +179,15 @@
                 break;       
 
             }
+          }catch(PDOException $e){
+            $e->getMessage();
+          }
+
             $sentenciaSQL = $conn->prepare("SELECT * from product;");
             $sentenciaSQL->execute();
             $listaProductos=$sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
             ?>        
-            <div class="col-md-5">
+            <div class="col-md-6 offset-md-3">
               
               <div class="card">
                 <div class="card-header">
@@ -203,39 +234,7 @@
               
               
             </div>
-            <div class="col-md-7">
-              <table class="table table-bordered">
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Cantidad</th>
-                    <th>Imagen</th>
-                    <th>Acciones</th>
-                  </tr>
-                </thead>
-                <tbody>
-                <?php foreach($listaProductos as $product){ ?>  
-                  <tr>
-                    <td><?php echo $product['id'] ?></td>
-                    <td><?php echo $product['nombre'] ?></td>
-                    <td><?php echo $product['cantidad'] ?></td>
-                    <td><?php echo $product['imagen'] ?></td>
-                    <td>
-                      Seleccionar | Borrar
-                      <form method="post">
-                        
-                        <input type="hidden" name="txtID" id="txtID" value="<?php echo $product['id']; ?>">
-                        <input type="submit" name="accion" value="Seleccionar" class="btn btn-primary">                    
-                        <input type="submit" name="accion" value="Borrar" class="btn btn-danger">                    
-                      
-                      </form>
-                    </td>
-                  </tr>
-                <?php } ?> 
-                </tbody>
-              </table>
-            </div>
+           
           </div>
         </main>
     </div>
@@ -248,6 +247,8 @@
 
 
 
+
 </body>
+
 
 </html>
