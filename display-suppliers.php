@@ -72,7 +72,7 @@
             <a class="nav-link" data-bs-toggle="collapse" href="#usersCollapse"><i class="fas fa-users"></i> <span>Users</span> <i class="fas fa-angle-down"></i></a>
             <div class="collapse" id="usersCollapse">
               <ul class="nav flex-column ml-3">
-              <li class="nav-item">
+                <li class="nav-item">
                   <a class="nav-link" href="display-users.php">Display users</a>
                 </li>
                 <li class="nav-item">
