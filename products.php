@@ -63,6 +63,9 @@
               <div class="collapse" id="usersCollapse">
                 <ul class="nav flex-column ml-3">
                   <li class="nav-item">
+                    <a class="nav-link" href="display-users.php">Display users</a>
+                  </li>
+                  <li class="nav-item">
                     <a class="nav-link" href="add-user.php">Add User</a>
                   </li>
                   <li class="nav-item">
