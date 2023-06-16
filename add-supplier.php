@@ -99,6 +99,24 @@
               </ul>
             </div>
           </li>
+
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#marcaCollapse"><i class="fas fa-users"></i> <span>Marca</span> <i class="fas fa-angle-down"></i></a>
+            <div class="collapse" id="marcaCollapse">
+              <ul class="nav flex-column ml-3">
+              <li class="nav-item">
+                  <a class="nav-link" href="display-marca.php">Display Marca</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="add-marca.php">Add Marca</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Modify Marca</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+
           <li class="nav-item">
             <a class="nav-link" href="#"><i class="fas fa-cog"></i>Settings</a>
           </li>

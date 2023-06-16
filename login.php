@@ -85,7 +85,7 @@
               </div>
               <button type="submit" class="btn btn-primary">Login</button>
               <div class="mt-2">
-                <a href="#">Forgot Password?</a>
+                <a href="forgot-password.php">Forgot Password?</a>
               </div>
             </form>
           </div>

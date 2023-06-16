@@ -8,7 +8,7 @@
   require_once 'database/connection.php';
 
   // Retrieve all users from the database
-  $users = array();
+  $suppliers = array();
 
   
   
@@ -21,7 +21,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Dashboard</title>
+  <title>View Marca</title>
 
   <link rel="stylesheet" href="css/main.css">
   <!-- Bootstrap CSS -->
@@ -72,7 +72,7 @@
             <a class="nav-link" data-bs-toggle="collapse" href="#usersCollapse"><i class="fas fa-users"></i> <span>Users</span> <i class="fas fa-angle-down"></i></a>
             <div class="collapse" id="usersCollapse">
               <ul class="nav flex-column ml-3">
-              <li class="nav-item">
+                <li class="nav-item">
                   <a class="nav-link" href="display-users.php">Display users</a>
                 </li>
                 <li class="nav-item">
@@ -110,6 +110,24 @@
               </ul>
             </div>
           </li>
+
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#marcaCollapse"><i class="fas fa-users"></i> <span>Marca</span> <i class="fas fa-angle-down"></i></a>
+            <div class="collapse" id="marcaCollapse">
+              <ul class="nav flex-column ml-3">
+              <li class="nav-item">
+                  <a class="nav-link" href="display-marca.php">Display Marca</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="add-marca.php">Add Marca</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Modify Marca</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+
           <li class="nav-item">
             <a class="nav-link" href="#"><i class="fas fa-cog"></i>Settings</a>
           </li>
@@ -123,8 +141,8 @@
     <div class="container-fluid col-md-9 justify-content-center pt-5">
       <table class="table">
         <?php
-        //deleting a user
-          $userid = isset($_POST['userid']) ? $_POST['userid'] : "";
+        //deleting a supplier
+          $marcaid = isset($_POST['marcaid']) ? $_POST['marcaid'] : "";
           $btnAction = isset($_POST['btnAction']) ? $_POST['btnAction'] : "";
           try{
 
@@ -134,23 +152,21 @@
               
             
             case "Delete":
-              $id = $_POST['userid']; // Retrieve the user ID from the form
-              $stmt = $conn->prepare("DELETE FROM user WHERE id = :id");
-              $stmt->bindParam(':id', $userid);
+              $id = $_POST['marcaid']; // Retrieve the supplier's ID from the form
+              $stmt = $conn->prepare("DELETE FROM marca WHERE id = :id");
+              $stmt->bindParam(':id', $marcaid);
               $stmt->execute();
               echo '<script>
                       setTimeout(function() {
                         Swal.fire({
-                          title: "Usuario eliminado",
-                          text: "El usuario ha sido eliminado correctamente.",
+                          title: "Marca eliminada",
+                          text: "La Marca ha sido eliminada correctamente.",
                           icon: "error",
                           timer: 1500,
                           showConfirmButton: false
                         });
                       }, 150); // Retardo de 500 milisegundos antes de mostrar la ventana emergente
                       </script>';
-
-              
               break;
             }
                         
@@ -160,9 +176,9 @@
           }
           
           try {
-            $stmt = $conn->prepare("SELECT * FROM user");
+            $stmt = $conn->prepare("SELECT * FROM marca");
             $stmt->execute();
-            $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $marcas = $stmt->fetchAll(PDO::FETCH_ASSOC);
           } catch(PDOException $e) {
               echo "Error: " . $e->getMessage();
           }
@@ -170,40 +186,20 @@
           <thead>
               <tr>
                   <th scope="col">ID</th>
-                  <th scope="col">RUT</th>
                   <th scope="col">Name</th>
-                  <th scope="col">Last Name</th>
-                  <th scope="col">Username</th>
-                  <th scope="col">Email</th>
-                  <th scope="col">Role</th>
-                  <th scope="col">Status</th>
-                  <th scope="col">Created At</th>
-                  <th scope="col">Updated At</th>
+                  
                   <th scope="col">Action</th>
               </tr>
           </thead>
           <tbody>
-              <?php foreach($users as $user): ?>
+              <?php foreach($marcas as $marca): ?>
                   <tr>
-                    <td><?php echo $user['id']; ?></td>
-                    <td><?php echo $user['rut']; ?></td>
-                    <td><?php echo $user['name']; ?></td>
-                    <td><?php echo $user['last_name']; ?></td>
-                    <td><?php echo $user['username']; ?></td>
-                    <td><?php echo $user['email']; ?></td>
-                    <td><?php echo $user['role']; ?></td>
-                    <td class="text-center">
-                        <?php if ($user['status'] == 1): ?>
-                            <input type="checkbox" checked disabled>
-                        <?php else: ?>
-                            <input type="checkbox" disabled>
-                        <?php endif; ?>
-                    </td>
-                    <td><?php echo $user['created_at']; ?></td>
-                    <td><?php echo $user['updated_at']; ?></td>
+                    <td><?php echo $marca['id']; ?></td>
+                    <td><?php echo $marca['nombre']; ?></td>
+                    
                     <td>
                       <form method="post">
-                        <input type="hidden" name="userid" id="userid" value="<?php echo $user['id']; ?>">
+                        <input type="hidden" name="marcaid" id="marcaid" value="<?php echo $marca['id']; ?>">
                         <input type="summit" name="btnAction" value="Edit" class="btn btn-primary " style="height:38px; width:71.6167px">
                         <input type="submit" name="btnAction" value="Delete" class="btn btn-danger" style="height:38px; width:71.6167px">
                       </form>

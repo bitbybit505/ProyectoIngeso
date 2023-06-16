@@ -53,7 +53,7 @@
 
   <div class="container-fluid">
   <div class="row">
-    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar" style="max-height: 450px;">
       <div class="sidebar-sticky">
         <ul class="nav flex-column">
           <li class="nav-item">
@@ -102,8 +102,27 @@
             </div>
           </li>
           <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#marcaCollapse"><i class="fas fa-users"></i> <span>Marca</span> <i class="fas fa-angle-down"></i></a>
+            <div class="collapse" id="marcaCollapse">
+              <ul class="nav flex-column ml-3">
+              <li class="nav-item">
+                  <a class="nav-link" href="display-marca.php">Display Marca</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="add-marca.php">Add Marca</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Modify Marca</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="#"><i class="fas fa-cog"></i>Settings</a>
           </li>
+
+          
+
         </ul>
       </div>
     </nav>
@@ -125,6 +144,13 @@
         $txtNombre=(isset($_POST['txtNombre']))?$_POST['txtNombre']:"";
         $txtImagen=(isset($_FILES['txtImagen']['name']))?$_FILES['txtImagen']['name']:"";
         $txtCantidad=(isset($_POST['txtCantidad']))?$_POST['txtCantidad']:"";
+        $txtDescripcion=(isset($_POST['txtDescripcion']))?$_POST['txtDescripcion']:"";
+        $txtIngreso=(isset($_POST['txtIngreso']))?$_POST['txtIngreso']:"";
+        $txtUpdate=(isset($_POST['txtUpdate']))?$_POST['txtUpdate']:"";
+        $txtIDMarca=(isset($_POST['txtIDMarca']))?$_POST['txtIDMarca']:"";
+        $txtIDProveedor=(isset($_POST['txtIDProveedor']))?$_POST['txtIDProveedor']:"";
+
+       
         $accion=(isset($_POST['accion']))?$_POST['accion']:"";
 
         include('database/connection.php');
@@ -148,7 +174,41 @@
               //echo "presionado boton Cancelar";
               break;    
             */
+
+            case "Modificar":
+              $sentenciaSQL = $conn->prepare("UPDATE product SET nombre=:nombre  WHERE id=:id");
+              $sentenciaSQL->bindParam(':nombre',$txtNombre);
+              $sentenciaSQL->bindParam(':id',$txtID);
+              $sentenciaSQL->execute();
+
+              $sentenciaSQL = $conn->prepare("UPDATE product SET cantidad=:cantidad  WHERE id=:id");
+              $sentenciaSQL->bindParam(':cantidad',$txtCantidad);
+              $sentenciaSQL->bindParam(':id',$txtID);
+              $sentenciaSQL->execute();
+
+              if($txtImagen != ""){
+                $sentenciaSQL = $conn->prepare("UPDATE product SET imagen=:imagen  WHERE id=:id");
+                $sentenciaSQL->bindParam(':imagen',$txtImagen);
+                $sentenciaSQL->bindParam(':id',$txtID);
+                $sentenciaSQL->execute();
+              }
+              //echo "presionado boton Modificar";
+              break;
+
             case "Seleccionar":
+                $sentenciaSQL = $conn->prepare("SELECT * from product WHERE id=:id");
+                $sentenciaSQL->bindParam(':id',$txtID);
+                $sentenciaSQL->execute();
+                $producto=$sentenciaSQL->fetch(PDO::FETCH_LAZY);
+
+                $txtNombre=$producto['name'];
+                $txtCantidad=$producto['cantidad'];
+                $txtImagen=$producto['imagen'];
+                $txtDescripcion= $producto['descripcion'];
+                $txtIngreso=$producto['fecha_ingreso'];
+                $txtUpdate=$producto['fecha_actualizada'];
+                $txtIDMarca=$producto['id_marca'];
+                $txtIDProveedor=$producto['id_proveedor'];
               //echo "presionado boton Seleccionar";
               break; 
               
@@ -183,6 +243,11 @@
                             <th>Nombre</th>
                             <th>Cantidad</th>
                             <th>Imagen</th>
+                            <th>Descripciones</th>
+                            <th>Fecha Ingreso</th>
+                            <th>Fecha Actualizacion</th>
+                            <th>ID Marca</th>
+                            <th>ID Proveedor</th>
                             <th>Acciones</th>
                         </tr>
                         </thead>
@@ -190,16 +255,26 @@
                         <?php foreach($listaProductos as $product){ ?>  
                         <tr>
                             <td><?php echo $product['id'] ?></td>
-                            <td><?php echo $product['nombre'] ?></td>
+                            <td><?php echo $product['name'] ?></td>
                             <td><?php echo $product['cantidad'] ?></td>
                             <td><?php echo $product['imagen'] ?></td>
+                            <td><?php echo $product['descripcion'] ?></td>
+                            <td><?php echo $product['fecha_ingreso'] ?></td>
+                            <td><?php echo $product['fecha_actualizada'] ?></td>
+                            <td><?php echo $product['id_marca'] ?></td>
+                            <td><?php echo $product['id_proveedor'] ?></td>
                             <td>
-                            Seleccionar | Borrar
+                            
                             <form method="post">
                                 
                                 <input type="hidden" name="txtID" id="txtID" value="<?php echo $product['id']; ?>">
-                                <input type="submit" name="accion" value="Seleccionar" class="btn btn-primary">                    
-                                <input type="submit" name="accion" value="Borrar" class="btn btn-danger">                    
+                                
+                                
+                                <input type="submit" name="accion" value="Seleccionar" class="btn btn-primary">
+                                <input type="submit" name="accion" value="Borrar" class="btn btn-danger">
+                                
+                                                    
+                                                    
                             
                             </form>
                             </td>
@@ -207,7 +282,53 @@
                         <?php } ?> 
                         </tbody>
                     </table>
-                    </div>
+        </div>
+
+        <div class=" d-flex justify-content-center ">
+        <div class="card ">
+                <div class="card-header">
+                  Datos de Producto
+                </div>
+
+                <div class="card-body">
+                  <form method="POST" enctype="multipart/form-data">
+
+                  <div class = "form-group">
+                  <label for="textID">ID:</label>
+                  <input type="text" class="form-control" value="<?php echo $txtID ?>" name="txtID" id="txtID"  placeholder="ID">
+                  </div>
+
+                  <div class = "form-group">
+                  <label for="txtNombre">Nombre:</label>
+                  <input type="text" class="form-control" value="<?php echo $txtNombre ?>" name="txtNombre" id="txtNombre"  placeholder="Nombre del producto">
+                  </div>
+                  
+                  <div class = "form-group">
+                  <label for="txtCantidad">Cantidad:</label>
+                  <input type="text" class="form-control" value="<?php echo $txtCantidad ?>" name="txtCantidad" id="txtCantidad"  placeholder="Nombre del producto">
+                  </div>
+
+                  <div class = "form-group">
+                  <label for="txtNombre">Imagen:</label>
+                  value="<?php echo $txtImagen ?>"
+                  <input type="file" class="form-control" name="txtImagen" id="txtImagen"  placeholder="Nombre del producto">
+                  </div>
+
+                
+
+                  <br>
+                  <div class="btn-group" role="group" aria-label="">
+                    <!--<button type="submit" name="accion" value= "Agregar" class="btn btn-success">Agregar</button>-->
+                    <button type="submit" name="accion" value= "Modificar" class="btn btn-warning">Modificar</button>
+                    <button type="submit" name="accion" value= "Cancelar" class="btn btn-info">Cancelar</button>
+                  </div>
+                  </form>
+                </div>
+                
+              </div>                  
+        </div>
+
+                    
       
     </main>
   </div>

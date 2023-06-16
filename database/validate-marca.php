@@ -2,9 +2,8 @@
     session_start();
 
     $table_name= $_SESSION['table'];
-    $name= $_POST['name'];
-    $email= $_POST['email'];
-    $phone_number= $_POST['phone_number'];
+    $name= $_POST['nombre'];
+  
     
         
     /*$icommand="INSERT INTO $table_name('name','last_name','username','email','password','rol','status','created_at','updated_at') 
@@ -13,8 +12,8 @@
        
     try{
 
-        $icommand = "INSERT INTO $table_name (`name`,`email`, `phone_number`,`created_at`,`updated_at`) 
-                    VALUES ('$name','$email', '$phone_number',NOW(),NOW())";
+        $icommand = "INSERT INTO $table_name (`nombre`) 
+                    VALUES ('$name')";
 
 
         include('connection.php');
@@ -32,7 +31,7 @@
     }
 
     $_SESSION['response'] = $response;
-    header('location: ../add-supplier.php');
+    header('location: ../add-marca.php');
 
 
     

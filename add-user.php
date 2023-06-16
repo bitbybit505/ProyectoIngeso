@@ -23,7 +23,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
   <!-- Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
-  
+  <!-- rut Validation -->
+  <script src="functions/validation-rut.js"></script>
+
 
 </head>
 <body>
@@ -105,12 +107,16 @@
         </ul>
       </div>
     </nav>
-
+    
       <div class="container-fluid col-md-6 justify-content-center pt-5">
         <div class="card">
           <div class="card-header fw-semibold ">Registration</div>
           <div class="card-body">
-            <form method="POST" action="database/validate-user.php">
+            <form method="POST" action="database/validate-user.php" onsubmit="return validateForm();">
+              <div class="form-group mb-3">
+                <label for="rut" class="mb-1">RUT</label>
+                <input type="text" class="form-control" id="rut" name="rut" placeholder="Enter your RUT" required>
+              </div>
               <div class="form-group mb-3">
                 <label for="name">Name</label>
                 <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" required>
@@ -138,8 +144,8 @@
               if(isset($_SESSION['response'])){
                 $response_message= $_SESSION['response']['message'];
                 $is_success= $_SESSION['response']['success'];
-              
             ?>
+
             <div class="responseMessage text-center">
               <p class="alert <?= $is_success ? 'alert-success' : 'alert-danger' ?>">
                 <?= $response_message ?>

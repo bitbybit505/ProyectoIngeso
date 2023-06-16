@@ -3,7 +3,8 @@
   if(!isset($_SESSION['user'])) header('location: login.php');
   
   $user = $_SESSION['user'];
-
+  
+  
 ?>
 
 <!DOCTYPE html>
@@ -101,6 +102,22 @@
               </ul>
             </div>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#marcaCollapse"><i class="fas fa-users"></i> <span>Marca</span> <i class="fas fa-angle-down"></i></a>
+            <div class="collapse" id="marcaCollapse">
+              <ul class="nav flex-column ml-3">
+              <li class="nav-item">
+                  <a class="nav-link" href="display-marca.php">Display Marca</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="add-marca.php">Add Marca</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Modify Marca</a>
+                </li>
+              </ul>
+            </div>
+          </li>
             <li class="nav-item">
               <a class="nav-link" href="#"><i class="fas fa-cog"></i>Settings</a>
             </li>
@@ -125,6 +142,7 @@
             $txtNombre=(isset($_POST['txtNombre']))?$_POST['txtNombre']:"";
             $txtImagen=(isset($_FILES['txtImagen']['name']))?$_FILES['txtImagen']['name']:"";
             $txtCantidad=(isset($_POST['txtCantidad']))?$_POST['txtCantidad']:"";
+            $txtDescripcion=(isset($_POST['txtDescripcion']))?$_POST['txtDescripcion']:"";
             $accion=(isset($_POST['accion']))?$_POST['accion']:"";
 
             //echo $txtID."<br/>";
@@ -139,27 +157,60 @@
 
             switch($accion){
               case "Agregar":
-                //INSERT INTO `product` (`id`, `nombre`, `cantidad`, `imagen`) VALUES ('1', 'violin', '32', 'imagen.jpg');
-                $sentenciaSQL= $conn->prepare("INSERT INTO product (id, nombre, cantidad, imagen) VALUES (:id, :nombre, :cantidad, :imagen);");
-                $sentenciaSQL->bindParam(':id',$txtID);
-                $sentenciaSQL->bindParam(':nombre',$txtNombre);
-                $sentenciaSQL->bindParam(':cantidad',$txtCantidad);
-                $sentenciaSQL->bindParam(':imagen',$txtImagen);
-                $sentenciaSQL->execute();
-                //echo "<script>Swal.fire('¡Producto agregado!', 'El producto se agregó correctamente.', 'success');</script>";
-                echo '<script>
-                  setTimeout(function() {
-                    Swal.fire({
-                      title: "Producto agregado",
-                      text: "El producto se ha añadido correctamente.",
-                      icon: "success",
-                      timer: 1500,
-                      showConfirmButton: false
-                    });
-                  }, 150); // Retardo de 500 milisegundos antes de mostrar la ventana emergente
-                </script>';
-                
-               
+                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                  $txtMarca = $_POST['txtMarca'];
+                  echo "La marca seleccionada es: " . $txtMarca;
+                }
+                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                  $txtProveedor = $_POST['txtProveedor'];
+                  echo "el proveedor seleccionada es: " . $txtProveedor;
+                }
+                // Obtener el id de la marca seleccionada
+                try{
+                  $stmt = $conn->prepare("SELECT id FROM marca WHERE nombre = :nombre_marca");
+                  $stmt->bindParam(':nombre_marca', $txtMarca);
+                  $stmt->execute();
+                  $id_marca = $stmt->fetchColumn();//importante
+                  // Imprimir información adicional
+                  echo "Consulta SQL: " . $stmt->queryString . "<br>";
+                  echo "Número de filas afectadas: " . $stmt->rowCount() . "<br>";
+                  var_dump($id_marca);
+                  // Obtener el id del proveedor seleccionado
+                  $stmt = $conn->prepare("SELECT id FROM supplier WHERE `name` = :nombre_proveedor");
+                  $stmt->bindParam(':nombre_proveedor', $txtProveedor);
+                  $stmt->execute();
+                  $id_proveedor = $stmt->fetchColumn();//importante
+                  //INSERT INTO `product` (`id`, `nombre`, `cantidad`, `imagen`) VALUES ('1', 'violin', '32', 'imagen.jpg');
+                  $sentenciaSQL= $conn->prepare("INSERT INTO product (`name`, cantidad, imagen, descripcion, fecha_ingreso, fecha_actualizada, id_marca, id_proveedor) 
+                  VALUES (:nombre, :cantidad, :imagen, :descripcion, NOW(), NOW(), :id_marca, :id_proveedor);");
+                  //$sentenciaSQL->bindParam(':id',$txtID);
+                  $sentenciaSQL->bindParam(':nombre',$txtNombre);
+                  $sentenciaSQL->bindParam(':cantidad',$txtCantidad);
+                  $sentenciaSQL->bindParam(':imagen',$txtImagen);
+                  $sentenciaSQL->bindParam(':descripcion',$txtDescripcion);
+                  $sentenciaSQL->bindParam(':id_marca',$id_marca);
+                  $sentenciaSQL->bindParam(':id_proveedor',$id_proveedor);
+
+
+
+                  $sentenciaSQL->execute();
+                  //echo "<script>Swal.fire('¡Producto agregado!', 'El producto se agregó correctamente.', 'success');</script>";
+                  echo '<script>
+                    setTimeout(function() {
+                      Swal.fire({
+                        title: "Producto agregado",
+                        text: "El producto se ha añadido correctamente.",
+                        icon: "success",
+                        timer: 1500,
+                        showConfirmButton: false
+                      });
+                    }, 150); // Retardo de 500 milisegundos antes de mostrar la ventana emergente
+                  </script>';
+                  
+                } catch(Exception $e) {
+                  echo "Error: " . $e->getMessage(); // Mostrar el mensaje de error en pantalla
+                  
+                }
                 break;
 
               case "Modificar":
@@ -171,7 +222,9 @@
                 break;    
 
               case "Seleccionar":
+
                 //echo "presionado boton Seleccionar";
+               
                 break; 
                 
               case "Borrar":
@@ -200,29 +253,83 @@
                 <div class="card-body">
                   <form method="POST" enctype="multipart/form-data">
 
-                  <div class = "form-group">
-                  <label for="textID">ID:</label>
-                  <input type="text" class="form-control" name="txtID" id="txtID"  placeholder="ID">
-                  </div>
-
+         
                   <div class = "form-group">
                   <label for="txtNombre">Nombre:</label>
-                  <input type="text" class="form-control" name="txtNombre" id="txtNombre"  placeholder="Nombre del producto">
+                  <input type="text" class="form-control" value="<?php echo $txtNombre ?>" name="txtNombre" id="txtNombre"  placeholder="Nombre del producto">
                   </div>
                   
                   <div class = "form-group">
                   <label for="txtCantidad">Cantidad:</label>
-                  <input type="text" class="form-control" name="txtCantidad" id="txtCantidad"  placeholder="Nombre del producto">
+                  <input type="text" class="form-control" value="<?php echo $txtCantidad ?>" name="txtCantidad" id="txtCantidad"  placeholder="Nombre del producto">
                   </div>
 
                   <div class = "form-group">
                   <label for="txtNombre">Imagen:</label>
+                  value="<?php echo $txtImagen ?>"
                   <input type="file" class="form-control" name="txtImagen" id="txtImagen"  placeholder="Nombre del producto">
+                  </div>
+
+                  <div class = "form-group">
+                  <label for="txtDescripcion">Descripcion:</label>
+                  <input type="text" class="form-control" value="<?php echo $txtDescripcion ?>" name="txtDescripcion" id="txtDescripcion"  placeholder="Descripcion del producto">
+                  </div>
+                   
+                  <div class="form-group">
+                    <label for="txtMarca">Marca:</label>
+                    <select class="form-control" name="txtMarca" id="txtMarca">
+                      <?php
+                        // Conectarse a la base de datos y obtener las marcas existentes
+                        include('database/connection.php');
+                        $sentenciaSQL = $conn->prepare("SELECT nombre FROM marca");
+                        $sentenciaSQL->execute();
+                        $marcas=$sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
+                        //$txtMarcaName=$marca['nombre'];
+                        //$conexion = mysqli_connect("localhost", "usuario", "contraseña", "basededatos");
+                        //$query = "SELECT nombre FROM marca";
+                        //$result = mysqli_query($conexion, $query);
+                        
+                        // Crear una opción por cada marca existente
+                        foreach ($marcas as $marca) {
+                          echo "<option value='" . $marca['nombre'] . "'>" . $marca['nombre'] . "</option>";
+                        }
+                        
+                        // Cerrar la conexión a la base de datos
+                        var_dump($txtMarca);
+                        $conn = null;
+                      ?>
+                    </select>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="txtProveedor">Proveedor:</label>
+                    <select class="form-control" name="txtProveedor" id="txtProveedor">
+                      <?php
+                        // Conectarse a la base de datos y obtener las marcas existentes
+                        include('database/connection.php');
+                        $sentenciaSQL = $conn->prepare("SELECT `name` FROM supplier");
+                        $sentenciaSQL->execute();
+                        $proveedores=$sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
+                        //$txtMarcaName=$marca['nombre'];
+                        //$conexion = mysqli_connect("localhost", "usuario", "contraseña", "basededatos");
+                        //$query = "SELECT nombre FROM marca";
+                        //$result = mysqli_query($conexion, $query);
+                        
+                        // Crear una opción por cada marca existente
+                        foreach ($proveedores as $proveedor) {
+                          echo "<option value='" . $proveedor['name'] . "'>" . $proveedor['name'] . "</option>";
+                        }
+                        
+                        // Cerrar la conexión a la base de datos
+                        $conn = null;
+                      ?>
+                    </select>
                   </div>
 
                 
 
                   <br>
+                  
                   <div class="btn-group" role="group" aria-label="">
                     <button type="submit" name="accion" value= "Agregar" class="btn btn-success">Agregar</button>
                     <button type="submit" name="accion" value= "Modificar" class="btn btn-warning">Modificar</button>
