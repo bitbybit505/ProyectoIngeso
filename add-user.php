@@ -19,7 +19,6 @@
   <script src="css/bootstrap.bundle.min.js"></script>
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
   <!-- Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
@@ -80,10 +79,10 @@
             <div class="collapse" id="productCollapse">
               <ul class="nav flex-column ml-3">
                 <li class="nav-item">
-                  <a class="nav-link" href="lista-productos.php">View Products</a>
+                  <a class="nav-link" href="display-products.php">View Products</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="products.php">Add Product</a>
+                  <a class="nav-link" href="add-products.php">Add Product</a>
                 </li>
               </ul>
             </div>

@@ -9,11 +9,6 @@
 
   // Retrieve all users from the database
   $suppliers = array();
-
-  
-  
-  
-
 ?>
 
 <!DOCTYPE html>
@@ -24,6 +19,10 @@
   <title>View Marca</title>
 
   <link rel="stylesheet" href="css/main.css">
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <!-- Popper.js -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <script src="css/bootstrap.bundle.min.js"></script>
@@ -34,6 +33,28 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
   <!-- Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+
+  <script>
+    $(document).ready(function(){
+      $('#tabla_marca').DataTable({
+        "order": [[1, "asc"]],
+        "language":{
+          "lengthMenu": "Mostrar _MENU_ registros por pagina",
+          "info": "Mostrando pagina _PAGE_ de _PAGES_",
+          "infoEmpty": "No hay registros disponibles",
+          "infoFiltered": "(filtrada de _MAX_ registros)",
+          "loadingRecords": "Cargando...",
+          "processing":     "Procesando...",
+          "search": "Buscar:",
+          "zeroRecords":    "No se encontraron registros coincidentes",
+          "paginate": {
+            "next":       "Siguiente",
+            "previous":   "Anterior"
+          },					
+        }
+      });	
+    });	
+  </script>
 
 </head>
 <body>
@@ -89,10 +110,10 @@
             <div class="collapse" id="productCollapse">
               <ul class="nav flex-column ml-3">
                 <li class="nav-item">
-                  <a class="nav-link" href="lista-productos.php">View Products</a>
+                  <a class="nav-link" href="display-products.php">View Products</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="products.php">Add Product</a>
+                  <a class="nav-link" href="add-products.php">Add Product</a>
                 </li>
               </ul>
             </div>
@@ -139,7 +160,7 @@
 
 
     <div class="container-fluid col-md-9 justify-content-center pt-5">
-      <table class="table">
+      <table id="tabla_marca" class="table table-striped">
         <?php
         //deleting a supplier
           $marcaid = isset($_POST['marcaid']) ? $_POST['marcaid'] : "";
@@ -215,8 +236,9 @@
 
 </div>
 
-
-
+<!-- DataTable -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.css"/>  
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.js"></script>
 
 </body>
 
