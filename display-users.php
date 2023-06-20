@@ -36,7 +36,7 @@
 
   <script>
     $(document).ready(function(){
-      $('#tabla_usuarios').DataTable({
+      $('#table').DataTable({
         "order": [[1, "asc"]],
         "language":{
           "lengthMenu": "Mostrar _MENU_ registros por pagina",
@@ -142,7 +142,7 @@
 
 
     <div class="container-fluid col-md-9 justify-content-center pt-5">
-      <table id="tabla_usuarios" class="table table-striped">
+      <table id="table" class="table table-striped">
         <?php
         //deleting a user
           $userid = isset($_POST['userid']) ? $_POST['userid'] : "";

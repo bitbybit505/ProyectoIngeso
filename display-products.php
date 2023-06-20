@@ -32,7 +32,7 @@
   
   <script>
     $(document).ready(function(){
-      $('#tabla_productos').DataTable({
+      $('#table').DataTable({
         "order": [[1, "asc"]],
         "language":{
           "lengthMenu": "Mostrar _MENU_ registros por pagina",
@@ -248,7 +248,7 @@
         ?>
 
         <div class="row table-responsive">
-          <table id="tabla_productos" class="table table-striped">
+          <table id="table" class="table table-striped">
             <thead>
               <tr>
                 <th>Imagen</th>

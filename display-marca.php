@@ -36,7 +36,7 @@
 
   <script>
     $(document).ready(function(){
-      $('#tabla_marca').DataTable({
+      $('#table').DataTable({
         "order": [[1, "asc"]],
         "language":{
           "lengthMenu": "Mostrar _MENU_ registros por pagina",
@@ -160,7 +160,7 @@
 
 
     <div class="container-fluid col-md-9 justify-content-center pt-5">
-      <table id="tabla_marca" class="table table-striped">
+      <table id="table" class="table table-striped">
         <?php
         //deleting a supplier
           $marcaid = isset($_POST['marcaid']) ? $_POST['marcaid'] : "";
