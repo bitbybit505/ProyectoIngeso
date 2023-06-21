@@ -80,10 +80,10 @@
               <div class="collapse" id="productCollapse">
                 <ul class="nav flex-column ml-3">
                   <li class="nav-item">
-                    <a class="nav-link" href="lista-productos.php">View Products</a>
+                    <a class="nav-link" href="display-products.php">View Products</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="products.php">Add Product</a>
+                    <a class="nav-link" href="add-products.php">Add Product</a>
                   </li>
                 
                 </ul>
@@ -332,8 +332,6 @@
                   
                   <div class="btn-group" role="group" aria-label="">
                     <button type="submit" name="accion" value= "Agregar" class="btn btn-success">Agregar</button>
-                    <button type="submit" name="accion" value= "Modificar" class="btn btn-warning">Modificar</button>
-                    <button type="submit" name="accion" value= "Cancelar" class="btn btn-info">Cancelar</button>
                   </div>
                   </form>
                 </div>
