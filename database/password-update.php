@@ -53,8 +53,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($result) {
             // User AND email already exist
             $hashedPassword = password_hash($new_password, PASSWORD_DEFAULT); // Hash the new password
-        
-            $icommand = "UPDATE user SET password = :password WHERE rut = :rut AND username = :username";
+            
+            $icommand = "UPDATE user SET password = :password, updated_at = NOW() WHERE rut = :rut AND username = :username";
             $stmt = $conn->prepare($icommand);
             $stmt->bindParam(':password', $hashedPassword);
             $stmt->bindParam(':rut', $formatted_rut);
