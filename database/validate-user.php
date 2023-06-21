@@ -8,6 +8,7 @@
     $userin = $_POST['username'];
     $email = $_POST['email'];
     $password = $_POST['password'];
+    $phone_number= $_POST['phone_number'];
     $encrypted_password = password_hash($password, PASSWORD_DEFAULT);
     $stringVariable = "employee";
 
@@ -24,15 +25,18 @@
         return $formattedRut;
     }
 
+    $formatted_phone_number =  '+56 9 ' . substr($phone_number, 0, 4) . ' ' . substr($phone_number, 4);
+
     $formatted_rut= formatRut($rut);
 
-     try {
+    try {
         include('connection.php');
         // Check if the username or email already exists in the database
-        $stmt = $conn->prepare("SELECT * FROM $table_name WHERE rut = :rut OR username = :username OR email = :email");
+        $stmt = $conn->prepare("SELECT * FROM $table_name WHERE rut = :rut OR username = :username OR email = :email OR phone_number = :phone_number");
         $stmt->bindParam(':rut', $formatted_rut);
         $stmt->bindParam(':username', $userin);
         $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':phone_number',$formatted_phone_number);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -40,12 +44,12 @@
             // User or email already exists
             $response = [
                 'success' => false,
-                'message' => 'Rut, Username or email is already registered.'
+                'message' => 'Rut, Username, email or phone number is already registered.'
             ];
         } else {
             // Insert the new user into the database
-            $icommand = "INSERT INTO $table_name (`rut`,`name`, `last_name`, `username`, `email`, `password`, `role`, `status`, `created_at`, `updated_at`) 
-                        VALUES ('$formatted_rut','$name', '$last_name', '$userin', '$email', '$encrypted_password', '$stringVariable', 1, NOW(), NOW())";
+            $icommand = "INSERT INTO $table_name (`rut`,`name`, `last_name`, `username`, `email`, `password`,`phone_number`, `role`, `status`, `created_at`, `updated_at`) 
+                        VALUES ('$formatted_rut','$name', '$last_name', '$userin', '$email', '$encrypted_password','$formatted_phone_number', '$stringVariable', 1, NOW(), NOW())";
 
             $conn->exec($icommand);
             $response = [

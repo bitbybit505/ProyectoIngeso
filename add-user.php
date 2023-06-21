@@ -136,6 +136,16 @@
                 <label for="password" class="mb-1">Password</label>
                 <input type="password" class="form-control" id="password" name="password" placeholder="Choose a password" required>
               </div>
+              <div class="form-group mb-3">
+                <label for="phoneNumber" class="mb-1">Phone Number</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">+56 9</span>
+                  </div>
+                  <input type="text" class="form-control" id="phone_number" name="phone_number" pattern="[0-9]{8}" placeholder="ex. 123456789" required>
+                </div>
+              </div>
+
               <!--<input type="hidden" name="table" value= "users" /> -->
               <button type="submit" class="btn btn-primary mb-3 ">Register new user</button>
             </form>
