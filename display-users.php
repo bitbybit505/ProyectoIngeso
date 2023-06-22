@@ -58,6 +58,38 @@
       });	
     });	
   </script>
+  <script>
+    $(document).ready(function() {
+      // Add an event listener to the modal trigger button/link
+      $('#editUserModal').on('show.bs.modal', function(event) {
+        // Get the button/link that triggered the modal
+        var button = $(event.relatedTarget);
+
+        // Extract the user ID or any other necessary data from the button/link
+        var userId = button.data('user-id');
+
+        // Make an AJAX request to fetch the user's data based on the ID
+        $.ajax({
+          url: 'fetch-user.php',
+          method: 'POST',
+          data: { id: userId },
+          dataType: 'json',
+          success: function(response) {
+            // Populate the modal fields with the user's information
+            $('#editName').val(response.name);
+            $('#editRut').val(response.rut);
+            // Update other fields accordingly
+            // ...
+          },
+          error: function(xhr, status, error) {
+            // Handle error cases
+            console.error(error);
+          }
+        });
+      });
+    });
+  </script>
+
 
 </head>
 <body>
@@ -201,6 +233,7 @@
                   <th scope="col">Email</th>
                   <th scope="col">Role</th>
                   <th scope="col">Status</th>
+                  <th scope="col">Phone Number</th>
                   <th scope="col">Created At</th>
                   <th scope="col">Updated At</th>
                   <th scope="col">Action</th>
@@ -223,12 +256,48 @@
                             <input type="checkbox" disabled>
                         <?php endif; ?>
                     </td>
+                        
+                    <td><?php echo $user['phone_number']; ?></td>
                     <td><?php echo $user['created_at']; ?></td>
                     <td><?php echo $user['updated_at']; ?></td>
                     <td>
                       <form method="post">
                         <input type="hidden" name="userid" id="userid" value="<?php echo $user['id']; ?>">
-                        <input type="summit" name="btnAction" value="Edit" class="btn btn-primary " style="height:38px; width:71.6167px">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editUserModal" style="height:38px; width:71.6167px">Edit</button>
+                        <!--<input type="summit" name="btnAction" value="Edit" class="btn btn-primary " style="height:38px; width:71.6167px">-->
+                        <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="editUserModalLabel">Edit User</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <!-- Form fields for editing user information -->
+                                <form id="editUserForm">
+                                  <!-- Add input fields for each user property you want to edit -->
+                                  <div class="form-group">
+                                    <label for="editName">Name</label>
+                                    <input type="text" class="form-control" id="editName" name="name">
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="editRut">RUT</label>
+                                    <input type="text" class="form-control" id="editRut" name="rut">
+                                  </div>
+                                  <!-- Add more fields for other user properties -->
+                                  <!-- ... -->
+                                </form>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-primary" id="saveChangesBtn">Save Changes</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        
                         <input type="submit" name="btnAction" value="Delete" class="btn btn-danger" style="height:38px; width:71.6167px">
                       </form>
                     </td>
@@ -236,6 +305,7 @@
               <?php endforeach; ?>
           </tbody>
       </table>
+      
     </div>
  </div>
 
