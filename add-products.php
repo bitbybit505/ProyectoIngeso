@@ -163,7 +163,7 @@
                 }
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                   $txtProveedor = $_POST['txtProveedor'];
-                  echo "el proveedor seleccionada es: " . $txtProveedor;
+                  echo "El proveedor seleccionada es: " . $txtProveedor;
                 }
                 // Obtener el id de la marca seleccionada
                 try{
@@ -266,8 +266,7 @@
 
                   <div class = "form-group">
                   <label for="txtNombre">Imagen:</label>
-                  value="<?php echo $txtImagen ?>"
-                  <input type="file" class="form-control" name="txtImagen" id="txtImagen"  placeholder="Nombre del producto">
+                  <input type="file" class="form-control-file" name="txtImagen" id="txtImagen"  placeholder="Nombre del producto">
                   </div>
 
                   <div class = "form-group">

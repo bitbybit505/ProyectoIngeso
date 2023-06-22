@@ -48,7 +48,10 @@
             "previous":   "Anterior"
           },					
         }
-      });	
+      });
+      var oTable = $('#table').dataTable();
+      $('select#search_proveedor').change( function () {  oTable.fnFilter( this.value, 8 );  } );
+      $('select#search_marca').change( function () {  oTable.fnFilter( this.value, 7 ); });
     });	
   </script>
 
@@ -246,6 +249,31 @@
           $sentenciaSQL->execute();
           $listaProductos=$sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
         ?>
+        
+        <div class="form-inline">
+          <select id="search_proveedor" class="form-control form-control-sm m-2">
+            <option value="">Proveedor</option>
+              <?php
+                $sentenciaSQL = $conn->prepare("SELECT `name` FROM supplier");
+                $sentenciaSQL->execute();
+                $proveedores=$sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($proveedores as $proveedor) {
+                  echo "<option value='" . $proveedor['name'] . "'>" . $proveedor['name'] . "</option>";
+                }
+              ?>
+          </select>
+          <select id="search_marca" class="form-control form-control-sm m-2">
+            <option value="">Marca</option>
+              <?php
+                $sentenciaSQL = $conn->prepare("SELECT nombre FROM marca");
+                $sentenciaSQL->execute();
+                $marcas=$sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($marcas as $marca) {
+                  echo "<option value='" . $marca['nombre'] . "'>" . $marca['nombre'] . "</option>";
+                }
+              ?>
+          </select>
+        </div>
 
         <div class="row table-responsive">
           <table id="table" class="table table-striped">
@@ -263,7 +291,7 @@
                 <th>Acciones</th>
               </tr>
             </thead>
-
+            
             <tbody>
               <?php foreach($listaProductos as $product){ ?>
                 <tr>
