@@ -30,65 +30,64 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
   <!-- sweetAlert -->
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <!-- Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
   <!-- DataTable -->
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.css"/>  
   <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.js"></script>
 
-  <script>
-    $(document).ready(function(){
-      $('#table').DataTable({
-        "order": [[0, "asc"]],
-        "language":{
-          "lengthMenu": "Mostrar _MENU_ registros por pagina",
-          "info": "Mostrando pagina _PAGE_ de _PAGES_",
-          "infoEmpty": "No hay registros disponibles",
-          "infoFiltered": "(filtrada de _MAX_ registros)",
-          "loadingRecords": "Cargando...",
-          "processing":     "Procesando...",
-          "search": "Buscar:",
-          "zeroRecords":    "No se encontraron registros coincidentes",
-          "paginate": {
-            "next":       "Siguiente",
-            "previous":   "Anterior"
-          },					
-        }
-      });	
-    });	
-  </script>
-  <script>
-    $(document).ready(function() {
-      // Add an event listener to the modal trigger button/link
-      $('#editUserModal').on('show.bs.modal', function(event) {
-        // Get the button/link that triggered the modal
-        var button = $(event.relatedTarget);
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+  
+<script>
+  $(document).ready(function () {
 
-        // Extract the user ID or any other necessary data from the button/link
-        var userId = button.data('user-id');
+    $('.editbtn').on('click', function () {
 
-        // Make an AJAX request to fetch the user's data based on the ID
-        $.ajax({
-          url: 'fetch-user.php',
-          method: 'POST',
-          data: { id: userId },
-          dataType: 'json',
-          success: function(response) {
-            // Populate the modal fields with the user's information
-            $('#editName').val(response.name);
-            $('#editRut').val(response.rut);
-            // Update other fields accordingly
-            // ...
-          },
-          error: function(xhr, status, error) {
-            // Handle error cases
-            console.error(error);
-          }
-        });
-      });
+        $('#editmodal').modal('show');
+
+        $tr = $(this).closest('tr');
+
+        var data = $tr.children("td").map(function () {
+            return $(this).text();
+        }).get();
+
+        console.log(data[0],data[5]);
+        $('#e_id').val(data[0]);
+        $('#e_name').val(data[2]);
+        $('#e_last_name').val(data[3]);
+        $('#e_username').val(data[4]);
+        $('#e_email').val(data[5]);
+        $('#e_phone_number').val(data[8].replace(/\D/g, '').slice(-8));
+        $('#e_password').val(data[9])
     });
-  </script>
+  });
+</script>
+
+
+
+<script>
+  $(document).ready(function(){
+    $('#table').DataTable({
+      "order": [[0, "asc"]],
+      "language":{
+        "lengthMenu": "Mostrar _MENU_ registros por pagina",
+        "info": "Mostrando pagina _PAGE_ de _PAGES_",
+        "infoEmpty": "No hay registros disponibles",
+        "infoFiltered": "(filtrada de _MAX_ registros)",
+        "loadingRecords": "Cargando...",
+        "processing":     "Procesando...",
+        "search": "Buscar:",
+        "zeroRecords":    "No se encontraron registros coincidentes",
+        "paginate": {
+          "next":       "Siguiente",
+          "previous":   "Anterior"
+        },					
+      }
+    });	
+  });	
+</script>
+  
 
 
 </head>
@@ -184,29 +183,25 @@
           $btnAction = isset($_POST['btnAction']) ? $_POST['btnAction'] : "";
           try{
 
-          include('database/connection.php');
-            
-          switch ($btnAction) {
+            include('database/connection.php');
               
-            
-            case "Delete":
-              $id = $_POST['userid']; // Retrieve the user ID from the form
-              $stmt = $conn->prepare("DELETE FROM user WHERE id = :id");
-              $stmt->bindParam(':id', $userid);
-              $stmt->execute();
-              echo '<script>
-                      setTimeout(function() {
-                        Swal.fire({
-                          title: "Usuario eliminado",
-                          text: "El usuario ha sido eliminado correctamente.",
-                          icon: "error",
-                          timer: 1500,
-                          showConfirmButton: false
-                        });
-                      }, 150); // Retardo de 500 milisegundos antes de mostrar la ventana emergente
-                      </script>';
-
-              
+            switch ($btnAction) {
+              case "Delete":
+                $id = $_POST['userid']; // Retrieve the user ID from the form
+                $stmt = $conn->prepare("DELETE FROM user WHERE id = :id");
+                $stmt->bindParam(':id', $userid);
+                $stmt->execute();
+                echo '<script>
+                        setTimeout(function() {
+                          Swal.fire({
+                            title: "Usuario eliminado",
+                            text: "El usuario ha sido eliminado correctamente.",
+                            icon: "error",
+                            timer: 3000,
+                            showConfirmButton: false
+                          });
+                        }, 150); // Retardo de 500 milisegundos antes de mostrar la ventana emergente
+                        </script>';
               break;
             }
                         
@@ -219,7 +214,8 @@
             $stmt = $conn->prepare("SELECT * FROM user");
             $stmt->execute();
             $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
-          } catch(PDOException $e) {
+          } 
+          catch(PDOException $e) {
               echo "Error: " . $e->getMessage();
           }
         ?>
@@ -234,6 +230,7 @@
                   <th scope="col">Role</th>
                   <th scope="col">Status</th>
                   <th scope="col">Phone Number</th>
+                  <th scope="col" style="display: none;">Password</th>
                   <th scope="col">Created At</th>
                   <th scope="col">Updated At</th>
                   <th scope="col">Action</th>
@@ -258,46 +255,14 @@
                     </td>
                         
                     <td><?php echo $user['phone_number']; ?></td>
+                    <td style="display: none;"><?php echo $user['password']; ?></td>
                     <td><?php echo $user['created_at']; ?></td>
                     <td><?php echo $user['updated_at']; ?></td>
                     <td>
                       <form method="post">
                         <input type="hidden" name="userid" id="userid" value="<?php echo $user['id']; ?>">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editUserModal" style="height:38px; width:71.6167px">Edit</button>
-                        <!--<input type="summit" name="btnAction" value="Edit" class="btn btn-primary " style="height:38px; width:71.6167px">-->
-                        <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
-                          <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title" id="editUserModalLabel">Edit User</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                                </button>
-                              </div>
-                              <div class="modal-body">
-                                <!-- Form fields for editing user information -->
-                                <form id="editUserForm">
-                                  <!-- Add input fields for each user property you want to edit -->
-                                  <div class="form-group">
-                                    <label for="editName">Name</label>
-                                    <input type="text" class="form-control" id="editName" name="name">
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="editRut">RUT</label>
-                                    <input type="text" class="form-control" id="editRut" name="rut">
-                                  </div>
-                                  <!-- Add more fields for other user properties -->
-                                  <!-- ... -->
-                                </form>
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn btn-primary" id="saveChangesBtn">Save Changes</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        
+                        <button type="button" class="btn btn-primary editbtn"style="height:38px; width:71.6167px">Edit</button>
+                        <!--<input type="summit" name="btnAction" value="Edit" class="btn btn-primary editbtn" style="height:38px; width:71.6167px">-->
                         <input type="submit" name="btnAction" value="Delete" class="btn btn-danger" style="height:38px; width:71.6167px">
                       </form>
                     </td>
@@ -311,8 +276,102 @@
 
 </div>
 
+<?php
+if (isset($_SESSION['response'])) {
+    $response_message = $_SESSION['response']['message'];
+    $is_success = $_SESSION['response']['success'];
+?>
 
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Show SweetAlert modal
+        Swal.fire({
+            icon: '<?= $is_success ? 'success' : 'error' ?>',
+            title: '<?= $is_success ? 'Success' : 'Error' ?>',
+            text: '<?= $response_message ?>',
+            timer: 3000,
+            confirmButtonText: 'OK'
+        });
+    });
+</script>
+
+<?php
+    unset($_SESSION['response']);
+}
+?>
+
+
+
+<div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"> Edit User Data </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <form action="database/update-user.php"  method="POST">
+
+                    <div class="modal-body">
+
+                        <input type="hidden" name="e_id" id="e_id">
+
+                        <div class="form-group">
+                            <label> Name </label>
+                            <input type="text" name="e_name" id="e_name" class="form-control"
+                                placeholder="Enter First Name">
+                        </div>
+
+                        <div class="form-group">
+                            <label> Last Name </label>
+                            <input type="text" name="e_last_name" id="e_last_name" class="form-control"
+                                placeholder="Enter Last Name">
+                        </div>
+
+                        <div class="form-group">
+                            <label> Username</label>
+                            <input type="text" name="e_username" id="e_username" class="form-control"
+                                placeholder="Enter Last Name">
+                        </div>
+
+                        <div class="form-group">
+                            <label> Email </label>
+                            <input type="text" name="e_email" id="e_email" class="form-control" placeholder="Enter Email">
+                        </div>
+
+                        <div class="form-group">
+                            <label> Phone Number </label>
+
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">+56 9</span>
+                              </div>
+                              <input type="text" class="form-control" id="e_phone_number" name="e_phone_number" pattern="[0-9]{8}" placeholder="ex. 123456789" required>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                          <label for="password" class="mb-1">Password</label>
+                          <input type="password" class="form-control" id="e_password" name="e_password" placeholder="Choose a password" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" name="updatedata" class="btn btn-primary">Update Data</button>
+                    </div>
+                </form>
+                
+                    
+            </div>
+        </div>
+    </div>
 
 </body>
+
+
 
 </html>
