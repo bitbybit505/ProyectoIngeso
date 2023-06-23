@@ -52,7 +52,7 @@
             return $(this).text();
         }).get();
 
-        console.log(data[0],data[5]);
+        //console.log(data[0],data[5]);
         $('#e_id').val(data[0]);
         $('#e_name').val(data[2]);
         $('#e_last_name').val(data[3]);
@@ -276,6 +276,8 @@
 
 </div>
 
+
+<!-- MODAL -->
 <?php
 if (isset($_SESSION['response'])) {
     $response_message = $_SESSION['response']['message'];

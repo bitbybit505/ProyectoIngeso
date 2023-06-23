@@ -21,14 +21,11 @@
         $stmt->bindParam(':username', $userin);
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':phone_number', $formatted_phone_number);
-        
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
 
         if ($result) {
-           
-            
               // Username, email, or phone number already exists for another user
             $response = [
                 'success' => false,
