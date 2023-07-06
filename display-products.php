@@ -31,6 +31,33 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
   
   <script>
+  $(document).ready(function () {
+
+    $('.editbtn').on('click', function () {
+
+        $('#editmodal').modal('show');
+
+        $tr = $(this).closest('tr');
+
+        var data = $tr.children("td").map(function () {
+            return $(this).text();
+        }).get();
+
+        //console.log(data[0],data[5]);
+        $('#e_image').val(data[0]);
+        $('#e_name').val(data[1]);
+        $('#e_descripcion').val(data[2]);
+        $('#e_id').val(data[3]);
+        $('#e_cantidad').val(data[4]);
+        $('#e_precio').val(data[5]);
+        $('#e_marca').val(data[8])
+        $('#e_proveedor').val(data[9])
+    });
+  });
+</script>
+  
+  
+  <script>
     $(document).ready(function(){
       $('#table').DataTable({
         "order": [[0, "asc"]],
@@ -313,7 +340,7 @@
                   <td>
                     <form method="post">           
                       <input type="hidden" name="txtID" id="txtID" value="<?php echo $product['id']; ?>">
-                      <input type="submit" name="accion" value="Editar" class="btn btn-primary">
+                      <button type="button" class="btn btn-primary editbtn"style="height:38px; width:71.6167px">Edit</button>
                       <input type="submit" name="accion" value="Borrar" class="btn btn-danger">
                     </form>
                   </td>
@@ -326,6 +353,96 @@
     </div>
 
   </div>
+
+<!-- MODAL -->
+<?php
+if (isset($_SESSION['response'])) {
+    $response_message = $_SESSION['response']['message'];
+    $is_success = $_SESSION['response']['success'];
+?>
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Show SweetAlert modal
+        Swal.fire({
+            icon: '<?= $is_success ? 'success' : 'error' ?>',
+            title: '<?= $is_success ? 'Success' : 'Error' ?>',
+            text: '<?= $response_message ?>',
+            timer: 3000,
+            confirmButtonText: 'OK'
+        });
+    });
+</script>
+
+<?php
+    unset($_SESSION['response']);
+}
+?>
+  
+
+
+  <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"> Edit Product Data</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <form action="database/update-user.php"  method="POST">
+
+                    <div class="modal-body">
+
+                        <input type="hidden" name="e_id" id="e_id">
+
+                        <div class="form-group">
+                            <label>Nombre del producto</label>
+                            <input type="text" name="e_name" id="e_name" class="form-control "
+                                placeholder="Nombre del producto" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Descripción del producto</label>
+                            <input type="text" name="e_descripcion" id="e_descripcion" class="form-control"
+                                placeholder="Descripción del producto" >
+                        </div>
+
+                        <div class="form-group">
+                            <label>Imagen</label>
+                            <input type="text" name="e_image" id="e_image" class="form-control"
+                                placeholder="Imagen...">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Cantidad</label>
+                            <input type="text" name="e_cantidad" id="e_cantidad" class="form-control" 
+                                placeholder="Ingrese cantidad >= 0">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Precio</label>
+                            <input type="text" name="e_precio" id="e_precio" class="form-control" 
+                                placeholder="Ingrese precio >= 0">
+                        </div>
+
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" name="updatedata" class="btn btn-primary">Update Data</button>
+                    </div>
+                </form>
+                
+                    
+            </div>
+        </div>
+    </div>
+
 
   <!-- DataTable -->
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.css"/>  
