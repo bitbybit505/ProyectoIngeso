@@ -142,6 +142,7 @@
             $txtNombre=(isset($_POST['txtNombre']))?$_POST['txtNombre']:"";
             $txtImagen=(isset($_FILES['txtImagen']['name']))?$_FILES['txtImagen']['name']:"";
             $txtCantidad=(isset($_POST['txtCantidad']))?$_POST['txtCantidad']:"";
+            $txtPrecio=(isset($_POST['txtPrecio']))?$_POST['txtPrecio']:"";
             $txtDescripcion=(isset($_POST['txtDescripcion']))?$_POST['txtDescripcion']:"";
             $accion=(isset($_POST['accion']))?$_POST['accion']:"";
 
@@ -159,11 +160,11 @@
               case "Agregar":
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                   $txtMarca = $_POST['txtMarca'];
-                  echo "La marca seleccionada es: " . $txtMarca;
+                  //echo "La marca seleccionada es: " . $txtMarca;
                 }
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                   $txtProveedor = $_POST['txtProveedor'];
-                  echo "el proveedor seleccionada es: " . $txtProveedor;
+                  //echo "el proveedor seleccionada es: " . $txtProveedor;
                 }
                 // Obtener el id de la marca seleccionada
                 try{
@@ -172,20 +173,21 @@
                   $stmt->execute();
                   $id_marca = $stmt->fetchColumn();//importante
                   // Imprimir información adicional
-                  echo "Consulta SQL: " . $stmt->queryString . "<br>";
-                  echo "Número de filas afectadas: " . $stmt->rowCount() . "<br>";
-                  var_dump($id_marca);
+                  //echo "Consulta SQL: " . $stmt->queryString . "<br>";
+                  //echo "Número de filas afectadas: " . $stmt->rowCount() . "<br>";
+                  //var_dump($id_marca);
                   // Obtener el id del proveedor seleccionado
                   $stmt = $conn->prepare("SELECT id FROM supplier WHERE `name` = :nombre_proveedor");
                   $stmt->bindParam(':nombre_proveedor', $txtProveedor);
                   $stmt->execute();
                   $id_proveedor = $stmt->fetchColumn();//importante
                   //INSERT INTO `product` (`id`, `nombre`, `cantidad`, `imagen`) VALUES ('1', 'violin', '32', 'imagen.jpg');
-                  $sentenciaSQL= $conn->prepare("INSERT INTO product (`name`, cantidad, imagen, descripcion, fecha_ingreso, fecha_actualizada, id_marca, id_proveedor) 
-                  VALUES (:nombre, :cantidad, :imagen, :descripcion, NOW(), NOW(), :id_marca, :id_proveedor);");
+                  $sentenciaSQL= $conn->prepare("INSERT INTO product (`name`, cantidad, precio, imagen, descripcion, fecha_ingreso, fecha_actualizada, id_marca, id_proveedor) 
+                  VALUES (:nombre, :cantidad, :precio, :imagen, :descripcion, NOW(), NOW(), :id_marca, :id_proveedor);");
                   //$sentenciaSQL->bindParam(':id',$txtID);
                   $sentenciaSQL->bindParam(':nombre',$txtNombre);
                   $sentenciaSQL->bindParam(':cantidad',$txtCantidad);
+                  $sentenciaSQL->bindParam(':precio',$txtPrecio);
                   $sentenciaSQL->bindParam(':imagen',$txtImagen);
                   $sentenciaSQL->bindParam(':descripcion',$txtDescripcion);
                   $sentenciaSQL->bindParam(':id_marca',$id_marca);
@@ -261,8 +263,13 @@
                   
                   <div class = "form-group">
                   <label for="txtCantidad">Cantidad:</label>
-                  <input type="text" class="form-control" value="<?php echo $txtCantidad ?>" name="txtCantidad" id="txtCantidad"  placeholder="Nombre del producto">
-                  </div>
+                  <input type="number" class="form-control" value="<?php echo $txtCantidad ?>" name="txtCantidad" id="txtCantidad"  placeholder="cantidad de producto" inputmode="numeric" pattern="[0-9]+" min="0" required>
+                  <div class="invalid-feedback">Por favor, ingresa un número entero positivo.</div>
+
+                  <div class = "form-group">
+                  <label for="txtPrecio">Precio:</label>
+                  <input type="number" class="form-control" value="<?php echo $txtPrecio ?>" name="txtPrecio" id="txtPrecio"  placeholder="precio del producto" inputmode="numeric" pattern="[0-9]+" min="0" required>
+                  <div class="invalid-feedback">Por favor, ingresa un número entero positivo.</div>
 
                   <div class = "form-group">
                   <label for="txtNombre">Imagen:</label>

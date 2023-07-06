@@ -340,7 +340,7 @@ if (isset($_SESSION['response'])) {
                             <input type="text" name="e_username" id="e_username" class="form-control"
                                 placeholder="Enter Last Name">
                         </div>
-
+                        
                         <div class="form-group">
                             <label> Email </label>
                             <input type="text" name="e_email" id="e_email" class="form-control" placeholder="Enter Email">
