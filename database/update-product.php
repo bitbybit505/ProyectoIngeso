@@ -1,52 +1,53 @@
 <?php
     session_start();
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $brand = $_POST['e_marca'];
+        //echo "La marca seleccionada es: " . $txtMarca;
+    }
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $supplier= $_POST['e_proveedor'];
+        //echo "el proveedor seleccionada es: " . $txtProveedor;
+    }
+
     
+
+
     $table_name = $_SESSION['table'];
-    $userid= $_POST['e_id'];
+    $product_id= $_POST['e_id'];
     $name = $_POST['e_name'];
-    $last_name = $_POST['e_last_name'];
-    $userin = $_POST['e_username'];
-    $email = $_POST['e_email'];
-    $password = $_POST['e_password'];
-    $phone_number= $_POST['e_phone_number'];
-    $encrypted_password = password_hash($password, PASSWORD_DEFAULT);
+    $image = $_POST['e_image'];
+    $description = $_POST['e_descripcion'];
+    $quantity = $_POST['e_cantidad'];
+    $price= $_POST['e_precio'];
+    //$brand = $_POST['e_marca'];
+    //$supplier= $_POST['e_proveedor'];
     
-    $formatted_phone_number =  '+56 9 ' . substr($phone_number, 0, 4) . ' ' . substr($phone_number, 4);
 
     try {
         include('connection.php');
-        // Check if the username, email, or phone number already exists in the database for other users 
-        $stmt = $conn->prepare("SELECT * FROM `user` WHERE id != :userid AND (username = :username OR email = :email OR phone_number = :phone_number)");
-        $stmt->bindParam(':userid', $userid);
-        $stmt->bindParam(':username', $userin);
-        $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':phone_number', $formatted_phone_number);
+        
+        $stmt = $conn->prepare("SELECT id FROM marca WHERE nombre = :nombre_marca");
+        $stmt->bindParam(':nombre_marca', $brand);
         $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $brand_id = $stmt->fetchColumn();//importante
+        $stmt = $conn->prepare("SELECT id FROM supplier WHERE `name` = :nombre_proveedor");
+        $stmt->bindParam(':nombre_proveedor', $supplier);
+        $stmt->execute();
+        $supplier_id= $stmt->fetchColumn();//importante
+
+        $icommand = "UPDATE `product` SET `name`=?, `cantidad`=?, `precio`=?, `imagen`=?, `descripcion`=?, `fecha_actualizada`=NOW(), `id_marca`=?, `id_proveedor`=? WHERE `id`=?";
+        $stmt = $conn->prepare($icommand);
+        $stmt->execute([$name, $quantity, $price, $image, $description, $brand_id, $supplier_id, $product_id]);
 
 
-        if ($result) {
-              // Username, email, or phone number already exists for another user
-            $response = [
-                'success' => false,
-                'message' => 'The username, email, or phone number is already registered for another user.'
-            ];
-        } else {
-            // Insert the new user into the database
-            
-            $icommand = "UPDATE `user` SET `name`=?, `last_name`=?, `username`=?, `email`=?, `password`=?, `phone_number`=?, `updated_at`=NOW() WHERE `id`=?";
-            $stmt = $conn->prepare($icommand);
-            $stmt->execute([$name, $last_name, $userin, $email, $encrypted_password, $formatted_phone_number, $userid]);
-
-            
-            $response = [
-                'success' => true,
-                'message' => $name . ' ' . $last_name . ' was updated successfully.'
-            ];
+        $response = [
+            'success' => true,
+            'message' => $name . ' was updated successfully.'
+        ];
                         
                         
-        }
-    } catch (PDOException $e) {
+    }
+    catch (PDOException $e) {
         $response = [
             'success' => false,
             'message' => $e->getMessage()
@@ -55,5 +56,5 @@
     
 
     $_SESSION['response'] = $response;
-    header('location: ../display-users.php');
+    header('location: ../display-products.php');
 ?>

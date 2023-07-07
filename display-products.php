@@ -394,7 +394,7 @@ if (isset($_SESSION['response'])) {
                     </button>
                 </div>
 
-                <form action="database/update-products.php"  method="POST">
+                <form action="database/update-product.php"  method="POST">
 
                     <div class="modal-body">
 
@@ -431,7 +431,7 @@ if (isset($_SESSION['response'])) {
                         </div>
 
                         <div class="form-group">
-                        <label for="txtMarca">Marca:</label>
+                        <label>Marca</label>
                           <select class="form-control" name="e_marca" id="e_marca">
                             <?php
                             include('database/connection.php');
@@ -447,7 +447,7 @@ if (isset($_SESSION['response'])) {
                         </div>
                             
                         <div class="form-group">
-                        <label for="txtProveedor">Proveedor:</label>
+                        <label>Proveedor</label>
                           <select class="form-control" name="e_proveedor" id="e_proveedor">
                             <?php
                             include('database/connection.php');
