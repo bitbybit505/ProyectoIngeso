@@ -346,7 +346,8 @@ if (isset($_SESSION['response'])) {
                         
                         <div class="form-group">
                             <label> Email </label>
-                            <input type="text" name="e_email" id="e_email" class="form-control" placeholder="Enter Email">
+                            <input type="text" name="e_email" id="e_email" class="form-control" placeholder="Enter Email"
+                            required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{1,}">
                         </div>
 
                         <div class="form-group">

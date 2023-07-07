@@ -130,7 +130,8 @@
               </div>
               <div class="form-group mb-3">
                 <label for="email" class="mb-1">Email address</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" 
+                required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{1,}">
               </div>
               <div class="form-group mb-3">
                 <label for="password" class="mb-1">Password</label>

@@ -16,7 +16,7 @@
 
 
         if ($result) {
-              // Username, email, or phone number already exists for another user
+              //nombre ya está en la base de datos.
             $response = [
                 'success' => false,
                 'message' => 'El nombre de la marca ya está registrado.'
