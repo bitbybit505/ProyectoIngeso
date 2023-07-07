@@ -31,6 +31,23 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
   
   <script>
+    function validateNumber(input) {
+        // Remove any non-digit characters from the input value
+        input.value = input.value.replace(/\D/g, '');
+
+        // Parse the input value as a number
+        const number = parseInt(input.value);
+
+        // Check if the number is negative
+        if (isNaN(number) || number < 0) {
+            input.value = ''; // Clear the input value
+        }
+    }
+  </script>
+
+
+
+  <script>
   $(document).ready(function () {
 
     $('.editbtn').on('click', function () {
@@ -421,13 +438,13 @@ if (isset($_SESSION['response'])) {
                         <div class="form-group">
                             <label>Cantidad</label>
                             <input type="text" name="e_cantidad" id="e_cantidad" class="form-control" 
-                                placeholder="Ingrese cantidad >= 0">
+                                placeholder="Ingrese cantidad >= 0" oninput="validateNumber(this)" required>
                         </div>
 
                         <div class="form-group">
                             <label>Precio</label>
                             <input type="text" name="e_precio" id="e_precio" class="form-control" 
-                                placeholder="Ingrese precio >= 0">
+                                placeholder="Ingrese precio >= 0" oninput="validateNumber(this)" required>
                         </div>
 
                         <div class="form-group">

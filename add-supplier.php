@@ -138,8 +138,13 @@
                 <input type="email" class="form-control" id="email" name="email" placeholder="Enter the email" required>
               </div>
               <div class="form-group mb-3">
-                <label for="phone_number" class="mb-1">Phone number</label>
-                <input type="text" class="form-control" id="phone_number" name="phone_number" placeholder="Enter the phone number" required>
+                <label for="phoneNumber" class="mb-1">Phone Number</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">+56 9</span>
+                  </div>
+                  <input type="text" class="form-control" id="phone_number" name="phone_number" pattern="[0-9]{8}" placeholder="ex. 123456789" required>
+                </div>
               </div>
               
               <!--<input type="hidden" name="table" value= "users" /> -->

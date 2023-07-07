@@ -33,6 +33,29 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
   <!-- Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- EDIT BUTTON MODAL-->
+
+  <script>
+    $(document).ready(function () {
+
+      $('.editbtn').on('click', function () {
+
+          $('#editmodal').modal('show');
+
+          $tr = $(this).closest('tr');
+
+          var data = $tr.children("td").map(function () {
+              return $(this).text();
+          }).get();
+
+          //console.log(data[0],data[5]);
+          $('#e_id').val(data[0]);
+          $('#e_name').val(data[1]);
+      });
+    });
+  </script>
+
+
 
   <script>
     $(document).ready(function(){
@@ -221,7 +244,7 @@
                     <td>
                       <form method="post">
                         <input type="hidden" name="marcaid" id="marcaid" value="<?php echo $marca['id']; ?>">
-                        <input type="summit" name="btnAction" value="Edit" class="btn btn-primary " style="height:38px; width:71.6167px">
+                        <button type="button" class="btn btn-primary editbtn"style="height:38px; width:71.6167px">Editar</button>
                         <input type="submit" name="btnAction" value="Delete" class="btn btn-danger" style="height:38px; width:71.6167px">
                       </form>
                     </td>
@@ -235,6 +258,73 @@
 </div>
 
 </div>
+
+
+<!-- MODAL -->
+<?php
+if (isset($_SESSION['response'])) {
+    $response_message = $_SESSION['response']['message'];
+    $is_success = $_SESSION['response']['success'];
+?>
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Show SweetAlert modal
+        Swal.fire({
+            icon: '<?= $is_success ? 'success' : 'error' ?>',
+            title: '<?= $is_success ? 'Success' : 'Error' ?>',
+            text: '<?= $response_message ?>',
+            timer: 3000,
+            confirmButtonText: 'OK'
+        });
+    });
+</script>
+
+<?php
+    unset($_SESSION['response']);
+}
+?>
+
+
+
+<div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"> Información de marca </h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <form action="database/update-marca.php"  method="POST">
+
+                    <div class="modal-body">
+
+                        <input type="hidden" name="e_id" id="e_id">
+
+                        <div class="form-group">
+                            <label> Name </label>
+                            <input type="text" name="e_name" id="e_name" class="form-control"
+                                placeholder="Enter First Name">
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" name="updatedata" class="btn btn-primary">Update Data</button>
+                    </div>
+                </form>
+                
+                    
+            </div>
+        </div>
+    </div>
+
+
 
 <!-- DataTable -->
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.css"/>  
