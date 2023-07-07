@@ -394,7 +394,7 @@ if (isset($_SESSION['response'])) {
                     </button>
                 </div>
 
-                <form action="database/update-user.php"  method="POST">
+                <form action="database/update-products.php"  method="POST">
 
                     <div class="modal-body">
 
