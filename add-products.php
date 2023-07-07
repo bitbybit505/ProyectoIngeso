@@ -303,7 +303,7 @@
                         
                         // Cerrar la conexión a la base de datos
                         var_dump($txtMarca);
-                        $conn = null;
+                        
                       ?>
                     </select>
                   </div>

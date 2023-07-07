@@ -430,6 +430,40 @@ if (isset($_SESSION['response'])) {
                                 placeholder="Ingrese precio >= 0">
                         </div>
 
+                        <div class="form-group">
+                        <label for="txtMarca">Marca:</label>
+                          <select class="form-control" name="e_marca" id="e_marca">
+                            <?php
+                            include('database/connection.php');
+                            $sentenciaSQL = $conn->prepare("SELECT nombre FROM marca");
+                            $sentenciaSQL->execute();
+                            $marcas=$sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
+                            foreach ($marcas as $marca) {
+                              echo "<option value='" . $marca['nombre'] . "'>" . $marca['nombre'] . "</option>";
+                            }
+                            
+                            ?>
+                          </select>
+                        </div>
+                            
+                        <div class="form-group">
+                        <label for="txtProveedor">Proveedor:</label>
+                          <select class="form-control" name="e_proveedor" id="e_proveedor">
+                            <?php
+                            include('database/connection.php');
+                            $sentenciaSQL = $conn->prepare("SELECT `name` FROM supplier");
+                            $sentenciaSQL->execute();
+                            $proveedores=$sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
+                            foreach ($proveedores as $proveedor) {
+                              echo "<option value='" . $proveedor['name'] . "'>" . $proveedor['name'] . "</option>";
+                            }
+                            $conn = null;
+                            ?>
+                          </select>
+                        </div>
+
+                        
+
                         
                     </div>
                     <div class="modal-footer">
