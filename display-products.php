@@ -100,6 +100,14 @@
     
   </script>
 
+  <!-- Cantidad arrows-->
+  <script>
+    function updateQuantity(productId, action) {
+      // Redirige a otra página para realizar la actualización de la cantidad
+      window.location.href = 'database/update-quantity.php?id=' + productId + '&action=' + action;
+    }
+  </script>
+
 </head>
 
 
@@ -348,7 +356,12 @@
                   <td><?php echo $product['name'] ?></td>
                   <td><?php echo $product['descripcion'] ?></td>
                   <td><?php echo $product['id'] ?></td>
-                  <td><?php echo $product['cantidad'] ?></td>
+                  <td><div class="d-flex align-items-center"
+                    ><button class="btn btn-sm btn-outline-secondary" onclick="updateQuantity(<?=$product['id']?>, 'decrease')"
+                    ><i class="bi bi-arrow-down"></i></button><div class="mx-2"><?=$product['cantidad']?></div
+                    ><button class="btn btn-sm btn-outline-secondary" onclick="updateQuantity(<?=$product['id']?>, 'increase')"
+                    ><i class="bi bi-arrow-up"></i></button></div
+                    ></td>
                   <td><?php echo $product['precio'] ?></td>
                   <td><?php echo $product['fecha_ingreso'] ?></td>
                   <td><?php echo $product['fecha_actualizada'] ?></td>
