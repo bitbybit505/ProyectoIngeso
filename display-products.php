@@ -389,7 +389,7 @@ if (isset($_SESSION['response'])) {
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel"> Edit Product Data</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -414,9 +414,9 @@ if (isset($_SESSION['response'])) {
 
                         <div class="form-group">
                             <label>Imagen</label>
-                            <input type="text" name="e_image" id="e_image" class="form-control"
-                                placeholder="Imagen...">
+                            <input type="file" name="e_image" id="e_image" class="form-control">
                         </div>
+
                         
                         <div class="form-group">
                             <label>Cantidad</label>
@@ -467,7 +467,7 @@ if (isset($_SESSION['response'])) {
                         
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit" name="updatedata" class="btn btn-primary">Update Data</button>
                     </div>
                 </form>
