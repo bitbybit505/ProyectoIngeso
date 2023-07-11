@@ -193,29 +193,73 @@
           $btnAction = isset($_POST['btnAction']) ? $_POST['btnAction'] : "";
           try{
 
-          include('database/connection.php');
-            
-          switch ($btnAction) {
+            include('database/connection.php');
               
-            
-            case "Delete":
-              $id = $_POST['supplierid']; // Retrieve the supplier's ID from the form
-              $stmt = $conn->prepare("DELETE FROM supplier WHERE id = :id");
-              $stmt->bindParam(':id', $supplierid);
-              $stmt->execute();
-              echo '<script>
-                      setTimeout(function() {
-                        Swal.fire({
-                          title: "Proveedor eliminado",
-                          text: "El proveedor ha sido eliminado correctamente.",
-                          icon: "error",
-                          timer: 1500,
-                          showConfirmButton: false
-                        });
-                      }, 150); // Retardo de 500 milisegundos antes de mostrar la ventana emergente
-                      </script>';
-              break;
-            }
+            switch ($btnAction) {
+               case "Delete":
+            $supplierid = $_POST['supplierid']; // Retrieve the supplier's ID from the form
+            echo '
+            <script>
+                Swal.fire({
+                    title: "¿Estás seguro?",
+                    text: "¡No podrás revertir esto!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Sí, eliminar",
+                    cancelButtonText: "Cancelar"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // User confirmed, proceed with deletion
+                        const xhr = new XMLHttpRequest();
+                        xhr.open("POST", "database/remove-supplier.php", true);
+                        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                        xhr.onreadystatechange = function() {
+                            if (xhr.readyState === 4) {
+                                if (xhr.status === 200) {
+                                    // Handle the response
+                                    const response = xhr.responseText.trim();
+                                    if (response === "success") {
+                                        // Deletion successful
+                                        Swal.fire({
+                                            title: "Proveedor eliminado",
+                                            text: "El proveedor ha sido eliminado correctamente.",
+                                            icon: "success",
+                                            timer: 1500,
+                                            showConfirmButton: false
+                                        }).then(() => {
+                                            // Reload the page to update the supplier list
+                                            window.location.href = "display-suppliers.php";
+                                        });
+                                    } else {
+                                        // Deletion failed
+                                        Swal.fire({
+                                            title: "Error",
+                                            text: "No se pudo eliminar el proveedor.",
+                                            icon: "error",
+                                            timer: 1500,
+                                            showConfirmButton: false
+                                        });
+                                    }
+                                } else {
+                                    // Request failed
+                                    Swal.fire({
+                                        title: "Error",
+                                        text: "No se pudo completar la solicitud.",
+                                        icon: "error",
+                                        timer: 1500,
+                                        showConfirmButton: false
+                                    });
+                                }
+                            }
+                        };
+                        xhr.send("supplier_id=" + ' . $supplierid . ');
+                    }
+                });
+            </script>';
+            break;
+              }
                         
           }
           catch(PDOException $e){

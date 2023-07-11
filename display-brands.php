@@ -160,13 +160,10 @@
             <div class="collapse" id="marcaCollapse">
               <ul class="nav flex-column ml-3">
               <li class="nav-item">
-                  <a class="nav-link" href="display-marca.php">Display Marca</a>
+                  <a class="nav-link" href="display-brands.php">Display Marca</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="add-marca.php">Add Marca</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Modify Marca</a>
+                  <a class="nav-link" href="add-brand.php">Add Marca</a>
                 </li>
               </ul>
             </div>
@@ -196,21 +193,59 @@
               
             
             case "Delete":
-              $id = $_POST['marcaid']; // Retrieve the supplier's ID from the form
-              $stmt = $conn->prepare("DELETE FROM marca WHERE id = :id");
-              $stmt->bindParam(':id', $marcaid);
-              $stmt->execute();
-              echo '<script>
-                      setTimeout(function() {
-                        Swal.fire({
-                          title: "Marca eliminada",
-                          text: "La Marca ha sido eliminada correctamente.",
-                          icon: "error",
-                          timer: 1500,
-                          showConfirmButton: false
-                        });
-                      }, 150); // Retardo de 500 milisegundos antes de mostrar la ventana emergente
-                      </script>';
+              echo '
+              <script>
+                  Swal.fire({
+                      title: "¿Estás seguro?",
+                      text: "¡No podrás revertir esto!",
+                      icon: "warning",
+                      showCancelButton: true,
+                      confirmButtonColor: "#3085d6",
+                      cancelButtonColor: "#d33",
+                      confirmButtonText: "Sí, eliminar",
+                      cancelButtonText: "Cancelar"
+                  }).then((result) => {
+                      if (result.isConfirmed) {
+                          // User confirmed, proceed with deletion
+                          const xhr = new XMLHttpRequest();
+                          xhr.open("POST", "database/remove-brand.php", true);
+                          xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                          xhr.onreadystatechange = function() {
+                              if (xhr.readyState === 4 && xhr.status === 200) {
+                                  // Handle the response if needed
+                                  if (xhr.responseText === "success") {
+                                      // Brand deleted successfully
+                                      Swal.fire({
+                                          title: "Marca eliminada",
+                                          text: "La Marca ha sido eliminada correctamente.",
+                                          icon: "success",
+                                          timer: 3000,
+                                          showConfirmButton: false
+                                      }).then(() => {
+                                          // Reload the page to update the brand list
+                                          window.location.href = "display-brands.php";
+                                      });
+                                      // Find and remove the table row containing the deleted brand
+                                      const row = document.getElementById("row-' . $marcaid . '");
+                                      if (row) {
+                                          row.remove();
+                                      }
+                                  } else {
+                                      // Brand not found or deletion failed
+                                      Swal.fire({
+                                          title: "Error",
+                                          text: "No se pudo eliminar la Marca.",
+                                          icon: "error",
+                                          timer: 3000,
+                                          showConfirmButton: false
+                                      });
+                                  }
+                              }
+                          };
+                          xhr.send("brand_id=' . $marcaid . '"); // Pass the brand_id variable here
+                      }
+                  });
+              </script>';
               break;
             }
                         
@@ -300,7 +335,7 @@ if (isset($_SESSION['response'])) {
                     </button>
                 </div>
 
-                <form action="database/update-marca.php"  method="POST">
+                <form action="database/update-brand.php"  method="POST">
 
                     <div class="modal-body">
 

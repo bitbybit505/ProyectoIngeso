@@ -25,7 +25,7 @@
     }
 
     $_SESSION['response'] = $response;
-    header('location: ../add-marca.php');
+    header('location: ../add-brand.php');
 
 
     

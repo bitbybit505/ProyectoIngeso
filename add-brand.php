@@ -105,13 +105,10 @@
             <div class="collapse" id="marcaCollapse">
               <ul class="nav flex-column ml-3">
               <li class="nav-item">
-                  <a class="nav-link" href="display-marca.php">Display Marca</a>
+                  <a class="nav-link" href="display-brands.php">Display Marca</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="add-marca.php">Add Marca</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Modify Marca</a>
+                  <a class="nav-link" href="add-brand.php">Add Marca</a>
                 </li>
               </ul>
             </div>
@@ -128,7 +125,7 @@
         <div class="card">
           <div class="card-header fw-semibold ">Register Marca</div>
           <div class="card-body">
-            <form method="POST" action="database/validate-marca.php">
+            <form method="POST" action="database/validate-brand.php">
               <div class="form-group mb-3">
                 <label for="name">Name</label>
                 <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Enter the name" required>

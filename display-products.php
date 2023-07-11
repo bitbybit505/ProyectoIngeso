@@ -284,35 +284,70 @@
 
           include('database/connection.php');
           switch($accion){
-              case "Borrar":
-                //Borrar imagen del producto
-                $sentenciaSQL = $conn->prepare("SELECT * from product WHERE id=:id");
-                $sentenciaSQL->bindParam(':id',$txtID);
-                $sentenciaSQL->execute();
-                $producto=$sentenciaSQL->fetch(PDO::FETCH_LAZY);
-
-                if(isset($producto["imagen"]) && ($producto["imagen"] != "img.jpg"))
-                {
-                  if(file_exists("img/".$producto["imagen"])){
-                    unlink("img/".$producto["imagen"]);
-                  }
-                }
-                //echo "presionado boton Borrar";
-                $sentenciaSQL = $conn->prepare("DELETE from product WHERE id=:id");
-                $sentenciaSQL->bindParam(':id',$txtID);
-                $sentenciaSQL->execute();
-                echo '<script>
-                        setTimeout(function() {
-                          Swal.fire({
-                            title: "Producto eliminado",
-                            text: "El producto ha sido eliminado correctamente.",
-                            icon: "error",
-                            timer: 1500,
-                            showConfirmButton: false
-                          });
-                        }, 150); // Retardo de 500 milisegundos antes de mostrar la ventana emergente
-                        </script>';
-                break;
+            case "Borrar":
+              // Borrar imagen del producto
+              $sentenciaSQL = $conn->prepare("SELECT * from product WHERE id=:id");
+              $sentenciaSQL->bindParam(':id', $txtID);
+              $sentenciaSQL->execute();
+              $producto = $sentenciaSQL->fetch(PDO::FETCH_LAZY);
+          
+              echo '
+              <script>
+                  Swal.fire({
+                    title: "¿Estás seguro?",
+                    text: "¡No podrás revertir esto!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Sí, eliminar",
+                    cancelButtonText: "Cancelar"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // User confirmed, proceed with deletion
+                        const xhr = new XMLHttpRequest();
+                        xhr.open("POST", "database/remove-product.php", true);
+                        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                        xhr.onreadystatechange = function() {
+                            if (xhr.readyState === 4 && xhr.status === 200) {
+                                // Handle the response if needed
+                                if (xhr.responseText === "success") {
+                                    // Product deleted successfully
+                                    Swal.fire({
+                                        title: "Producto eliminado",
+                                        text: "El producto ha sido eliminado correctamente.",
+                                        icon: "success",
+                                        timer: 1500,
+                                        showConfirmButton: false
+                                    }).then(() => {
+                                        // Reload the page to update the products list
+                                        window.location.href = "display-products.php";
+                                    });
+                                    // Find and remove the table row containing the deleted product
+                                    const row = document.getElementById("row-' . $txtID . '");
+                                    if (row) {
+                                        row.remove();
+                                    }
+                                } else {
+                                    // Product not found or deletion failed
+                                    Swal.fire({
+                                        title: "Error",
+                                        text: "No se pudo eliminar el producto.",
+                                        icon: "error",
+                                        timer: 1500,
+                                        showConfirmButton: false
+                                    });
+                                }
+                            }
+                        };
+                        xhr.send("product_id=" + ' . $txtID . '); // Pass the product_id variable here
+                    }
+                });
+              </script>';
+              break;
+          
+            
+          
             }
 
           $sentenciaSQL = $conn->prepare(
@@ -384,7 +419,9 @@
                   <td>
                     <div class="image-container">
                       <img src="img/<?php echo $product['imagen']; ?>" width="80" alt="">
-                      <button class="btn btn-sm btn-danger remove-image-btn" data-product-id="<?php echo $product['id']; ?>">x</button>
+                      <?php if (!empty($product['imagen']) && $product['imagen'] != 'img.jpg'): ?>
+                        <button class="btn btn-sm btn-danger remove-image-btn" data-product-id="<?php echo $product['id']; ?>">x</button>
+                      <?php endif; ?>
                     </div>
                   </td>
                   <td><?php echo $product['name'] ?></td>

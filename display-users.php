@@ -190,22 +190,60 @@
               
             switch ($btnAction) {
               case "Delete":
-                $id = $_POST['userid']; // Retrieve the user ID from the form
-                $stmt = $conn->prepare("DELETE FROM user WHERE id = :id");
-                $stmt->bindParam(':id', $userid);
-                $stmt->execute();
-                echo '<script>
-                        setTimeout(function() {
-                          Swal.fire({
-                            title: "Usuario eliminado",
-                            text: "El usuario ha sido eliminado correctamente.",
-                            icon: "error",
-                            timer: 3000,
-                            showConfirmButton: false
-                          });
-                        }, 150); // Retardo de 500 milisegundos antes de mostrar la ventana emergente
-                        </script>';
-              break;
+                echo '
+                <script>
+                    Swal.fire({
+                        title: "¿Estás seguro?",
+                        text: "¡No podrás revertir esto!",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Sí, eliminar",
+                        cancelButtonText: "Cancelar"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // User confirmed, proceed with deletion
+                            const xhr = new XMLHttpRequest();
+                            xhr.open("POST", "database/remove-user.php", true);
+                            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                            xhr.onreadystatechange = function() {
+                                if (xhr.readyState === 4 && xhr.status === 200) {
+                                    // Handle the response if needed
+                                    if (xhr.responseText === "success") {
+                                        // User deleted successfully
+                                        Swal.fire({
+                                            title: "Usuario eliminado",
+                                            text: "El usuario ha sido eliminado correctamente.",
+                                            icon: "success",
+                                            timer: 3000,
+                                            showConfirmButton: false
+                                        }).then(() => {
+                                            // Reload the page to update the user list
+                                            window.location.href = "display-users.php";
+                                        });
+                                        // Find and remove the table row containing the deleted user
+                                        const row = document.getElementById("row-' . $userid . '");
+                                        if (row) {
+                                            row.remove();
+                                        }
+                                    } else {
+                                        // User not found or deletion failed
+                                        Swal.fire({
+                                            title: "Error",
+                                            text: "No se pudo eliminar el usuario.",
+                                            icon: "error",
+                                            timer: 3000,
+                                            showConfirmButton: false
+                                        });
+                                    }
+                                }
+                            };
+                            xhr.send("user_id=' . $userid . '"); // Pass the user_id variable here
+                        }
+                    });
+                </script>';
+                break;
             }
                         
           }

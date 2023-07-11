@@ -45,5 +45,5 @@
     
 
     $_SESSION['response'] = $response;
-    header('location: ../display-marca.php');
+    header('location: ../display-brand.php');
 ?>
