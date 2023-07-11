@@ -30,6 +30,60 @@
   <!-- Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
   
+<!-- 
+  <style>
+    .enlarged-image {
+      max-width: 90%;
+      max-height: 90%;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+    }
+
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9998;
+      cursor: pointer;
+    }
+  </style>
+  -->
+
+  <style>
+    .image-container {
+      position: relative;
+      display: inline-block;
+    }
+
+    .image-zoom {
+      transition: transform 0.3s;
+    }
+
+    .enlarged-image {
+      max-width: 30%;
+      max-height: 30%;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+      border: 4px solid #ccc;
+      padding: 10px;
+      background-color: white;
+    }
+
+  </style>
+
+  
   
   <script>
     function validateNumber(input) {
@@ -45,7 +99,43 @@
         }
     }
   </script>
+   
 
+   
+<!-- TO ENLARGE WHEN CLICKING 
+<script>
+    function showEnlargedImage(event) {
+      var enlargedImage = document.createElement('img');
+      var imageSrc = event.target.src;
+
+      var preloadImage = new Image();
+      preloadImage.src = imageSrc;
+      preloadImage.onload = function() {
+        enlargedImage.src = imageSrc;
+        enlargedImage.className = 'enlarged-image';
+
+        var modalOverlay = document.createElement('div');
+        modalOverlay.className = 'modal-overlay';
+        modalOverlay.appendChild(enlargedImage);
+
+        document.body.appendChild(modalOverlay);
+
+        modalOverlay.addEventListener('click', function(event) {
+          if (event.target === modalOverlay) {
+            modalOverlay.parentNode.removeChild(modalOverlay);
+          }
+        });
+      };
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      var imageContainers = document.getElementsByClassName('image-container');
+      for (var i = 0; i < imageContainers.length; i++) {
+        imageContainers[i].addEventListener('click', showEnlargedImage);
+      }
+    });
+  </script>
+  -->
 
 
 
@@ -164,10 +254,13 @@
     }
   </script>
 
+
+
 </head>
 
 
 <body>
+  
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
@@ -418,11 +511,12 @@
                 <tr>
                   <td>
                     <div class="image-container">
-                      <img src="img/<?php echo $product['imagen']; ?>" width="80" alt="">
+                      <img class="image-zoom" src="img/<?php echo $product['imagen']; ?>" width="80" alt="" data-image="<?php echo $product['imagen']; ?>">
                       <?php if (!empty($product['imagen']) && $product['imagen'] != 'img.jpg'): ?>
                         <button class="btn btn-sm btn-danger remove-image-btn" data-product-id="<?php echo $product['id']; ?>">x</button>
                       <?php endif; ?>
                     </div>
+                    
                   </td>
                   <td><?php echo $product['name'] ?></td>
                   <td><?php echo $product['descripcion'] ?></td>
@@ -454,6 +548,44 @@
     </div>
 
   </div>
+
+ <!-- ENLARGE IMAGE -->
+  <script>
+    function showEnlargedImage(event) {
+    var enlargedImage = document.createElement('img');
+    var imageFileName = event.target.getAttribute('data-image');
+    var imagePath = 'img/' + imageFileName; // Modify this line to match your image path
+
+    enlargedImage.src = imagePath;
+    enlargedImage.className = 'enlarged-image';
+
+    var modalOverlay = document.createElement('div');
+    modalOverlay.className = 'modal-overlay';
+    modalOverlay.appendChild(enlargedImage);
+
+    document.body.appendChild(modalOverlay);
+
+    modalOverlay.addEventListener('click', function(event) {
+      if (event.target === modalOverlay) {
+        modalOverlay.parentNode.removeChild(modalOverlay);
+      }
+    });
+  }
+
+  var imageContainers = document.getElementsByClassName('image-container');
+  for (var i = 0; i < imageContainers.length; i++) {
+    var image = imageContainers[i].getElementsByTagName('img')[0];
+    var imageFileName = image.getAttribute('data-image');
+    image.addEventListener('mouseover', showEnlargedImage);
+    image.addEventListener('mouseout', function() {
+      var modalOverlay = document.getElementsByClassName('modal-overlay')[0];
+      if (modalOverlay) {
+        modalOverlay.parentNode.removeChild(modalOverlay);
+      }
+    });
+  }
+  </script>
+  
 
 <!-- MODAL -->
 <?php

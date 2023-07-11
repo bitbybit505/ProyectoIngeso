@@ -16,7 +16,7 @@ if (isset($_POST['product_id'])) {
 
     // Check if product exists and has an image
     if ($product && isset($product['imagen']) && $product['imagen'] != "img.jpg") {
-        $imagePath = "img/" . $product['imagen'];
+        $imagePath = "../img/" . $product['imagen'];
 
         // Check if the image file exists
         if (file_exists($imagePath)) {
