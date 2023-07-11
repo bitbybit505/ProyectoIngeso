@@ -185,10 +185,22 @@
                   $sentenciaSQL= $conn->prepare("INSERT INTO product (`name`, cantidad, precio, imagen, descripcion, fecha_ingreso, fecha_actualizada, id_marca, id_proveedor) 
                   VALUES (:nombre, :cantidad, :precio, :imagen, :descripcion, NOW(), NOW(), :id_marca, :id_proveedor);");
                   //$sentenciaSQL->bindParam(':id',$txtID);
+
+                  //Agregar imagen con hora
+                  $fecha = new DateTime();
+                  $nombreImagen = ($txtImagen != "")?$fecha->getTimestamp()."_".$_FILES["txtImagen"]["name"]:"img.jpg";
+
+                  $tmpImagen = $_FILES["txtImagen"]["tmp_name"];
+
+                  if($tmpImagen != "")
+                  {
+                    move_uploaded_file($tmpImagen,"img/".$nombreImagen);
+                  }
+
                   $sentenciaSQL->bindParam(':nombre',$txtNombre);
                   $sentenciaSQL->bindParam(':cantidad',$txtCantidad);
                   $sentenciaSQL->bindParam(':precio',$txtPrecio);
-                  $sentenciaSQL->bindParam(':imagen',$txtImagen);
+                  $sentenciaSQL->bindParam(':imagen',$nombreImagen);
                   $sentenciaSQL->bindParam(':descripcion',$txtDescripcion);
                   $sentenciaSQL->bindParam(':id_marca',$id_marca);
                   $sentenciaSQL->bindParam(':id_proveedor',$id_proveedor);

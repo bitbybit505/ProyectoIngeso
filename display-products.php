@@ -60,7 +60,6 @@
             return $(this).text();
         }).get();
 
-        //console.log(data[0],data[5]);
         $('#e_image').val(data[0]);
         $('#e_name').val(data[1]);
         $('#e_descripcion').val(data[2]);
@@ -69,9 +68,10 @@
         $('#e_precio').val(data[5]);
         $('#e_marca').val(data[8])
         $('#e_proveedor').val(data[9])
+        console.log(data[0]);
     });
   });
-</script>
+  </script>
   
   
   <script>
@@ -228,45 +228,19 @@
 
           include('database/connection.php');
           switch($accion){
-              case "Modificar":
-                $sentenciaSQL = $conn->prepare("UPDATE product SET nombre=:nombre  WHERE id=:id");
-                $sentenciaSQL->bindParam(':nombre',$txtNombre);
-                $sentenciaSQL->bindParam(':id',$txtID);
-                $sentenciaSQL->execute();
-
-                $sentenciaSQL = $conn->prepare("UPDATE product SET cantidad=:cantidad  WHERE id=:id");
-                $sentenciaSQL->bindParam(':cantidad',$txtCantidad);
-                $sentenciaSQL->bindParam(':id',$txtID);
-                $sentenciaSQL->execute();
-
-                if($txtImagen != ""){
-                  $sentenciaSQL = $conn->prepare("UPDATE product SET imagen=:imagen  WHERE id=:id");
-                  $sentenciaSQL->bindParam(':imagen',$txtImagen);
-                  $sentenciaSQL->bindParam(':id',$txtID);
-                  $sentenciaSQL->execute();
-                }
-                //echo "presionado boton Modificar";
-                break;
-
-              case "Seleccionar":
-                  $sentenciaSQL = $conn->prepare("SELECT * from product WHERE id=:id");
-                  $sentenciaSQL->bindParam(':id',$txtID);
-                  $sentenciaSQL->execute();
-                  $producto=$sentenciaSQL->fetch(PDO::FETCH_LAZY);
-
-                  $txtNombre=$producto['name'];
-                  $txtCantidad=$producto['cantidad'];
-                  $txtPrecio=$producto['precio'];
-                  $txtImagen=$producto['imagen'];
-                  $txtDescripcion= $producto['descripcion'];
-                  $txtIngreso=$producto['fecha_ingreso'];
-                  $txtUpdate=$producto['fecha_actualizada'];
-                  $txtIDMarca=$producto['id_marca'];
-                  $txtIDProveedor=$producto['id_proveedor'];
-                //echo "presionado boton Seleccionar";
-                break; 
-                
               case "Borrar":
+                //Borrar imagen del producto
+                $sentenciaSQL = $conn->prepare("SELECT * from product WHERE id=:id");
+                $sentenciaSQL->bindParam(':id',$txtID);
+                $sentenciaSQL->execute();
+                $producto=$sentenciaSQL->fetch(PDO::FETCH_LAZY);
+
+                if(isset($producto["imagen"]) && ($producto["imagen"] != "img.jpg"))
+                {
+                  if(file_exists("img/".$producto["imagen"])){
+                    unlink("img/".$producto["imagen"]);
+                  }
+                }
                 //echo "presionado boton Borrar";
                 $sentenciaSQL = $conn->prepare("DELETE from product WHERE id=:id");
                 $sentenciaSQL->bindParam(':id',$txtID);
@@ -282,8 +256,7 @@
                           });
                         }, 150); // Retardo de 500 milisegundos antes de mostrar la ventana emergente
                         </script>';
-                break;       
-
+                break;
             }
 
           $sentenciaSQL = $conn->prepare(
@@ -352,7 +325,7 @@
             <tbody>
               <?php foreach($listaProductos as $product){ ?>
                 <tr>
-                  <td><?php echo $product['imagen'] ?></td>  
+                  <td><img src="img/<?php echo $product['imagen'];?>" width="80" alt="" srcset=""></td>
                   <td><?php echo $product['name'] ?></td>
                   <td><?php echo $product['descripcion'] ?></td>
                   <td><?php echo $product['id'] ?></td>
@@ -424,7 +397,7 @@ if (isset($_SESSION['response'])) {
                     </button>
                 </div>
 
-                <form action="database/update-product.php"  method="POST">
+                <form action="database/update-product.php"  method="POST" enctype="multipart/form-data">
 
                     <div class="modal-body">
 
@@ -444,7 +417,7 @@ if (isset($_SESSION['response'])) {
 
                         <div class="form-group">
                             <label>Imagen</label>
-                            <input type="file" name="e_image" id="e_image" class="form-control">
+                            <input type="file" class="form-control" name="e_imagen" id="e_imagen" placeholder="Nombre del producto">
                         </div>
 
                         
