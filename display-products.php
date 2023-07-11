@@ -30,6 +30,7 @@
   <!-- Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
   
+  
   <script>
     function validateNumber(input) {
         // Remove any non-digit characters from the input value
@@ -44,6 +45,8 @@
         }
     }
   </script>
+
+
 
 
 
@@ -70,9 +73,62 @@
         $('#e_proveedor').val(data[9])
         console.log(data[0]);
     });
+    $('.remove-image-btn').on('click', function() {
+    const productId = $(this).data('product-id');
+
+    Swal.fire({
+      title: 'Confirmation',
+      text: 'Are you sure you want to remove the image?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, remove it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Send AJAX request to remove-image.php
+        $.ajax({
+          url: 'database/remove-image.php',
+          type: 'POST',
+          data: { productID: productId },
+          dataType: 'json',
+          success: function(response) {
+            if (response.success) {
+              Swal.fire({
+                title: 'Success',
+                text: response.message,
+                icon: 'success',
+                timer: 2000
+              }).then(() => {
+                // Refresh the page to update the product list
+                location.reload();
+              });
+            } else {
+              Swal.fire({
+                title: 'Error',
+                text: response.message,
+                icon: 'error',
+                timer: 2000
+              });
+            }
+          },
+          error: function() {
+            Swal.fire({
+              title: 'Error',
+              text: 'An error occurred while removing the image.',
+              icon: 'error',
+              timer: 2000
+            });
+          }
+        });
+      }
+    });
+  });
   });
   </script>
   
+
+
   
   <script>
     $(document).ready(function(){
@@ -325,7 +381,12 @@
             <tbody>
               <?php foreach($listaProductos as $product){ ?>
                 <tr>
-                  <td><img src="img/<?php echo $product['imagen'];?>" width="80" alt="" srcset=""></td>
+                  <td>
+                    <div class="image-container">
+                      <img src="img/<?php echo $product['imagen']; ?>" width="80" alt="">
+                      <button class="btn btn-sm btn-danger remove-image-btn" data-product-id="<?php echo $product['id']; ?>">x</button>
+                    </div>
+                  </td>
                   <td><?php echo $product['name'] ?></td>
                   <td><?php echo $product['descripcion'] ?></td>
                   <td><?php echo $product['id'] ?></td>
@@ -378,6 +439,10 @@ if (isset($_SESSION['response'])) {
         });
     });
 </script>
+
+
+
+
 
 <?php
     unset($_SESSION['response']);
