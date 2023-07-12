@@ -25,10 +25,13 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
   <!-- Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+  
+  
 
+  
 </head>
 <body>
-
+  
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
       <a class="navbar-brand" href="#">Dashboard</a>
@@ -52,79 +55,71 @@
 
 
   <div class="container-fluid">
-    <div class="row">
-      <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-        <div class="sidebar-sticky">
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link active" href="dashboard.php"></i>Dashboard</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="collapse" href="#usersCollapse"><i class="fas fa-users"></i> <span>Users</span> <i class="fas fa-angle-down"></i></a>
-              <div class="collapse" id="usersCollapse">
-                <ul class="nav flex-column ml-3">
-                  <li class="nav-item">
-                    <a class="nav-link" href="display-users.php">Display users</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="add-user.php">Add User</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Modify User</a>
-                  </li>
-                </ul>
-              </div>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="collapse" href="#productCollapse"><i class="fas fa-box-open"></i> <span>Products</span> <i class="fas fa-angle-down"></i></a>
-              <div class="collapse" id="productCollapse">
-                <ul class="nav flex-column ml-3">
-                  <li class="nav-item">
-                    <a class="nav-link" href="display-products.php">View Products</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="add-products.php">Add Product</a>
-                  </li>
-                
-                </ul>
-              </div>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#suppliersCollapse"><i class="bi bi-building"></i> <span>Supplier</span> <i class="fas fa-angle-down"></i></a>
-            <div class="collapse" id="suppliersCollapse">
+  <div class="row">
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active" href="dashboard.php"></i>Tablero</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#usersCollapse"><i class="fas fa-users"></i> <span>Usuarios</span> <i class="fas fa-angle-down"></i></a>
+            <div class="collapse" id="usersCollapse">
               <ul class="nav flex-column ml-3">
-                <li class="nav-item">
-                  <a class="nav-link" href="display-suppliers.php">View Supplier</a>
+              <li class="nav-item">
+                  <a class="nav-link" href="display-users.php">Ver Usuarios</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="add-supplier.php">Add Supplier</a>
+                  <a class="nav-link" href="add-user.php">Agregar Usuario</a>
                 </li>
               </ul>
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#marcaCollapse"><i class="fas fa-users"></i> <span>Marca</span> <i class="fas fa-angle-down"></i></a>
-            <div class="collapse" id="marcaCollapse">
+            <a class="nav-link" data-bs-toggle="collapse" href="#productCollapse"><i class="fas fa-box-open"></i> <span>Productos</span> <i class="fas fa-angle-down"></i></a>
+            <div class="collapse" id="productCollapse">
               <ul class="nav flex-column ml-3">
-              <li class="nav-item">
-                  <a class="nav-link" href="display-marca.php">Display Marca</a>
+                <li class="nav-item">
+                  <a class="nav-link" href="display-products.php">Ver Productos</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="add-marca.php">Add Marca</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Modify Marca</a>
+                  <a class="nav-link" href="add-products.php">Agregar Producto</a>
                 </li>
               </ul>
             </div>
           </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#"><i class="fas fa-cog"></i>Settings</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#suppliersCollapse"><i class="bi bi-building"></i> <span>Proveedores</span> <i class="fas fa-angle-down"></i></a>
+            <div class="collapse" id="suppliersCollapse">
+              <ul class="nav flex-column ml-3">
+                <li class="nav-item">
+                  <a class="nav-link" href="display-suppliers.php">Ver Proveedores</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="add-supplier.php">Agregar Proveedor</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#brandsCollapse"><i class="bi bi-building"></i> <span>Marcas</span> <i class="fas fa-angle-down"></i></a>
+            <div class="collapse" id="brandsCollapse">
+              <ul class="nav flex-column ml-3">
+                <li class="nav-item">
+                  <a class="nav-link" href="display-brands.php">Ver Marcas</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="add-brand.php">Agregar Marca</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"><i class="fas fa-cog"></i>Settings</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
     
 
 
@@ -208,18 +203,31 @@
 
 
                   $sentenciaSQL->execute();
+                  
                   //echo "<script>Swal.fire('¡Producto agregado!', 'El producto se agregó correctamente.', 'success');</script>";
+                  
+
+                  
+                  
                   echo '<script>
                     setTimeout(function() {
                       Swal.fire({
+                        
                         title: "Producto agregado",
-                        text: "El producto se ha añadido correctamente.",
+                        
                         icon: "success",
-                        timer: 1500,
+                        timer: 700,
                         showConfirmButton: false
                       });
-                    }, 150); // Retardo de 500 milisegundos antes de mostrar la ventana emergente
+                    }, 0); // Retardo de 500 milisegundos antes de mostrar la ventana emergente
                   </script>';
+                  $txtID = "";
+                  $txtNombre = "";
+                  $txtImagen = "";
+                  $txtCantidad = "";
+                  $txtPrecio = "";
+                  $txtDescripcion = "";
+                  break;
                   
                 } catch(Exception $e) {
                   echo "Error: " . $e->getMessage(); // Mostrar el mensaje de error en pantalla
@@ -366,7 +374,7 @@
         </main>
     </div>
   </div>
-
+  
 </div>
 
 </div>

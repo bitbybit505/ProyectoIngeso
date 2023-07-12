@@ -110,65 +110,60 @@
       <div class="sidebar-sticky">
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link active" href="dashboard.php"></i>Dashboard</a>
+            <a class="nav-link active" href="dashboard.php"></i>Tablero</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#usersCollapse"><i class="fas fa-users"></i> <span>Users</span> <i class="fas fa-angle-down"></i></a>
+            <a class="nav-link" data-bs-toggle="collapse" href="#usersCollapse"><i class="fas fa-users"></i> <span>Usuarios</span> <i class="fas fa-angle-down"></i></a>
             <div class="collapse" id="usersCollapse">
               <ul class="nav flex-column ml-3">
-                <li class="nav-item">
-                  <a class="nav-link" href="display-users.php">Display users</a>
+              <li class="nav-item">
+                  <a class="nav-link" href="display-users.php">Ver Usuarios</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="add-user.php">Add User</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Modify User</a>
+                  <a class="nav-link" href="add-user.php">Agregar Usuario</a>
                 </li>
               </ul>
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#productCollapse"><i class="fas fa-box-open"></i> <span>Products</span> <i class="fas fa-angle-down"></i></a>
+            <a class="nav-link" data-bs-toggle="collapse" href="#productCollapse"><i class="fas fa-box-open"></i> <span>Productos</span> <i class="fas fa-angle-down"></i></a>
             <div class="collapse" id="productCollapse">
               <ul class="nav flex-column ml-3">
                 <li class="nav-item">
-                  <a class="nav-link" href="display-products.php">View Products</a>
+                  <a class="nav-link" href="display-products.php">Ver Productos</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="add-products.php">Add Product</a>
+                  <a class="nav-link" href="add-products.php">Agregar Producto</a>
                 </li>
               </ul>
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#suppliersCollapse"><i class="bi bi-building"></i> <span>Supplier</span> <i class="fas fa-angle-down"></i></a>
+            <a class="nav-link" data-bs-toggle="collapse" href="#suppliersCollapse"><i class="bi bi-building"></i> <span>Proveedores</span> <i class="fas fa-angle-down"></i></a>
             <div class="collapse" id="suppliersCollapse">
               <ul class="nav flex-column ml-3">
                 <li class="nav-item">
-                  <a class="nav-link" href="display-suppliers.php">View Supplier</a>
+                  <a class="nav-link" href="display-suppliers.php">Ver Proveedores</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="add-supplier.php">Add Supplier</a>
+                  <a class="nav-link" href="add-supplier.php">Agregar Proveedor</a>
                 </li>
               </ul>
             </div>
           </li>
-
           <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#marcaCollapse"><i class="fas fa-users"></i> <span>Marca</span> <i class="fas fa-angle-down"></i></a>
-            <div class="collapse" id="marcaCollapse">
+            <a class="nav-link" data-bs-toggle="collapse" href="#brandsCollapse"><i class="bi bi-building"></i> <span>Marcas</span> <i class="fas fa-angle-down"></i></a>
+            <div class="collapse" id="brandsCollapse">
               <ul class="nav flex-column ml-3">
-              <li class="nav-item">
-                  <a class="nav-link" href="display-brands.php">Display Marca</a>
+                <li class="nav-item">
+                  <a class="nav-link" href="display-brands.php">Ver Marcas</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="add-brand.php">Add Marca</a>
+                  <a class="nav-link" href="add-brand.php">Agregar Marca</a>
                 </li>
               </ul>
             </div>
           </li>
-
           <li class="nav-item">
             <a class="nav-link" href="#"><i class="fas fa-cog"></i>Settings</a>
           </li>
