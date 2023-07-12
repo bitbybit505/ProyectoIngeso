@@ -34,6 +34,7 @@
   <!-- Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
 
+  
   <!-- EDIT BUTTON MODAL-->
 
 <script>
@@ -107,7 +108,7 @@
 
 
 
-  <div class="container-fluid">
+  <div class="container-fluid custom-container">
   <div class="row">
     <nav class="col-md-2 d-none d-md-block bg-light sidebar">
       <div class="sidebar-sticky">

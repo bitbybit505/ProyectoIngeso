@@ -30,4 +30,28 @@ body{
     text-align: center;
 }
 
- 
+.custom-container{
+  height: 94vh; /* Set the container height to 100% of the viewport height */
+  overflow-y: auto; /* Add vertical scroll if content overflows */
+}
+
+.custom-container row {
+  height: 100%; /* Set the row height to 100% of the container height */
+}
+
+.custom-container .sidebar {
+  height: 100%; /* Set the sidebar height to 100% of the row height */
+}
+
+.custom-container-user{
+    height: 125vh; /* Set the container height to 100% of the viewport height */
+    overflow-y: auto; /* Add vertical scroll if content overflows */
+  }
+
+.custom-container-user .row {
+  height: 100%; /* Set the row height to 100% of the container height */
+}
+
+.custom-container-user .sidebar {
+  height: 100%; /* Set the sidebar height to 100% of the row height */
+}
