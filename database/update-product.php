@@ -14,6 +14,8 @@ $product_id = $_POST['e_id'];
 $name = $_POST['e_name'];
 $description = $_POST['e_descripcion'];
 $quantity = $_POST['e_cantidad'];
+$quantity_rec = $_POST['e_cant_rec'];
+$quantity_min = $_POST['e_cant_min'];
 $price = $_POST['e_precio'];
 
 try {
@@ -60,13 +62,13 @@ try {
     }
 
     if ($_FILES['e_imagen']['error'] !== UPLOAD_ERR_NO_FILE) {
-        $icommand = "UPDATE `product` SET `name`=?, `cantidad`=?, `precio`=?, `imagen`=?, `descripcion`=?, `fecha_actualizada`=NOW(), `id_marca`=?, `id_proveedor`=? WHERE `id`=?";
+        $icommand = "UPDATE `product` SET `name`=?, `cantidad`=?, `cantidad_rec`=?, `cantidad_min`=?, `precio`=?, `imagen`=?, `descripcion`=?, `fecha_actualizada`=NOW(), `id_marca`=?, `id_proveedor`=? WHERE `id`=?";
         $stmt = $conn->prepare($icommand);
-        $stmt->execute([$name, $quantity, $price, $image, $description, $brand_id, $supplier_id, $product_id]);
+        $stmt->execute([$name, $quantity, $quantity_rec, $quantity_min, $price, $image, $description, $brand_id, $supplier_id, $product_id]);
     } else {
-        $icommand = "UPDATE `product` SET `name`=?, `cantidad`=?, `precio`=?, `descripcion`=?, `fecha_actualizada`=NOW(), `id_marca`=?, `id_proveedor`=? WHERE `id`=?";
+        $icommand = "UPDATE `product` SET `name`=?, `cantidad`=?, `cantidad_rec`=?, `cantidad_min`=?, `precio`=?, `descripcion`=?, `fecha_actualizada`=NOW(), `id_marca`=?, `id_proveedor`=? WHERE `id`=?";
         $stmt = $conn->prepare($icommand);
-        $stmt->execute([$name, $quantity, $price, $description, $brand_id, $supplier_id, $product_id]);
+        $stmt->execute([$name, $quantity, $quantity_rec, $quantity_min, $price, $description, $brand_id, $supplier_id, $product_id]);
     }
 
     $response = [

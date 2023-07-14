@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jul 07, 2023 at 10:00 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.1.17
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 15-07-2023 a las 00:03:10
+-- Versión del servidor: 10.4.28-MariaDB
+-- Versión de PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,21 +18,23 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `inventory`
+-- Base de datos: `inventory`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product`
+-- Estructura de tabla para la tabla `product`
 --
 
 CREATE TABLE `product` (
   `id` bigint(20) NOT NULL,
   `name` varchar(255) NOT NULL,
   `cantidad` int(11) NOT NULL,
+  `cantidad_rec` int(11) NOT NULL,
+  `cantidad_min` int(11) NOT NULL,
   `precio` int(11) NOT NULL,
-  `imagen` longblob DEFAULT NULL,
+  `imagen` varchar(1000) DEFAULT NULL,
   `descripcion` varchar(100) DEFAULT NULL,
   `fecha_ingreso` datetime DEFAULT NULL,
   `fecha_actualizada` datetime DEFAULT NULL,
@@ -41,19 +43,20 @@ CREATE TABLE `product` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `product`
+-- Volcado de datos para la tabla `product`
 --
 
-INSERT INTO `product` (`id`, `name`, `cantidad`, `precio`, `imagen`, `descripcion`, `fecha_ingreso`, `fecha_actualizada`, `id_marca`, `id_proveedor`) VALUES
-(1, 'Piano', 2, 599000, '', 'Piano con teclas negras', '2023-07-03 18:43:33', '2023-07-07 08:27:47', 9, 22),
-(3, 'GX20004 ', 0, 0, '', 'Laptop that has 10gb of ram', '2023-07-07 08:29:29', '2023-07-07 08:38:04', 13, 19);
+INSERT INTO `product` (`id`, `name`, `cantidad`, `cantidad_rec`, `cantidad_min`, `precio`, `imagen`, `descripcion`, `fecha_ingreso`, `fecha_actualizada`, `id_marca`, `id_proveedor`) VALUES
+(1, 'Piano', 9, 9, 3, 60000, '', 'Piano con teclas negras', '2023-07-03 18:43:33', '2023-07-14 18:02:40', 9, 19),
+(3, 'GX20004 ', 7, 8, 2, 0, '', 'Laptop that has 10gb of ram', '2023-07-07 08:29:29', '2023-07-14 18:02:44', 13, 19),
+(20, 'asda', 1, 8, 2, 234, '', 'sdgf', '2023-07-10 21:32:07', '2023-07-14 18:01:40', 10, 2);
 
 --
--- Indexes for dumped tables
+-- Índices para tablas volcadas
 --
 
 --
--- Indexes for table `product`
+-- Indices de la tabla `product`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`id`),
@@ -62,14 +65,14 @@ ALTER TABLE `product`
   ADD UNIQUE KEY `id` (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT for table `product`
+-- AUTO_INCREMENT de la tabla `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -31,8 +31,41 @@ if (isset($_GET['id']) && isset($_GET['action'])) {
         $sentenciaSQL->bindParam(':id', $productId);
         $sentenciaSQL->execute();
     }    
-  }
+  } elseif ($action === 'increase_rec') {
+    $sentenciaSQL = $conn->prepare("UPDATE product SET cantidad_rec = cantidad_rec + 1, fecha_actualizada = NOW() WHERE id = :id");
+    $sentenciaSQL->bindParam(':id', $productId);
+    $sentenciaSQL->execute();
+  } elseif ($action === 'decrease_rec') {
+    // Verificar que la cantidad actual sea mayor que cero antes de disminuir
+    $sentenciaSQL = $conn->prepare("SELECT cantidad_rec FROM product WHERE id = :id");
+    $sentenciaSQL->bindParam(':id', $productId);
+    $sentenciaSQL->execute();
+    $row = $sentenciaSQL->fetch(PDO::FETCH_ASSOC);
+    $currentQuantity = $row['cantidad_rec'];
 
+    if ($currentQuantity > 0) {
+        $sentenciaSQL = $conn->prepare("UPDATE product SET cantidad_rec = cantidad_rec - 1, fecha_actualizada = NOW() WHERE id = :id");
+        $sentenciaSQL->bindParam(':id', $productId);
+        $sentenciaSQL->execute();
+    }    
+  } elseif ($action === 'increase_min') {
+    $sentenciaSQL = $conn->prepare("UPDATE product SET cantidad_min = cantidad_min + 1, fecha_actualizada = NOW() WHERE id = :id");
+    $sentenciaSQL->bindParam(':id', $productId);
+    $sentenciaSQL->execute();
+  } elseif ($action === 'decrease_min') {
+    // Verificar que la cantidad actual sea mayor que cero antes de disminuir
+    $sentenciaSQL = $conn->prepare("SELECT cantidad_min FROM product WHERE id = :id");
+    $sentenciaSQL->bindParam(':id', $productId);
+    $sentenciaSQL->execute();
+    $row = $sentenciaSQL->fetch(PDO::FETCH_ASSOC);
+    $currentQuantity = $row['cantidad_min'];
+
+    if ($currentQuantity > 0) {
+        $sentenciaSQL = $conn->prepare("UPDATE product SET cantidad_min = cantidad_min - 1, fecha_actualizada = NOW() WHERE id = :id");
+        $sentenciaSQL->bindParam(':id', $productId);
+        $sentenciaSQL->execute();
+    }
+  }
   // Asegúrate de ajustar la lógica según tus necesidades y la estructura de tu base de datos
 
   // Después de actualizar la cantidad, puedes redirigir al usuario a la página original

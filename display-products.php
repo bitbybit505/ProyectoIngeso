@@ -81,6 +81,17 @@
       background-color: white;
     }
 
+    .verde {
+      background-color: #90EE90;
+    }
+
+    .azul {
+      background-color: #ADD8E6;
+    }
+
+    .rojo {
+      background-color: #FFC0CB;
+    }
   </style>
 
   
@@ -158,10 +169,11 @@
         $('#e_descripcion').val(data[2]);
         $('#e_id').val(data[3]);
         $('#e_cantidad').val(data[4]);
-        $('#e_precio').val(data[5]);
-        $('#e_marca').val(data[8])
-        $('#e_proveedor').val(data[9])
-        console.log(data[0]);
+        $('#e_cant_rec').val(data[5]);
+        $('#e_cant_min').val(data[6]);
+        $('#e_precio').val(data[7]);
+        $('#e_marca').val(data[10])
+        $('#e_proveedor').val(data[11])
     });
     $('.remove-image-btn').on('click', function() {
     const productId = $(this).data('product-id');
@@ -241,7 +253,35 @@
       });
       var oTable = $('#table').dataTable();
       $('select#search_proveedor').change( function () {  oTable.fnFilter( this.value, 9 );  } );
-      $('select#search_marca').change( function () {  oTable.fnFilter( this.value, 8 ); });	
+      $('select#search_marca').change( function () {  oTable.fnFilter( this.value, 8 ); });
+      
+      var cTable = $('#table').DataTable();
+      for (var i = 0; i < cTable.rows().count(); i++) {
+        var fila = cTable.row(i).data();
+        var datosLimpios = [];
+        $.each(fila, function (index, data) {
+          var textoLimpio = $('<div>').html(data).text().trim();
+          datosLimpios.push(textoLimpio);
+        });
+        var cant = datosLimpios[4];
+        var cant_rec = datosLimpios[5];
+        var cant_min = datosLimpios[6];
+
+        var filaElement = cTable.row(i).node();
+        
+        if(cant >= cant_rec){
+          //Verde
+          $(filaElement).addClass('verde');
+        }else{
+          if(cant_rec > cant && cant >= cant_min){
+            //Azul
+            $(filaElement).addClass('azul');
+          }else{
+            //cant < cant_min : Rojo
+            $(filaElement).addClass('rojo');
+          }
+        }
+      }
     });
     
   </script>
@@ -442,6 +482,8 @@
               P.id as 'id',
               P.name as 'name',
               P.cantidad as 'cantidad',
+              P.cantidad_rec as 'cant_rec',
+              P.cantidad_min as 'cant_min',
               P.precio as 'precio',
               P.imagen as 'imagen',
               P.descripcion as 'descripcion',
@@ -491,6 +533,8 @@
                 <th>Descripcion</th>
                 <th>ID</th>
                 <th>Cantidad</th>
+                <th>Cant. Recomendada</th>
+                <th>Cant. Minima</th>
                 <th>Precio</th>
                 <th>Fecha Ingreso</th>
                 <th>Fecha Actualizacion</th>
@@ -519,6 +563,18 @@
                     ><button class="btn btn-sm btn-outline-secondary" onclick="updateQuantity(<?=$product['id']?>, 'decrease')"
                     ><i class="bi bi-arrow-down"></i></button><div class="mx-2"><?=$product['cantidad']?></div
                     ><button class="btn btn-sm btn-outline-secondary" onclick="updateQuantity(<?=$product['id']?>, 'increase')"
+                    ><i class="bi bi-arrow-up"></i></button></div
+                    ></td>
+                  <td><div class="d-flex align-items-center"
+                    ><button class="btn btn-sm btn-outline-secondary" onclick="updateQuantity(<?=$product['id']?>, 'decrease_rec')"
+                    ><i class="bi bi-arrow-down"></i></button><div class="mx-2"><?=$product['cant_rec']?></div
+                    ><button class="btn btn-sm btn-outline-secondary" onclick="updateQuantity(<?=$product['id']?>, 'increase_rec')"
+                    ><i class="bi bi-arrow-up"></i></button></div
+                    ></td>
+                  <td><div class="d-flex align-items-center"
+                    ><button class="btn btn-sm btn-outline-secondary" onclick="updateQuantity(<?=$product['id']?>, 'decrease_min')"
+                    ><i class="bi bi-arrow-down"></i></button><div class="mx-2"><?=$product['cant_min']?></div
+                    ><button class="btn btn-sm btn-outline-secondary" onclick="updateQuantity(<?=$product['id']?>, 'increase_min')"
                     ><i class="bi bi-arrow-up"></i></button></div
                     ></td>
                   <td><?php echo $product['precio'] ?></td>
@@ -652,6 +708,18 @@ if (isset($_SESSION['response'])) {
                         <div class="form-group">
                             <label>Cantidad</label>
                             <input type="text" name="e_cantidad" id="e_cantidad" class="form-control" 
+                                placeholder="Ingrese cantidad >= 0" oninput="validateNumber(this)" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Cantidad Recomendada</label>
+                            <input type="text" name="e_cant_rec" id="e_cant_rec" class="form-control" 
+                                placeholder="Ingrese cantidad >= 0" oninput="validateNumber(this)" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Cantidad Minima</label>
+                            <input type="text" name="e_cant_min" id="e_cant_min" class="form-control" 
                                 placeholder="Ingrese cantidad >= 0" oninput="validateNumber(this)" required>
                         </div>
 
