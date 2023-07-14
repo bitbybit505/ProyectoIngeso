@@ -137,16 +137,12 @@
             $txtNombre=(isset($_POST['txtNombre']))?$_POST['txtNombre']:"";
             $txtImagen=(isset($_FILES['txtImagen']['name']))?$_FILES['txtImagen']['name']:"";
             $txtCantidad=(isset($_POST['txtCantidad']))?$_POST['txtCantidad']:"";
+            $txtCantidadRec=(isset($_POST['txtCantidadRec']))?$_POST['txtCantidadRec']:"";
+            $txtCantidadMin=(isset($_POST['txtCantidadMin']))?$_POST['txtCantidadMin']:"";
             $txtPrecio=(isset($_POST['txtPrecio']))?$_POST['txtPrecio']:"";
             $txtDescripcion=(isset($_POST['txtDescripcion']))?$_POST['txtDescripcion']:"";
             $accion=(isset($_POST['accion']))?$_POST['accion']:"";
 
-            //echo $txtID."<br/>";
-            //echo $txtNombre."<br/>";
-            //echo $txtImagen."<br/>";
-            //echo $txtCantidad."<br/>";
-            //echo $accion."<br/>";
-          
           try{
             include('database/connection.php');
             
@@ -177,8 +173,8 @@
                   $stmt->execute();
                   $id_proveedor = $stmt->fetchColumn();//importante
                   //INSERT INTO `product` (`id`, `nombre`, `cantidad`, `imagen`) VALUES ('1', 'violin', '32', 'imagen.jpg');
-                  $sentenciaSQL= $conn->prepare("INSERT INTO product (`name`, cantidad, precio, imagen, descripcion, fecha_ingreso, fecha_actualizada, id_marca, id_proveedor) 
-                  VALUES (:nombre, :cantidad, :precio, :imagen, :descripcion, NOW(), NOW(), :id_marca, :id_proveedor);");
+                  $sentenciaSQL= $conn->prepare("INSERT INTO product (`name`, cantidad, cantidad_rec, cantidad_min, precio, imagen, descripcion, fecha_ingreso, fecha_actualizada, id_marca, id_proveedor) 
+                  VALUES (:nombre, :cantidad, :cantidad_rec, :cantidad_min, :precio, :imagen, :descripcion, NOW(), NOW(), :id_marca, :id_proveedor);");
                   //$sentenciaSQL->bindParam(':id',$txtID);
 
                   //Agregar imagen con hora
@@ -194,6 +190,8 @@
 
                   $sentenciaSQL->bindParam(':nombre',$txtNombre);
                   $sentenciaSQL->bindParam(':cantidad',$txtCantidad);
+                  $sentenciaSQL->bindParam(':cantidad_rec',$txtCantidadRec);
+                  $sentenciaSQL->bindParam(':cantidad_min',$txtCantidadMin);
                   $sentenciaSQL->bindParam(':precio',$txtPrecio);
                   $sentenciaSQL->bindParam(':imagen',$nombreImagen);
                   $sentenciaSQL->bindParam(':descripcion',$txtDescripcion);
@@ -225,6 +223,8 @@
                   $txtNombre = "";
                   $txtImagen = "";
                   $txtCantidad = "";
+                  $txtCantidadRec = "";
+                  $txtCantidadMin = "";
                   $txtPrecio = "";
                   $txtDescripcion = "";
                   break;
@@ -234,28 +234,6 @@
                   
                 }
                 break;
-
-              case "Modificar":
-                //echo "presionado boton Modificar";
-                break;
-
-              case "Cancelar":
-                //echo "presionado boton Cancelar";
-                break;    
-
-              case "Seleccionar":
-
-                //echo "presionado boton Seleccionar";
-               
-                break; 
-                
-              case "Borrar":
-                //echo "presionado boton Borrar";
-                $sentenciaSQL = $conn->prepare("DELETE from product WHERE id=:id");
-                $sentenciaSQL->bindParam(':id',$txtID);
-                $sentenciaSQL->execute();
-                break;       
-
             }
           }catch(PDOException $e){
             $e->getMessage();
@@ -284,6 +262,16 @@
                   <div class = "form-group">
                   <label for="txtCantidad">Cantidad:</label>
                   <input type="number" class="form-control" value="<?php echo $txtCantidad ?>" name="txtCantidad" id="txtCantidad"  placeholder="cantidad de producto" inputmode="numeric" pattern="[0-9]+" min="0" required>
+                  <div class="invalid-feedback">Por favor, ingresa un número entero positivo.</div>
+
+                  <div class = "form-group">
+                  <label for="txtCantidad">Cantidad Recomendada:</label>
+                  <input type="number" class="form-control" value="<?php echo $txtCantidadRec ?>" name="txtCantidadRec" id="txtCantidadRec"  placeholder="cantidad de producto" inputmode="numeric" pattern="[0-9]+" min="0" required>
+                  <div class="invalid-feedback">Por favor, ingresa un número entero positivo.</div>
+
+                  <div class = "form-group">
+                  <label for="txtCantidad">Cantidad Minima:</label>
+                  <input type="number" class="form-control" value="<?php echo $txtCantidadMin ?>" name="txtCantidadMin" id="txtCantidadMin"  placeholder="cantidad de producto" inputmode="numeric" pattern="[0-9]+" min="0" required>
                   <div class="invalid-feedback">Por favor, ingresa un número entero positivo.</div>
 
                   <div class = "form-group">
