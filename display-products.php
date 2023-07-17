@@ -32,6 +32,7 @@
   
 <!-- 
   <style>
+    <!-- 
     .enlarged-image {
       max-width: 90%;
       max-height: 90%;
@@ -55,8 +56,10 @@
       z-index: 9998;
       cursor: pointer;
     }
+    
+    
   </style>
-  -->
+-->
 
   <style>
     .image-container {
@@ -92,6 +95,13 @@
     .rojo {
       background-color: #FFC0CB;
     }
+    body{
+        background: #ffe259;
+        background: linear-gradient(to right, #FF0000, #FFFF00);
+        }
+    .nav-link {
+    color: black !important;
+    }    
   </style>
 
   
@@ -302,29 +312,29 @@
 <body>
   
 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-      <a class="navbar-brand" href="#">Dashboard</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link" id="homeBtn" href="#">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a href="database/logout.php" id="logoutBtn">Logout</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+    
+    <a class="navbar-brand pr-3" href="dashboard.php" style="margin-right: auto; margin-left: 15px;">Tablero</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+           aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="navbar-brand" id="homeBtn" href="#">Casa <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+            <a href="database/logout.php" id="logoutBtn" class="navbar-brand">Cerrar sesion</a>
+            </li>
+          </ul>
+        </div>
+      
+    </nav>
 
   <div class="container-fluid">
   <div class="row">
-    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar rounded shadow">
       <div class="sidebar-sticky">
         <ul class="nav flex-column">
           <li class="nav-item">
@@ -525,7 +535,7 @@
         </div>
 
         <div class="row table-responsive">
-          <table id="table" class="table table-striped">
+          <table id="table" class="table">
             <thead>
               <tr>
                 <th>Imagen</th>

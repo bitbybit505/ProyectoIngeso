@@ -13,7 +13,7 @@
     <div class="nav-bar">
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
-                <a class="navbar-brand fw-semibold" href="#">LogoThingy</a>
+                <a class="navbar-brand fw-semibold" href="#">Casa Flores</a>
             </div>
         </nav>
     </div>

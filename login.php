@@ -74,6 +74,7 @@
             </div>
         </nav>
     </div>
+    
     <div class="container w-100 bg-primary mt-5 rounded shadow"> 
         <div class="row align-items-stretch">
             <div class="col bg d-none d-lg-block col-md-5 col-lg-5 col-xl-6 rounded">
@@ -105,7 +106,7 @@
                         <button type = "submit" class = "btn btn-primary">Login</button>
                     </div>  
                     <div class="my-3">
-                        <span><a href="#">¿Contraseña olvidada?</a></span>
+                        <span><a href="forgot-password.php">¿Contraseña olvidada?</a></span>
                     </div>  
                 </form>
                 <br><br><br><br><br><br>

@@ -19,13 +19,15 @@ if(isset($_SESSION['user'])) {
 <body>
   
    
-  <div class="nav-bar">
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-      <div class="container-fluid">
-        <a class="navbar-brand fw-semibold" href="index.php">LogoThingy</a>
-      </div>
-    </nav>
-  </div>
+<div class="nav-bar">
+        <nav class="navbar navbar-expand-lg bg-black">
+
+            <div class="container-fluid">
+                <a class="navbar-brand fw-semibold text-white" href="login.php">Iniciar sesion</a>
+            </div>
+        </nav>
+    </div>
+    
   <div class="container pt-5 mt-5">
     <div class="row justify-content-center">
       <div class="col-md-6">

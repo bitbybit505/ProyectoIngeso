@@ -5,11 +5,10 @@
   $user = $_SESSION['user'];
 
 ?>
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
+<meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Dashboard</title>
 
@@ -22,36 +21,41 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
   <!-- Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
-  
-
+  <style>
+        body{
+        background: #ffe259;
+        background: linear-gradient(to right, #FF0000, #FFFF00);
+        }
+        .nav-link {
+        color: black !important;
+        }
+        
+    </style>
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+    
+    <a class="navbar-brand pr-3" href="dashboard.php" style="margin-right: auto; margin-left: 15px;">Tablero</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+           aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="navbar-brand" id="homeBtn" href="#">Casa <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+            <a href="database/logout.php" id="logoutBtn" class="navbar-brand">Cerrar sesion</a>
+            </li>
+          </ul>
+        </div>
+      
+    </nav>
 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-      <a class="navbar-brand" href="#">Dashboard</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link" id="homeBtn" href="#">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a href="database/logout.php" id="logoutBtn">Logout</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-
-
-  <div class="container-fluid custom-container">
+<div class="container-fluid custom-container mt-5 " >
   <div class="row">
-    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar rounded shadow">
       <div class="sidebar-sticky">
         <ul class="nav flex-column">
           <li class="nav-item">
@@ -109,46 +113,42 @@
               </ul>
             </div>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#"><i class="fas fa-cog"></i>Settings</a>
-          </li>
+          
         </ul>
       </div>
     </nav>
-
-    
-
-
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Dashboard</h1>
-        <span>Welcome, <?=$user['name'] .' '.$user['last_name'] ?> </span>
+        <h1 class="h2">Tablero</h1>
+        <span>Bienvenido, <?=$user['name'] .' '.$user['last_name'] ?> </span>
       </div>
       <div class="row">
-        <div class="col-md-4">
-          <div class="card">
+        <div class="col-md-4 rounded ">
+          <div class="card shadow ">
             <div class="card-body">
-              <h5 class="card-title">Users</h5>
-              <p class="card-text">View and manage users.</p>
-              <a href="#" class="btn btn-primary">View Users</a>
+              <h5 class="card-title">Usuarios</h5>
+              <p class="card-text">Ver y administrar usuarios.</p>
+              <a href="display-users.php" class="btn btn-primary">Ver Usuarios</a>
+              <a href="add-users.php" class="btn btn-primary">Administrar Usuarios</a>
             </div>
           </div>
         </div>
-        <div class="col-md-4">
-          <div class="card">
+        <div class="col-md-4 rounded">
+          <div class="card shadow">
             <div class="card-body">
-              <h5 class="card-title">Products</h5>
-              <p class="card-text">View and manage products.</p>
-              <a href="#" class="btn btn-primary">View Products</a>
+              <h5 class="card-title">Productos</h5>
+              <p class="card-text">Ver y administrar productos.</p>
+              <a href="display-products.php" class="btn btn-primary">Ver Productos</a>
+              <a href="add-products.php" class="btn btn-primary">Administrar Productos</a>
             </div>
           </div>
         </div>
-        <div class="col-md-4">
-          <div class="card">
+        <div class="col-md-4 rounded ">
+          <div class="card shadow">
             <div class="card-body">
-              <h5 class="card-title">Orders</h5>
-              <p class="card-text">View and manage orders.</p>
-              <a href="#" class="btn btn-primary">View Orders</a>
+              <h5 class="card-title">Ordenes</h5>
+              <p class="card-text">Ver y administrar ordenes.</p>
+              <a href="#" class="btn btn-primary">Ver ordenes</a>
             </div>
           </div>
         </div>
@@ -156,16 +156,5 @@
         
       </div>
     </main>
-  </div>
- </div>
-
-</div>
-
-</div>
-
-
-
-
 </body>
-
 </html>
