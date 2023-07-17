@@ -8,17 +8,21 @@
     <link rel="stylesheet" href="css/main.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+    body {
+      background: #ffe259;
+      background: linear-gradient(to right, #FF6666, #FFFF99);
+    }
+  </style>
 </head>
 <body>
     <div class="nav-bar">
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid">
-                <a class="navbar-brand fw-semibold" href="#">Casa Flores</a>
-            </div>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand pr-3 fw-semibold" style="margin-right: auto; margin-left: 15px;">Casa Flores</a>
         </nav>
     </div>
 
-    <a href="login.php" class="btn btn-outline-primary login-button">Login</a>
+    <a href="login.php" class="btn btn-outline-primary login-button">Iniciar Sesion</a>
 
     <div class="container welcome-section">
         <h1 class="display-4">Welcome to Homepage</h1>

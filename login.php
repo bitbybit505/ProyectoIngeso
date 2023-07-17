@@ -50,14 +50,15 @@
     
     <style>
         body{
-        background: #ffe259;
-        background: linear-gradient(to right, #FF0000, #FFFF00);
+            background: #ffe259;
+            background: linear-gradient(to right, #FF6666, #FFFF99);
         }
         .bg{
             background-image: url("assets/electric.jpg");
-            backgroind-position: center center;
+            background-position: center center;
         }
     </style>
+
 </head>
 <body>
     
@@ -67,11 +68,12 @@
         </div>
     <?php } ?>
     <div class="nav-bar">
-        <nav class="navbar navbar-expand-lg bg-black">
-
-            <div class="container-fluid">
-                <a class="navbar-brand fw-semibold text-white" href="index.php">Casa Flores</a>
-            </div>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand pr-3 fw-semibold" href="index.php" style="margin-right: auto; margin-left: 15px;">Casa Flores</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
         </nav>
     </div>
     
