@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 15-07-2023 a las 00:03:10
--- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.2.4
+-- Host: 127.0.0.1
+-- Generation Time: Jul 18, 2023 at 03:35 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.1.17
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `inventory`
+-- Database: `inventory`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `product`
+-- Table structure for table `product`
 --
 
 CREATE TABLE `product` (
@@ -43,7 +43,7 @@ CREATE TABLE `product` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `product`
+-- Dumping data for table `product`
 --
 
 INSERT INTO `product` (`id`, `name`, `cantidad`, `cantidad_rec`, `cantidad_min`, `precio`, `imagen`, `descripcion`, `fecha_ingreso`, `fecha_actualizada`, `id_marca`, `id_proveedor`) VALUES
@@ -52,24 +52,22 @@ INSERT INTO `product` (`id`, `name`, `cantidad`, `cantidad_rec`, `cantidad_min`,
 (20, 'asda', 1, 8, 2, 234, '', 'sdgf', '2023-07-10 21:32:07', '2023-07-14 18:01:40', 10, 2);
 
 --
--- Índices para tablas volcadas
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `product`
+-- Indexes for table `product`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `name` (`name`),
-  ADD UNIQUE KEY `name_2` (`name`),
   ADD UNIQUE KEY `id` (`id`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de la tabla `product`
+-- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
