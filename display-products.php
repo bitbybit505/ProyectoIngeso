@@ -258,15 +258,9 @@
           var textoLimpio = $('<div>').html(data).text().trim();
           datosLimpios.push(textoLimpio);
         });
-<<<<<<< HEAD
         var cant = parseInt(datosLimpios[4]);
         var cant_rec = parseInt(datosLimpios[5]);
         var cant_min = parseInt(datosLimpios[6]);
-=======
-        var cant = datosLimpios[4];
-        var cant_rec = datosLimpios[5];
-        var cant_min = datosLimpios[6];
->>>>>>> 469100367c5431435e597cb36735579e9a1bebec
 
         var filaElement = cTable.row(i).node();
         
