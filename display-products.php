@@ -94,6 +94,7 @@
     .rojo {
       background-color: #FFC0CB;
     }
+
     body {
       background: #ffe259;
       background: linear-gradient(to right, #FF6666, #FFFF99);
@@ -110,6 +111,11 @@
     table.table {
       border-radius: 10px; /* Ajusta el valor según la cantidad de redondeo que deseas */
       overflow: hidden; /* Evita que el contenido sobresalga del borde redondeado */
+    }
+
+    #table thead {
+      background-color: #28242c; /* Cambia este color al que desees para el encabezado oscuro */
+      color: white; /* Color del texto en el encabezado */
     }
   </style>
 
@@ -254,7 +260,7 @@
   <script>
     $(document).ready(function(){
       $('#table').DataTable({
-        "order": [[1, "asc"]],
+        "order": [[3, "asc"]],
         "language":{
           "lengthMenu": "Mostrar _MENU_ registros por pagina",
           "info": "Mostrando pagina _PAGE_ de _PAGES_",
@@ -591,7 +597,7 @@ $(document).ready(function () {
         </div>
 
         <div class="row table-responsive">
-          <table id="table" class="table table-striped table-dark">
+          <table id="table" class="table table-striped">
             <thead>
               <tr>
                 <th>Imagen</th>

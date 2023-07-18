@@ -82,7 +82,7 @@
   <script>
     $(document).ready(function(){
       $('#table').DataTable({
-        "order": [[1, "asc"]],
+        "order": [[0, "asc"]],
         "language":{
           "lengthMenu": "Mostrar _MENU_ registros por pagina",
           "info": "Mostrando pagina _PAGE_ de _PAGES_",
