@@ -47,6 +47,11 @@
     .lateral-bar{
       background-color: #FFA07A;
     }
+
+    table.table {
+      border-radius: 10px; /* Ajusta el valor según la cantidad de redondeo que deseas */
+      overflow: hidden; /* Evita que el contenido sobresalga del borde redondeado */
+    }
   </style>
   <!-- EDIT BUTTON MODAL-->
 
@@ -91,8 +96,18 @@
             "next":       "Siguiente",
             "previous":   "Anterior"
           },					
-        }
-      });	
+        },
+        "columnDefs": [
+        {
+          "targets": "orderable-column", // La clase personalizada que agregaste a las columnas ordenables
+          "orderable": true, // Columnas ordenables
+        },
+        {
+          "targets": "_all", // Resto de las columnas
+          "orderable": false, // Columnas no ordenables
+        },
+        ],
+      });
     });	
   </script>
 
@@ -323,13 +338,13 @@ $(document).ready(function () {
         ?>
           <thead>
               <tr>
-                  <th scope="col">ID</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Email</th>
-                  <th scope="col">Phone number</th>
-                  <th scope="col">Created At</th>
-                  <th scope="col">Updated At</th>
-                  <th scope="col">Action</th>
+                  <th scope="col" class="orderable-column">ID</th>
+                  <th scope="col" class="orderable-column">Nombre</th>
+                  <th scope="col">Correo</th>
+                  <th scope="col">Número de Telefono</th>
+                  <th scope="col" class="orderable-column">Fecha Ingreso</th>
+                  <th scope="col" class="orderable-column">Fecha Actualizacion</th>
+                  <th scope="col">Acciones</th>
               </tr>
           </thead>
           <tbody>

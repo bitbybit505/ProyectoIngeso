@@ -106,6 +106,11 @@
     .lateral-bar{
       background-color: #FFA07A;
     }
+    
+    table.table {
+      border-radius: 10px; /* Ajusta el valor según la cantidad de redondeo que deseas */
+      overflow: hidden; /* Evita que el contenido sobresalga del borde redondeado */
+    }
   </style>
 
   
@@ -249,7 +254,7 @@
   <script>
     $(document).ready(function(){
       $('#table').DataTable({
-        "order": [[0, "asc"]],
+        "order": [[1, "asc"]],
         "language":{
           "lengthMenu": "Mostrar _MENU_ registros por pagina",
           "info": "Mostrando pagina _PAGE_ de _PAGES_",
@@ -263,7 +268,17 @@
             "next":       "Siguiente",
             "previous":   "Anterior"
           },					
-        }
+        },
+        "columnDefs": [
+        {
+          "targets": "orderable-column", // La clase personalizada que agregaste a las columnas ordenables
+          "orderable": true, // Columnas ordenables
+        },
+        {
+          "targets": "_all", // Resto de las columnas
+          "orderable": false, // Columnas no ordenables
+        },
+        ],
       });
       var oTable = $('#table').dataTable();
       $('select#search_proveedor').change( function () {  oTable.fnFilter( this.value, 9 );  } );
@@ -580,17 +595,17 @@ $(document).ready(function () {
             <thead>
               <tr>
                 <th>Imagen</th>
-                <th>Nombre</th>
+                <th class="orderable-column">Nombre</th>
                 <th>Descripcion</th>
-                <th>ID</th>
-                <th>Cantidad</th>
+                <th class="orderable-column">ID</th>
+                <th class="orderable-column">Cantidad</th>
                 <th>Cant. Recomendada</th>
                 <th>Cant. Minima</th>
-                <th>Precio</th>
-                <th>Fecha Ingreso</th>
-                <th>Fecha Actualizacion</th>
-                <th>Marca</th>
-                <th>Proveedor</th>
+                <th class="orderable-column">Precio</th>
+                <th class="orderable-column">Fecha Ingreso</th>
+                <th class="orderable-column">Fecha Actualizacion</th>
+                <th class="orderable-column">Marca</th>
+                <th class="orderable-column">Proveedor</th>
                 <th>Acciones</th>
               </tr>
             </thead>
