@@ -379,9 +379,9 @@ $(document).ready(function () {
                     <td>
                       <form method="post">
                         <input type="hidden" name="userid" id="userid" value="<?php echo $user['id']; ?>">
-                        <button type="button" class="btn btn-primary editbtn"style="height:38px; width:71.6167px">Edit</button>
+                        <button type="button" class="btn btn-primary editbtn"style="height:38px; width:71.6167px">Editar</button>
                         <!--<input type="summit" name="btnAction" value="Edit" class="btn btn-primary editbtn" style="height:38px; width:71.6167px">-->
-                        <input type="submit" name="btnAction" value="Delete" class="btn btn-danger" style="height:38px; width:71.6167px">
+                        <input type="submit" name="btnAction" value="Borrar" class="btn btn-danger" style="height:38px; width:71.6167px">
                       </form>
                     </td>
                   </tr>

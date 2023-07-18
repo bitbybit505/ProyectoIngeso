@@ -651,7 +651,7 @@ $(document).ready(function () {
                   <td>
                     <form method="post">           
                       <input type="hidden" name="txtID" id="txtID" value="<?php echo $product['id']; ?>">
-                      <button type="button" class="btn btn-primary editbtn"style="height:38px; width:71.6167px">Edit</button>
+                      <button type="button" class="btn btn-primary editbtn"style="height:38px; width:71.6167px">Editar</button>
                       <input type="submit" name="accion" value="Borrar" class="btn btn-danger">
                     </form>
                   </td>
