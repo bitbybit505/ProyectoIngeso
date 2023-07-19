@@ -84,8 +84,8 @@
       $('#table').DataTable({
         "order": [[0, "asc"]],
         "language":{
-          "lengthMenu": "Mostrar _MENU_ registros por pagina",
-          "info": "Mostrando pagina _PAGE_ de _PAGES_",
+          "lengthMenu": "Mostrar _MENU_ registros por página",
+          "info": "Mostrando página _PAGE_ de _PAGES_",
           "infoEmpty": "No hay registros disponibles",
           "infoFiltered": "(filtrada de _MAX_ registros)",
           "loadingRecords": "Cargando...",
