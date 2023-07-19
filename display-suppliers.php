@@ -258,7 +258,7 @@ $(document).ready(function () {
             include('database/connection.php');
               
             switch ($btnAction) {
-               case "Delete":
+               case "Borrar":
             $supplierid = $_POST['supplierid']; // Retrieve the supplier's ID from the form
             echo '
             <script>
@@ -360,7 +360,7 @@ $(document).ready(function () {
                       <form method="post">
                         <input type="hidden" name="supplierid" id="supplierid" value="<?php echo $supplier['id']; ?>">
                         <button type="button" class="btn btn-primary editbtn"style="height:38px; width:71.6167px">Editar</button>
-                        <input type="submit" name="btnAction" value="Delete" class="btn btn-danger" style="height:38px; width:71.6167px">
+                        <input type="submit" name="btnAction" value="Borrar" class="btn btn-danger" style="height:38px; width:71.6167px">
                       </form>
                     </td>
                   </tr>

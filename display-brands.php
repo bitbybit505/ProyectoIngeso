@@ -257,7 +257,7 @@ $(document).ready(function () {
           switch ($btnAction) {
               
             
-            case "Delete":
+            case "Borrar":
               echo '
               <script>
                   Swal.fire({
@@ -343,7 +343,7 @@ $(document).ready(function () {
                       <form method="post">
                         <input type="hidden" name="marcaid" id="marcaid" value="<?php echo $marca['id']; ?>">
                         <button type="button" class="btn btn-primary editbtn"style="height:38px; width:71.6167px">Editar</button>
-                        <input type="submit" name="btnAction" value="Delete" class="btn btn-danger" style="height:38px; width:71.6167px">
+                        <input type="submit" name="btnAction" value="Borrar" class="btn btn-danger" style="height:38px; width:71.6167px">
                       </form>
                     </td>
                   </tr>
