@@ -276,6 +276,17 @@
             $(filaElement).addClass('rojo');
           }
         }
+
+        if (cant_min >= cant_rec) {
+          // Check if cant_min has already been adjusted
+          if (cant_min >= cant_rec - 1) {
+            cant_min = cant_rec - 1;
+            if (cant_min < 0) {
+              cant_min = 0;
+            }
+            $(filaElement).find('.mx-2:eq(2)').text(cant_min); // Update the displayed value
+          }
+        }
       }
     });
     
