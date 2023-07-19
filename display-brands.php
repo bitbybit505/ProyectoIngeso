@@ -331,7 +331,7 @@ $(document).ready(function () {
               <tr>
                   <th scope="col" class="orderable-column">ID</th>
                   <th scope="col" class="orderable-column">Nombre</th>
-                  <th scope="col">Acciones</th>
+                  <th scope="col" style="width: 200px;">Acciones</th>
               </tr>
           </thead>
           <tbody>
