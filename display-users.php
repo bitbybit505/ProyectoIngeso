@@ -16,7 +16,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Usuarios</title>
+  <title>Ver Usuarios</title>
 
   <link rel="stylesheet" href="css/main.css">
   <!-- jQuery -->
@@ -184,7 +184,7 @@ $(document).ready(function () {
         <?=$user['name'] .' '.$user['last_name'] ?> <i class="fa-solid fa-caret-down"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-          <a class="dropdown-item" href="#"><i class="fas fa-cog"></i> <span>Opciones</span></a>
+          <!--<a class="dropdown-item" href="#"><i class="fas fa-cog"></i> <span>Opciones</span></a>-->
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="database/logout.php"><i class="fa-solid fa-right-from-bracket"></i> <span>Cerrar Sesion</span></a>
         </div>
@@ -346,7 +346,7 @@ $(document).ready(function () {
                   <th scope="col" class="orderable-column">Usuario</th>
                   <th scope="col">Correo</th>
                   <th scope="col">Rol</th>
-                  <th scope="col">Estado</th>
+                  <th scope="col" style="display: none;">Estado</th>
                   <th scope="col">Número de Teléfono</th>
                   <th scope="col" style="display: none;">Contraseña</th>
                   <th scope="col" class="orderable-column">Fecha Ingreso</th>
@@ -364,14 +364,6 @@ $(document).ready(function () {
                     <td><?php echo $user['username']; ?></td>
                     <td><?php echo $user['email']; ?></td>
                     <td><?php echo $user['role']; ?></td>
-                    <td class="text-center">
-                        <?php if ($user['status'] == 1): ?>
-                            <input type="checkbox" checked disabled>
-                        <?php else: ?>
-                            <input type="checkbox" disabled>
-                        <?php endif; ?>
-                    </td>
-                        
                     <td><?php echo $user['phone_number']; ?></td>
                     <td style="display: none;"><?php echo $user['password']; ?></td>
                     <td><?php echo $user['created_at']; ?></td>

@@ -12,7 +12,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Dashboard</title>
+  <title>Ver Productos</title>
 
   <link rel="stylesheet" href="css/main.css">
   <!-- jQuery -->
@@ -354,7 +354,7 @@ $(document).ready(function () {
         <?=$user['name'] .' '.$user['last_name'] ?> <i class="fa-solid fa-caret-down"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-          <a class="dropdown-item" href="#"><i class="fas fa-cog"></i> <span>Opciones</span></a>
+          <!--<a class="dropdown-item" href="#"><i class="fas fa-cog"></i> <span>Opciones</span></a>-->
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="database/logout.php"><i class="fa-solid fa-right-from-bracket"></i> <span>Cerrar Sesion</span></a>
         </div>
@@ -560,7 +560,7 @@ $(document).ready(function () {
           <table id="table" class="table table-striped">
             <thead>
               <tr>
-                <th>Imagen</th>
+                <th style="width: 110px;">Imagen</th>
                 <th class="orderable-column">Nombre</th>
                 <th>Descripción</th>
                 <th class="orderable-column">ID</th>
@@ -731,7 +731,7 @@ if (isset($_SESSION['response'])) {
 
                         <div class="form-group">
                             <label>Imagen</label>
-                            <input type="file" class="form-control" name="e_imagen" id="e_imagen" placeholder="Nombre del producto">
+                            <input type="file" class="form-control" name="e_imagen" id="e_imagen" placeholder="Nombre del producto" accept=".jpg, .jpeg, .png, .gif, .webp">
                         </div>
 
                         

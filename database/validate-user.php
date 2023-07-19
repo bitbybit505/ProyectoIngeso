@@ -13,6 +13,7 @@
     $stringVariable = "Empleado";
 
     function formatRut($rut) {
+
         $rut = preg_replace('/[.-]/', '', $rut); // Remove dots and dashes from the rut
       
         // Separate the rut digits and verifier
@@ -44,7 +45,7 @@
             // User or email already exists
             $response = [
                 'success' => false,
-                'message' => 'Rut, Username, email or phone number is already registered.'
+                'message' => 'El rut, nombre de usuario, correo o número de teléfono ya existen.'
             ];
         } else {
             // Insert the new user into the database
@@ -54,7 +55,7 @@
             $conn->exec($icommand);
             $response = [
                 'success' => true,
-                'message' => $name . ' ' . $last_name . ' was added successfully.'
+                'message' => $name . ' ' . $last_name . ' fue agregado exitosamente.'
             ];
         }
     } catch (PDOException $e) {

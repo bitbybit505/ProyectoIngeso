@@ -16,7 +16,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>View suppliers</title>
+  <title>Ver Proveedores</title>
 
   <link rel="stylesheet" href="css/main.css">
   <!-- jQuery -->
@@ -176,7 +176,7 @@ $(document).ready(function () {
         <?=$user['name'] .' '.$user['last_name'] ?> <i class="fa-solid fa-caret-down"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-          <a class="dropdown-item" href="#"><i class="fas fa-cog"></i> <span>Opciones</span></a>
+          <!--<a class="dropdown-item" href="#"><i class="fas fa-cog"></i> <span>Opciones</span></a>-->
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="database/logout.php"><i class="fa-solid fa-right-from-bracket"></i> <span>Cerrar Sesion</span></a>
         </div>

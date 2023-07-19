@@ -311,8 +311,8 @@ $(document).ready(function () {
                   <div class="invalid-feedback">Por favor, ingresa un número entero positivo.</div>
                   </div>
                   <div class="form-group mb-3 fw-semibold">
-                    <label for="txtCantidad">Cantidad Minima</label>
-                    <input type="number" class="form-control" value="<?php echo $txtCantidadMin ?>" name="txtCantidadMin" id="txtCantidadMin"  placeholder="Ingrese cantidad minima del producto" inputmode="numeric" pattern="[0-9]+" min="0" required>
+                    <label for="txtCantidad">Cantidad Mínima</label>
+                    <input type="number" class="form-control" value="<?php echo $txtCantidadMin ?>" name="txtCantidadMin" id="txtCantidadMin"  placeholder="Ingrese cantidad mínima del producto" inputmode="numeric" pattern="[0-9]+" min="0" required>
                   <div class="invalid-feedback">Por favor, ingresa un número entero positivo.</div>
                   </div>
                   <div class="form-group mb-3 fw-semibold">
@@ -322,11 +322,11 @@ $(document).ready(function () {
                   </div>
                   <div class="form-group mb-3 fw-semibold">
                     <label for="txtNombre">Imagen</label>
-                    <input type="file" class="form-control" name="txtImagen" id="txtImagen"  placeholder="Nombre del producto">
+                    <input type="file" class="form-control" name="txtImagen" id="txtImagen"  placeholder="Nombre del producto" accept=".jpg, .jpeg, .png, .gif, .webp">
                   </div>
                   <div class="form-group mb-3 fw-semibold">
-                    <label for="txtDescripcion">Descripcion</label>
-                    <input type="text" class="form-control" value="<?php echo $txtDescripcion ?>" name="txtDescripcion" id="txtDescripcion"  placeholder="Ingrese descripcion del producto">
+                    <label for="txtDescripcion">Descripción</label>
+                    <input type="text" class="form-control" value="<?php echo $txtDescripcion ?>" name="txtDescripcion" id="txtDescripcion"  placeholder="Ingrese descripción del producto">
                   </div>
                   <div class="form-group mb-3 fw-semibold">
                     <label for="txtMarca">Marca:</label>

@@ -14,6 +14,12 @@ if(isset($_SESSION['user'])) {
     <title>Cambiar Contraseña</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style>
+    body {
+      background: #ffe259;
+      background: linear-gradient(to right, #FF6666, #FFFF99);
+    }
+  </style>
 </head>
 <body>
   

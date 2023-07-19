@@ -32,7 +32,7 @@
     }
 
     if($user_exist) header('location: dashboard.php');
-    else $error_message = 'Please check the username and password.';
+    else $error_message = 'Por favor revise sus credenciales.';
 
   }
 
