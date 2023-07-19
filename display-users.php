@@ -16,7 +16,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Dashboard</title>
+  <title>Usuarios</title>
 
   <link rel="stylesheet" href="css/main.css">
   <!-- jQuery -->
@@ -92,8 +92,8 @@
     $('#table').DataTable({
       "order": [[0, "asc"]],
       "language":{
-        "lengthMenu": "Mostrar _MENU_ registros por pagina",
-        "info": "Mostrando pagina _PAGE_ de _PAGES_",
+        "lengthMenu": "Mostrar _MENU_ registros por página",
+        "info": "Mostrando página _PAGE_ de _PAGES_",
         "infoEmpty": "No hay registros disponibles",
         "infoFiltered": "(filtrada de _MAX_ registros)",
         "loadingRecords": "Cargando...",
@@ -266,7 +266,7 @@ $(document).ready(function () {
             include('database/connection.php');
               
             switch ($btnAction) {
-              case "Delete":
+              case "Borrar":
                 echo '
                 <script>
                     Swal.fire({
@@ -340,17 +340,17 @@ $(document).ready(function () {
           <thead>
               <tr>
                   <th scope="col" class="orderable-column">ID</th>
-                  <th scope="col">RUT</th>
+                  <th scope="col style="width: 92px;" >RUT</th>
                   <th scope="col" class="orderable-column">Nombre</th>
                   <th scope="col" class="orderable-column">Apellido</th>
                   <th scope="col" class="orderable-column">Usuario</th>
                   <th scope="col">Correo</th>
                   <th scope="col">Rol</th>
                   <th scope="col">Estado</th>
-                  <th scope="col">Número de Telefono</th>
+                  <th scope="col">Número de Teléfono</th>
                   <th scope="col" style="display: none;">Contraseña</th>
                   <th scope="col" class="orderable-column">Fecha Ingreso</th>
-                  <th scope="col" class="orderable-column">Fecha Actualizacion</th>
+                  <th scope="col" class="orderable-column">Fecha Actualización</th>
                   <th scope="col">Acciones</th>
               </tr>
           </thead>
@@ -429,10 +429,8 @@ if (isset($_SESSION['response'])) {
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"> Edit User Data </h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <h5 class="modal-title" id="exampleModalLabel">Editar Datos de Usuario</h5>
+                    
                 </div>
 
                 <form action="database/update-user.php"  method="POST">
@@ -442,47 +440,46 @@ if (isset($_SESSION['response'])) {
                         <input type="hidden" name="e_id" id="e_id">
 
                         <div class="form-group">
-                            <label> Name </label>
+                            <label>Nombre</label>
                             <input type="text" name="e_name" id="e_name" class="form-control"
-                                placeholder="Enter First Name">
+                                placeholder="Ingrese su Nombre">
                         </div>
 
                         <div class="form-group">
-                            <label> Last Name </label>
+                            <label>Apellido</label>
                             <input type="text" name="e_last_name" id="e_last_name" class="form-control"
-                                placeholder="Enter Last Name">
+                                placeholder="Ingrese su Apellido">
                         </div>
 
                         <div class="form-group">
-                            <label> Username</label>
+                            <label>Nombre de usuario</label>
                             <input type="text" name="e_username" id="e_username" class="form-control"
-                                placeholder="Enter Last Name">
+                                placeholder="Ingrese su nombre de usuario">
                         </div>
                         
                         <div class="form-group">
-                            <label> Email </label>
-                            <input type="text" name="e_email" id="e_email" class="form-control" placeholder="Enter Email"
+                            <label>Correo</label>
+                            <input type="text" name="e_email" id="e_email" class="form-control" placeholder="Ingrese su Correo"
                             required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{1,}">
                         </div>
 
                         <div class="form-group">
-                            <label> Phone Number </label>
-
+                            <label>Número de teléfono</label>
                             <div class="input-group">
                               <div class="input-group-prepend">
                                 <span class="input-group-text">+56 9</span>
                               </div>
-                              <input type="text" class="form-control" id="e_phone_number" name="e_phone_number" pattern="[0-9]{8}" placeholder="ex. 123456789" required>
+                              <input type="text" class="form-control" id="e_phone_number" name="e_phone_number" pattern="[0-9]{8}" placeholder="Ejemplo: 12356789" required>
                             </div>
                         </div>
                         <div class="form-group mb-3">
-                          <label for="password" class="mb-1">Password</label>
-                          <input type="password" class="form-control" id="e_password" name="e_password" placeholder="Choose a password" required>
+                          <label for="password" class="mb-1">Contraseña</label>
+                          <input type="password" class="form-control" id="e_password" name="e_password" placeholder="Ingrese su Contraseña" required>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" name="updatedata" class="btn btn-primary">Update Data</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" name="updatedata" class="btn btn-primary">Actualizar</button>
                     </div>
                 </form>
                 

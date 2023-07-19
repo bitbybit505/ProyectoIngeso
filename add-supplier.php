@@ -188,7 +188,7 @@ $(document).ready(function () {
                 <input type="email" class="form-control" id="email" name="email" placeholder="Ingrese correo del proveedor" required>
               </div>
               <div class="form-group mb-3 fw-semibold">
-                <label for="phoneNumber" class="mb-1">Número de telefono</label>
+                <label for="phoneNumber" class="mb-1">Número de teléfono</label>
                 <div class="input-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text">+56 9</span>

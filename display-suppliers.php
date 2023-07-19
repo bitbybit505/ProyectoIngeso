@@ -341,9 +341,9 @@ $(document).ready(function () {
                   <th scope="col" class="orderable-column">ID</th>
                   <th scope="col" class="orderable-column">Nombre</th>
                   <th scope="col">Correo</th>
-                  <th scope="col">Número de Telefono</th>
+                  <th scope="col">Número de Teléfono</th>
                   <th scope="col" class="orderable-column">Fecha Ingreso</th>
-                  <th scope="col" class="orderable-column">Fecha Actualizacion</th>
+                  <th scope="col" class="orderable-column">Fecha Actualización</th>
                   <th scope="col">Acciones</th>
               </tr>
           </thead>
@@ -360,7 +360,7 @@ $(document).ready(function () {
                       <form method="post">
                         <input type="hidden" name="supplierid" id="supplierid" value="<?php echo $supplier['id']; ?>">
                         <button type="button" class="btn btn-primary editbtn"style="height:38px; width:71.6167px">Editar</button>
-                        <input type="submit" name="btnAction" value="Borrar" class="btn btn-danger" style="height:38px; width:71.6167px">
+                        <input type="submit" name="btnAction" value="Delete" class="btn btn-danger" style="height:38px; width:71.6167px">
                       </form>
                     </td>
                   </tr>
@@ -408,10 +408,7 @@ if (isset($_SESSION['response'])) {
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"> Edit User Data </h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <h5 class="modal-title" id="exampleModalLabel">Editar Datos de Proveedor</h5>
                 </div>
 
                 <form action="database/update-supplier.php"  method="POST">
@@ -423,32 +420,31 @@ if (isset($_SESSION['response'])) {
                         <div class="form-group">
                             <label>Nombre</label>
                             <input type="text" name="e_name" id="e_name" class="form-control"
-                                placeholder="Enter Name">
+                                placeholder="Ingrese el Nombre del Proveedor">
                         </div>
 
                         <div class="form-group mb-3">
                           <label for="email" class="mb-1">Correo</label>
-                          <input type="email" class="form-control" id="e_email" name="e_email" placeholder="Enter your email" 
+                          <input type="email" class="form-control" id="e_email" name="e_email" placeholder="Ingrese el Correo del Proveedor" 
                           required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{1,}">
                         </div>
 
 
                         <div class="form-group">
-                            <label> Phone Number </label>
-
+                            <label>Número telefónico</label>
                             <div class="input-group">
                               <div class="input-group-prepend">
                                 <span class="input-group-text">+56 9</span>
                               </div>
-                              <input type="text" class="form-control" id="e_phone_number" name="e_phone_number" pattern="[0-9]{8}" placeholder="ex. 123456789" required>
+                              <input type="text" class="form-control" id="e_phone_number" name="e_phone_number" pattern="[0-9]{8}" placeholder="Ej. 123456789" required>
                             </div>
                         </div>
                         
                         
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" name="updatedata" class="btn btn-primary">Update Data</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" name="updatedata" class="btn btn-primary">Actualizar</button>
                     </div>
                 </form>
                 

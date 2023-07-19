@@ -222,8 +222,8 @@
       $('#table').DataTable({
         "order": [[3, "asc"]],
         "language":{
-          "lengthMenu": "Mostrar _MENU_ registros por pagina",
-          "info": "Mostrando pagina _PAGE_ de _PAGES_",
+          "lengthMenu": "Mostrar _MENU_ registros por página",
+          "info": "Mostrando página _PAGE_ de _PAGES_",
           "infoEmpty": "No hay registros disponibles",
           "infoFiltered": "(filtrada de _MAX_ registros)",
           "loadingRecords": "Cargando...",
@@ -562,14 +562,14 @@ $(document).ready(function () {
               <tr>
                 <th>Imagen</th>
                 <th class="orderable-column">Nombre</th>
-                <th>Descripcion</th>
+                <th>Descripción</th>
                 <th class="orderable-column">ID</th>
                 <th class="orderable-column">Cantidad</th>
                 <th>Cant. Recomendada</th>
-                <th>Cant. Minima</th>
+                <th>Cant. Mínima</th>
                 <th class="orderable-column">Precio</th>
                 <th class="orderable-column">Fecha Ingreso</th>
-                <th class="orderable-column">Fecha Actualizacion</th>
+                <th class="orderable-column">Fecha Actualización</th>
                 <th class="orderable-column">Marca</th>
                 <th class="orderable-column">Proveedor</th>
                 <th>Acciones</th>
@@ -707,10 +707,8 @@ if (isset($_SESSION['response'])) {
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"> Edit Product Data</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <h5 class="modal-title" id="exampleModalLabel">Editar Datos de Producto</h5>
+                    
                 </div>
 
                 <form action="database/update-product.php"  method="POST" enctype="multipart/form-data">
@@ -798,8 +796,8 @@ if (isset($_SESSION['response'])) {
                         
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" name="updatedata" class="btn btn-primary">Update Data</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" name="updatedata" class="btn btn-primary">Actualizar</button>
                     </div>
                 </form>
                 

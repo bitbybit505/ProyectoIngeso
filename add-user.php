@@ -182,31 +182,31 @@ $(document).ready(function () {
             <form method="POST" action="database/validate-user.php" onsubmit="return validateForm();">
               <div class="form-group mb-3 fw-semibold">
                 <label for="rut" class="mb-1">RUT</label>
-                <input type="text" class="form-control" id="rut" name="rut" placeholder="Ingrese RUT del usuario" required>
+                <input type="text" class="form-control" id="rut" name="rut" placeholder="Ingrese su RUT" required>
               </div>
               <div class="form-group mb-3 fw-semibold">
                 <label for="name">Nombre</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="Ingrese nombre del usuario" required>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Ingrese su Nombre" required>
               </div>
               <div class="form-group mb-3 fw-semibold">
                 <label for="last_name" class="mb-1">Apellido</label>
-                <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Ingrese apellido del usuario" required>
+                <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Ingrese su Apellido" required>
               </div>
               <div class="form-group mb-3 fw-semibold">
                 <label for="username" class="mb-1">Usuario</label>
-                <input type="text" class="form-control" id="username" name="username" placeholder="Ingrese nombre de usuario" required>
+                <input type="text" class="form-control" id="username" name="username" placeholder="Ingrese su Nombre de Usuario" required>
               </div>
               <div class="form-group mb-3 fw-semibold">
                 <label for="email" class="mb-1">Correo</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="Ingrese correo del usuario" 
+                <input type="email" class="form-control" id="email" name="email" placeholder="Ingrese su Correo" 
                 required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{1,}">
               </div>
               <div class="form-group mb-3 fw-semibold">
                 <label for="password" class="mb-1">Contraseña</label>
-                <input type="password" class="form-control" id="password" name="password" placeholder="Ingrese contraseña del usuario" required>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Ingrese Contraseña" required>
               </div>
               <div class="form-group mb-3 fw-semibold">
-                <label for="phoneNumber" class="mb-1">Número de telefono</label>
+                <label for="phoneNumber" class="mb-1">Número de teléfono</label>
                 <div class="input-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text">+56 9</span>

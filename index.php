@@ -22,18 +22,16 @@
         </nav>
     </div>
 
-    <a href="login.php" class="btn btn-outline-primary login-button">Iniciar Sesion</a>
+    <a href="login.php" class="btn btn-outline-primary login-button">Iniciar Sesión</a>
 
     <div class="container welcome-section">
-        <h1 class="display-4">Welcome to Homepage</h1>
-        <p class="lead">Manage and track your inventory with ease. Our system provides real-time visibility into your stock levels, 
-        helps you streamline inventory operations, and ensures efficient order fulfillment.</p>
+        <h1 class="display-4">¡Bienvenido al Sistema de Control de Inventario!</h1>
+        <p class="lead">Esta página te permitirá controlar y administrar el inventario de tu tienda.</p>
         <hr class="my-4">
-        <p>From inventory monitoring to automated stock replenishment, 
-        our system empowers you to optimize your inventory management processes and improve overall business efficiency.</p>
+        <p>A través de esta plataforma, podrás realizar diversas acciones para gestionar de manera eficiente tus productos y mantener un registro actualizado de tus existencias</p>
         
         <!-- Button to trigger user creation -->
-        <button class="btn btn-primary btn-lg" id="createAdminBtn">Learn more</button>
+        <button class="btn btn-primary btn-lg" id="createAdminBtn">Inicializar</button>
     </div>
 
     <script>

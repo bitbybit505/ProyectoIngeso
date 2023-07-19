@@ -93,22 +93,18 @@
                 <!-- login -->
                 <form action="login.php" method="POST">
                     <div class="mb-4">
-                        <label for="username" class = "mb-1">Nombre de usuario</label>
+                        <label for="username" class = "mb-1">Nombre de Usuario</label>
                         <input type="username" name="username" class="form-control" aria-describedby="usernameHelp" placeholder="Ingrese nombre de usuario" id="username">
                     </div>
                     <div class="mb-4">
                     <label for="password" class = "mb-1">Contraseña</label>
                         <input type="password" name="password" class="form-control"  placeholder="Ingrese contraseña" id="password">
                     </div>
-                    <div class="mb-4 form-check">
-                        <input type="checkbox" class="form-check-input " id="remember">
-                        <label class="form-check-label" for="remember">Recordarme</label>
-                    </div>
                     <div class="d-grid">
-                        <button type = "submit" class = "btn btn-primary">Login</button>
+                        <button type = "submit" class = "btn btn-primary">Entrar</button>
                     </div>  
                     <div class="my-3">
-                        <span><a href="forgot-password.php">¿Contraseña olvidada?</a></span>
+                        <span><a href="forgot-password.php">¿Olvidaste tu contraseña?</a></span>
                     </div>  
                 </form>
                 <br><br><br><br><br><br>

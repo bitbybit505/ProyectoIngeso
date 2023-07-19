@@ -81,8 +81,8 @@
       $('#table').DataTable({
         "order": [[0, "asc"]],
         "language":{
-          "lengthMenu": "Mostrar _MENU_ registros por pagina",
-          "info": "Mostrando pagina _PAGE_ de _PAGES_",
+          "lengthMenu": "Mostrar _MENU_ registros por página",
+          "info": "Mostrando página _PAGE_ de _PAGES_",
           "infoEmpty": "No hay registros disponibles",
           "infoFiltered": "(filtrada de _MAX_ registros)",
           "loadingRecords": "Cargando...",
@@ -343,7 +343,7 @@ $(document).ready(function () {
                       <form method="post">
                         <input type="hidden" name="marcaid" id="marcaid" value="<?php echo $marca['id']; ?>">
                         <button type="button" class="btn btn-primary editbtn"style="height:38px; width:71.6167px">Editar</button>
-                        <input type="submit" name="btnAction" value="Borrar" class="btn btn-danger" style="height:38px; width:71.6167px">
+                        <input type="submit" name="btnAction" value="Delete" class="btn btn-danger" style="height:38px; width:71.6167px">
                       </form>
                     </td>
                   </tr>
@@ -392,10 +392,8 @@ if (isset($_SESSION['response'])) {
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"> Información de marca </h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <h5 class="modal-title" id="exampleModalLabel">Editar Datos de Marca</h5>
+                    
                 </div>
 
                 <form action="database/update-brand.php"  method="POST">
@@ -405,15 +403,15 @@ if (isset($_SESSION['response'])) {
                         <input type="hidden" name="e_id" id="e_id">
 
                         <div class="form-group">
-                            <label> Name </label>
+                            <label>Nombre</label>
                             <input type="text" name="e_name" id="e_name" class="form-control"
-                                placeholder="Enter First Name">
+                                placeholder="Nombre marca">
                         </div>
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" name="updatedata" class="btn btn-primary">Update Data</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" name="updatedata" class="btn btn-primary">Actualizar</button>
                     </div>
                 </form>
                 

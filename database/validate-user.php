@@ -10,7 +10,7 @@
     $password = $_POST['password'];
     $phone_number= $_POST['phone_number'];
     $encrypted_password = password_hash($password, PASSWORD_DEFAULT);
-    $stringVariable = "employee";
+    $stringVariable = "Empleado";
 
     function formatRut($rut) {
         $rut = preg_replace('/[.-]/', '', $rut); // Remove dots and dashes from the rut

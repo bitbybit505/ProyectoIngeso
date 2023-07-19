@@ -180,9 +180,9 @@ $(document).ready(function () {
           <div class="card shadow ">
             <div class="card-body">
               <h5 class="card-title">Usuarios</h5>
-              <p class="card-text">Ver y administrar usuarios.</p>
+              <p class="card-text">Ver y agregar usuarios.</p>
               <a href="display-users.php" class="btn btn-primary">Ver Usuarios</a>
-              <a href="add-users.php" class="btn btn-primary">Administrar Usuarios</a>
+              <a href="add-users.php" class="btn btn-primary">Agregar Usuarios</a>
             </div>
           </div>
         </div>
@@ -190,18 +190,30 @@ $(document).ready(function () {
           <div class="card shadow">
             <div class="card-body">
               <h5 class="card-title">Productos</h5>
-              <p class="card-text">Ver y administrar productos.</p>
+              <p class="card-text">Ver y agregar productos.</p>
               <a href="display-products.php" class="btn btn-primary">Ver Productos</a>
-              <a href="add-products.php" class="btn btn-primary">Administrar Productos</a>
+              <a href="add-products.php" class="btn btn-primary">Agregar Productos</a>
             </div>
           </div>
         </div>
-        <div class="col-md-4 rounded ">
+        <div class="col-md-4 rounded">
           <div class="card shadow">
             <div class="card-body">
-              <h5 class="card-title">Ordenes</h5>
-              <p class="card-text">Ver y administrar ordenes.</p>
-              <a href="#" class="btn btn-primary">Ver ordenes</a>
+              <h5 class="card-title">Proveedores</h5>
+              <p class="card-text">Ver y agregar proveedores.</p>
+              <a href="display-suppliers.php" class="btn btn-primary">Ver Proveedores</a>
+              <a href="add-supplier.php" class="btn btn-primary">Agregar Proveedores</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-4 rounded" style="margin-top: 15px;">
+          <div class="card shadow">
+            <div class="card-body">
+              <h5 class="card-title">Marca</h5>
+              <p class="card-text">Ver y agregar marca</p>
+              <a href="display-brands.php" class="btn btn-primary">Ver Marca</a>
+              <a href="add-brand.php" class="btn btn-primary">Agregar Marca</a>
             </div>
           </div>
         </div>
