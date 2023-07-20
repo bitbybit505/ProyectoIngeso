@@ -340,12 +340,13 @@ $(document).ready(function () {
           <thead>
               <tr>
                   <th scope="col" class="orderable-column">ID</th>
-                  <th scope="col style="width: 92px;" >RUT</th>
+                  <th scope="col" style="width: 92px;">RUT</th>
                   <th scope="col" class="orderable-column">Nombre</th>
                   <th scope="col" class="orderable-column">Apellido</th>
                   <th scope="col" class="orderable-column">Usuario</th>
                   <th scope="col">Correo</th>
                   <th scope="col">Rol</th>
+                  
                   <th scope="col" style="display: none;">Estado</th>
                   <th scope="col">Número de Teléfono</th>
                   <th scope="col" style="display: none;">Contraseña</th>
@@ -364,6 +365,13 @@ $(document).ready(function () {
                     <td><?php echo $user['username']; ?></td>
                     <td><?php echo $user['email']; ?></td>
                     <td><?php echo $user['role']; ?></td>
+                    <td class="text-center" style="display: none">
+                        <?php if ($user['status'] == 1): ?>
+                            <input type="checkbox" checked disabled>
+                        <?php else: ?>
+                            <input type="checkbox" disabled>
+                        <?php endif; ?>
+                    </td>
                     <td><?php echo $user['phone_number']; ?></td>
                     <td style="display: none;"><?php echo $user['password']; ?></td>
                     <td><?php echo $user['created_at']; ?></td>
