@@ -3,6 +3,7 @@
   if(!isset($_SESSION['user'])) header('location: login.php');
   
   $user = $_SESSION['user'];
+  $user_role= $user['role'];
   include('database/connection.php');
 ?>
 
@@ -629,7 +630,9 @@ $(document).ready(function () {
                     <form method="post">           
                       <input type="hidden" name="txtID" id="txtID" value="<?php echo $product['id']; ?>">
                       <button type="button" class="btn btn-primary editbtn"style="height:38px; width:71.6167px">Editar</button>
-                      <input type="submit" name="accion" value="Borrar" class="btn btn-danger">
+                      <?php if ($user_role !== 'Empleado'): ?>
+                          <input type="submit" name="btnAction" value="Borrar" class="btn btn-danger" style="height:38px; width:71.6167px">
+                        <?php endif; ?>
                     </form>
                   </td>
                 </tr>

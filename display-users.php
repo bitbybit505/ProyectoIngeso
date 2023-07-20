@@ -3,7 +3,10 @@
   if(!isset($_SESSION['user'])) header('location: login.php');
   
   $user = $_SESSION['user'];
-
+  $user_role= $user['role'];
+  function isEmployee($user_role) {
+    return $user_role === "Empleado";
+  }
   // Include the connection.php file
   require_once 'database/connection.php';
 
@@ -337,6 +340,7 @@ $(document).ready(function () {
               echo "Error: " . $e->getMessage();
           }
         ?>
+        <?php if(!isEmployee($user_role)): ?>
           <thead>
               <tr>
                   <th scope="col" class="orderable-column">ID</th>
@@ -387,6 +391,62 @@ $(document).ready(function () {
                   </tr>
               <?php endforeach; ?>
           </tbody>
+          <?php endif; ?>
+          <?php if(isEmployee($user_role)): ?>
+          <thead>
+              <tr>
+                  <th scope="col" style="display: none;" class="orderable-column">ID</th>
+                  <th scope="col" style="width: 92px;">RUT</th>
+                  <th scope="col" class="orderable-column">Nombre</th>
+                  <th scope="col" class="orderable-column">Apellido</th>
+                  <th scope="col" class="orderable-column">Usuario</th>
+                  <th scope="col" style="display: none;">Correo</th>
+                  <th scope="col">Rol</th>
+                  
+                  <th scope="col" style="display: none;">Estado</th>
+                  <th scope="col">Número de Teléfono</th>
+                  <th scope="col" style="display: none;">Contraseña</th>
+                  <th scope="col" class="orderable-column">Fecha Ingreso</th>
+                  <th scope="col" class="orderable-column">Fecha Actualización</th>
+                  <th style="display: none;" scope="col">Acciones</th>
+              </tr>
+          </thead>
+          <tbody>
+              <?php foreach($users as $user): ?>
+                  <tr>
+                    <td style="display: none;"><?php echo $user['id']; ?></td>
+                    <td><?php echo $user['rut']; ?></td>
+                    <td><?php echo $user['name']; ?></td>
+                    <td><?php echo $user['last_name']; ?></td>
+                    <td><?php echo $user['username']; ?></td>
+                    <td style="display: none;"><?php echo $user['email']; ?></td>
+                    <td><?php echo $user['role']; ?></td>
+                    <td class="text-center" style="display: none">
+                        <?php if ($user['status'] == 1): ?>
+                            <input type="checkbox" checked disabled>
+                        <?php else: ?>
+                            <input type="checkbox" disabled>
+                        <?php endif; ?>
+                    </td>
+                    <td><?php echo $user['phone_number']; ?></td>
+                    <td style="display: none;"><?php echo $user['password']; ?></td>
+                    <td><?php echo $user['created_at']; ?></td>
+                    <td><?php echo $user['updated_at']; ?></td>
+                    <td style="display: none;">
+                      <form method="post">
+                      <?php if (!isEmployee($user_role)): ?>
+                        <input type="hidden" name="userid" id="userid" value="<?php echo $user['id']; ?>">
+                        
+                        <button type="button" class="btn btn-primary editbtn"style="height:38px; width:71.6167px">Editar</button>
+                        <!--<input type="summit" name="btnAction" value="Edit" class="btn btn-primary editbtn" style="height:38px; width:71.6167px">-->
+                        <input type="submit" name="btnAction" value="Borrar" class="btn btn-danger" style="height:38px; width:71.6167px">
+                      </form>
+                      <?php endif; ?>
+                    </td>
+                  </tr>
+              <?php endforeach; ?>
+          </tbody>
+          <?php endif; ?>
       </table>
       
     </div>

@@ -3,6 +3,10 @@
   if(!isset($_SESSION['user'])) header('location: login.php');
   
   $user = $_SESSION['user'];
+  $user_role= $user['role'];
+  function isEmployee($user_role) {
+    return $user_role === "Empleado";
+  }
 
   // Include the connection.php file
   require_once 'database/connection.php';
@@ -360,7 +364,9 @@ $(document).ready(function () {
                       <form method="post">
                         <input type="hidden" name="supplierid" id="supplierid" value="<?php echo $supplier['id']; ?>">
                         <button type="button" class="btn btn-primary editbtn"style="height:38px; width:71.6167px">Editar</button>
-                        <input type="submit" name="btnAction" value="Borrar" class="btn btn-danger" style="height:38px; width:71.6167px">
+                        <?php if (!isEmployee($user_role)): ?>
+                            <input type="submit" name="btnAction" value="Borrar" class="btn btn-danger" style="height:38px; width:71.6167px">
+                        <?php endif; ?>
                       </form>
                     </td>
                   </tr>

@@ -6,6 +6,10 @@
   
   $user_role= $user['role'];
   
+  function isEmployee($user_role) {
+    return $user_role === "Empleado";
+  }
+  
   // Include the connection.php file
   require_once 'database/connection.php';
 
@@ -344,8 +348,8 @@ $(document).ready(function () {
                     <td>
                       <form method="post">
                         <input type="hidden" name="marcaid" id="marcaid" value="<?php echo $marca['id']; ?>">
-                        <button type="button" class="btn btn-primary editbtn"style="height:38px; width:71.6167px">Editar</button>
-                        <?php if ($user_role !== 'Empleado'): ?>
+                        <button type="button" class="btn btn-primary editbtn" style="height:38px; width:71.6167px">Editar</button>
+                        <?php if (!isEmployee($user_role)): ?>
                             <input type="submit" name="btnAction" value="Borrar" class="btn btn-danger" style="height:38px; width:71.6167px">
                         <?php endif; ?>
                       </form>
