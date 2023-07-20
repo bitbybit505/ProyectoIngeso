@@ -59,6 +59,19 @@
       border-radius: 10px; /* Ajusta el valor según la cantidad de redondeo que deseas */
       overflow: hidden; /* Evita que el contenido sobresalga del borde redondeado */
     }
+    @media (min-width: 1200px) and (max-width: 1550px) {
+      /* Increase the sidebar width for HD screens */
+      .lateral-bar {
+        width: 190px;
+      }
+
+      /* Adjust the main content width for HD screens */
+      .col-md-9 {
+        flex: 0 0 75%;
+        max-width: 75%;
+        margin-right: 20%;
+      }
+    }
   </style>
 
 <!-- EDIT BUTTON MODAL-->

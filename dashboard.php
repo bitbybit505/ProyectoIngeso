@@ -179,7 +179,9 @@ $(document).ready(function () {
               <h5 class="card-title">Usuarios</h5>
               <p class="card-text">Ver y agregar usuarios.</p>
               <a href="display-users.php" class="btn btn-primary">Ver Usuarios</a>
-              <a href="add-users.php" class="btn btn-primary">Agregar Usuarios</a>
+              <?php if(!isEmployee($user_role)): ?>
+                <a href="add-user.php" class="btn btn-primary">Agregar Usuarios</a>
+              <?php endif ?>
             </div>
           </div>
         </div>

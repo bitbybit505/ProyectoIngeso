@@ -121,6 +121,22 @@
       background-color: #28242c; /* Cambia este color al que desees para el encabezado oscuro */
       color: white; /* Color del texto en el encabezado */
     }
+
+    @media (min-width: 1200px) and (max-width: 1650px) {
+      /* Increase the sidebar width for HD screens */
+      .lateral-bar {
+        width: 190px;
+      }
+
+      /* Adjust the main content width for HD screens */
+      .col-md-9 {
+        flex: 0 0 100%;
+        max-width: 100%;
+        margin-right: 20%;
+        
+      }
+    }
+    
   </style>
 
   
@@ -540,7 +556,7 @@ $(document).ready(function () {
           $sentenciaSQL->execute();
           $listaProductos=$sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
         ?>
-        <div class="form-inline">
+        <div class="form-inline" style="display: flex;">
           <select id="search_proveedor" class="form-control form-control-sm m-2">
             <option value="">Proveedor</option>
               <?php
