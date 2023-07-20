@@ -3,7 +3,10 @@
   if(!isset($_SESSION['user'])) header('location: login.php');
   
   $user = $_SESSION['user'];
-
+  $user_role= $user['role'];
+  function isEmployee($user_role) {
+    return $user_role === "Empleado";
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,28 +38,22 @@
       background-color: #FFA07A;
     }
   </style>
-  
-  <script>
+
+<script>
 $(document).ready(function () {
-  // Función para cambiar el último ícono al hacer clic en el enlace
   $('.nav-link').on('click', function () {
-    // Obtener el último ícono dentro del enlace actual
-    var icon = $(this).find('i').last();
+    var icon = $(this).find('i.fa-solid');
 
-    // Obtener la clase actual del ícono y la clase del ícono alternativo que deseas cambiar
-    var currentIconClass = icon.attr('class');
-    var originalIconClass = 'fa-solid fa-caret-down'; // Cambia esto por la clase del ícono original
-
-    // Verificar si el icono actual es el mismo que el original
-    if (currentIconClass === originalIconClass) {
-      // Si el icono actual es el mismo que el original, cambiar al ícono alternativo
-      var alternateIconClass = 'fa-solid fa-caret-down fa-rotate-180'; // Cambia esto por la clase del ícono alternativo que deseas mostrar
-      icon.removeClass(originalIconClass);
-      icon.addClass(alternateIconClass);
+    if (icon.hasClass('fa-caret-down')) {
+      // Si el ícono actual es fa-caret-down, cambiar a fa-caret-up
+      icon.removeClass('fa-caret-down');
+      icon.addClass('fa-caret-up');
     } else {
-      // Si el icono actual es diferente al original, cambiar al ícono original
-      icon.removeClass(currentIconClass);
-      icon.addClass(originalIconClass);
+      if (icon.hasClass('fa-caret-up')) {
+      // Si el ícono actual es fa-caret-up, cambiar a fa-caret-down
+      icon.removeClass('fa-caret-up');
+      icon.addClass('fa-caret-down');
+      }
     }
   });
 });
@@ -101,8 +98,6 @@ $(document).ready(function () {
         <?=$user['name'] .' '.$user['last_name'] ?> <i class="fa-solid fa-caret-down"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-          <!--<a class="dropdown-item" href="#"><i class="fas fa-cog"></i> <span>Opciones</span></a>-->
-          <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="database/logout.php"><i class="fa-solid fa-right-from-bracket"></i> <span>Cerrar Sesion</span></a>
         </div>
       </li>
@@ -122,9 +117,11 @@ $(document).ready(function () {
               <li class="nav-item">
                   <a class="nav-link" href="display-users.php"><i class="fas fa-search"></i> <span>Ver Usuarios</span></a>
                 </li>
+                <?php if (!isEmployee($user_role)): ?>
                 <li class="nav-item">
                   <a class="nav-link" href="add-user.php"><i class="fas fa-plus"></i> <span>Agregar Usuarios</span></a>
                 </li>
+                <?php endif; ?>
               </ul>
             </div>
           </li>
@@ -142,7 +139,7 @@ $(document).ready(function () {
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link fw-semibold" data-bs-toggle="collapse" href="#suppliersCollapse"><i class="fa-solid fa-truck-field"></i> <span>Proveedores</span> <i class="fa-solid fa-caret-down"></i></a>
+            <a class="nav-link fw-semibold" data-bs-toggle="collapse" href="#suppliersCollapse"><i class="fas fa-truck-field"></i> <span>Proveedores</span> <i class="fa-solid fa-caret-down"></i></a>
             <div class="collapse" id="suppliersCollapse">
               <ul class="nav flex-column ml-3">
                 <li class="nav-item">
@@ -155,7 +152,7 @@ $(document).ready(function () {
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link fw-semibold" data-bs-toggle="collapse" href="#brandsCollapse"><i class="fa-solid fa-city"></i> <span>Marcas</span> <i class="fa-solid fa-caret-down"></i></a>
+            <a class="nav-link fw-semibold" data-bs-toggle="collapse" href="#brandsCollapse"><i class="fas fa-city"></i> <span>Marcas</span> <i class="fa-solid fa-caret-down"></i></a>
             <div class="collapse" id="brandsCollapse">
               <ul class="nav flex-column ml-3">
                 <li class="nav-item">
