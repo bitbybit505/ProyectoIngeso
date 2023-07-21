@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 21, 2023 at 02:58 AM
+-- Generation Time: Jul 21, 2023 at 06:45 PM
 -- Server version: 10.4.28-MariaDB
--- PHP Version: 8.1.17
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -47,10 +47,15 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`id`, `name`, `cantidad`, `cantidad_rec`, `cantidad_min`, `precio`, `imagen`, `descripcion`, `fecha_ingreso`, `fecha_actualizada`, `id_marca`, `id_proveedor`) VALUES
-(1, 'Piano', 7, 8, 4, 222, '1689895928_flauta.webp', 'Piano con teclas negras', '2023-07-03 18:43:33', '2023-07-20 20:03:31', 9, 26),
-(3, 'GX20004 ', 10, 9, 1, 235235, '', 'Laptop that has 10gb of ram', '2023-07-07 08:29:29', '2023-07-20 20:26:26', 10, 2),
-(24, 'ñkdjsg', 123, 123, 2, 121241, 'img.jpg', '', '2023-07-20 19:39:11', '2023-07-20 20:17:05', 10, 2),
-(25, '42124', 144, 122, 123, 123123, '', '', '2023-07-20 20:15:52', '2023-07-20 20:15:52', 10, 2);
+(25, 'Guitarra Eléctrico Greg Bennett Avion Les Paul Av-7', 20, 10, 5, 549989, '', 'Color: Pearl White', '2023-07-20 21:39:08', '2023-07-20 21:39:08', 26, 1),
+(26, 'Greg Bennett Avion Les Paul Av-3', 15, 10, 5, 399990, '', 'Color: Negro', '2023-07-20 21:39:57', '2023-07-20 21:39:57', 26, 2),
+(27, 'Guitarra Eléctrica Squier Classic Vibe 70\' Telec Deluxe Blk', 9, 10, 5, 649990, '', 'Color: Black', '2023-07-20 21:40:46', '2023-07-20 21:40:46', 27, 1),
+(28, 'Bateria ADW Junior ADJ5J Drum Set', 4, 10, 5, 299989, '', 'Color: Verde', '2023-07-20 21:41:28', '2023-07-20 21:41:28', 29, 3),
+(29, 'Platillo Bateria Meinl HCS Crash', 15, 10, 6, 59990, '', 'Diametro: 14\"', '2023-07-20 21:42:14', '2023-07-20 21:42:14', 30, 4),
+(31, 'Amplificador Bajo Ashdown Original C112', 4, 15, 5, 849990, '', 'Color: Rojo', '2023-07-20 21:43:52', '2023-07-20 21:43:52', 32, 5),
+(32, 'Teclado Yamaha Portátil PSR-E273 con 61 teclas', 20, 10, 5, 199990, '', 'Color: Negro', '2023-07-20 21:44:36', '2023-07-20 21:44:36', 33, 5),
+(33, 'Piano Digital Gewa UP 400 Concierto', 6, 10, 5, 2499990, '', 'Color: Negro', '2023-07-20 21:45:09', '2023-07-20 21:45:09', 34, 3),
+(34, 'Piano Digital Gewa UP365 Concierto', 15, 10, 5, 1999990, '', 'Color: Negro', '2023-07-20 21:45:39', '2023-07-20 21:46:21', 34, 1);
 
 --
 -- Indexes for dumped tables
@@ -61,6 +66,8 @@ INSERT INTO `product` (`id`, `name`, `cantidad`, `cantidad_rec`, `cantidad_min`,
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `name` (`name`),
+  ADD UNIQUE KEY `name_2` (`name`),
   ADD UNIQUE KEY `id` (`id`);
 
 --
@@ -71,7 +78,7 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 21, 2023 at 02:58 AM
+-- Generation Time: Jul 21, 2023 at 06:45 PM
 -- Server version: 10.4.28-MariaDB
--- PHP Version: 8.1.17
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -37,13 +37,14 @@ CREATE TABLE `marca` (
 --
 
 INSERT INTO `marca` (`id`, `nombre`) VALUES
-(10, 'ACERUS'),
-(7, 'ASUS2'),
-(17, 'BIBLIO3'),
-(9, 'Chinchon444'),
-(2, 'coca'),
-(12, 'HACHEPE'),
-(11, 'PEgasus');
+(29, 'ADW'),
+(32, 'Ashdown'),
+(31, 'Fender'),
+(34, 'Gewa'),
+(26, 'Greg Bennett'),
+(30, 'Meinl'),
+(27, 'Squier'),
+(33, 'Yamaha');
 
 --
 -- Indexes for dumped tables
@@ -64,7 +65,7 @@ ALTER TABLE `marca`
 -- AUTO_INCREMENT for table `marca`
 --
 ALTER TABLE `marca`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
