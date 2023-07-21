@@ -256,8 +256,8 @@
         ],
       });
       var oTable = $('#table').dataTable();
-      $('select#search_proveedor').change( function () {  oTable.fnFilter( this.value, 9 );  } );
-      $('select#search_marca').change( function () {  oTable.fnFilter( this.value, 8 ); });
+      $('select#search_proveedor').change( function () {  oTable.fnFilter( this.value, 11 );  } );
+      $('select#search_marca').change( function () {  oTable.fnFilter( this.value, 10 ); });
       
       var cTable = $('#table').DataTable();
       for (var i = 0; i < cTable.rows().count(); i++) {
