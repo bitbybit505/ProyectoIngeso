@@ -35,6 +35,14 @@ body{
   
 }
 
+.pt-bitbybit{
+  padding-top: 30px !important;
+}
+
+.mb-bitbybit{
+  margin-bottom: 10px;
+}
+
 .custom-container row {
   height: 100%; /* Set the row height to 100% of the container height */
 }
@@ -93,7 +101,7 @@ body{
   }
   
   
-
+  
 }
 
 
