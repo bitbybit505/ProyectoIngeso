@@ -410,6 +410,7 @@ $(document).ready(function () {
           </thead>
           <tbody>
               <?php foreach($users as $user): ?>
+                  <?php if ($user['role'] !="Admin"): ?>
                   <tr>
                     <td style="display: none;"><?php echo $user['id']; ?></td>
                     <td><?php echo $user['rut']; ?></td>
@@ -441,6 +442,7 @@ $(document).ready(function () {
                       <?php endif; ?>
                     </td>
                   </tr>
+                  <?php endif; ?>
               <?php endforeach; ?>
           </tbody>
           <?php endif; ?>

@@ -16,10 +16,10 @@ if ($selectQuery->rowCount() === 0) {
     // Prepare the values for the insert query
     $insertQuery->bindValue(':id', 1);
     $insertQuery->bindValue(':rut', '1');
-    $insertQuery->bindValue(':name', 'administrator');
-    $insertQuery->bindValue(':last_name', 'acc');
-    $insertQuery->bindValue(':username', 'admin');
-    $insertQuery->bindValue(':email', 'admin@admin.com');
+    $insertQuery->bindValue(':name', 'Cuenta');
+    $insertQuery->bindValue(':last_name', 'Administrador');
+    $insertQuery->bindValue(':username', 'Admin');
+    $insertQuery->bindValue(':email', 'a@a.com');
     $insertQuery->bindValue(':password', $hashedPassword);
     $insertQuery->bindValue(':phone_number', '1');
     $insertQuery->bindValue(':role', 'Admin');

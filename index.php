@@ -3,16 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to Homepage</title>
+    <title>Página de Bienvenida</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/main.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
-    body {
-      background: #ffe259;
-      background: linear-gradient(to right, #FF6666, #FFFF99);
-    }
+        body {
+        background: #ffe259;
+        background: linear-gradient(to right, #FF6666, #FFFF99);
+        position: relative;
+        min-height: 100vh;
+        }
+
+        .trademark {
+            position: absolute;
+            bottom: 10px; /* Adjust this value to control the vertical position */
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 20px;
+        }
   </style>
 </head>
 <body>
@@ -34,6 +44,9 @@
         <button class="btn btn-primary btn-lg" id="createAdminBtn">Inicializar</button>
     </div>
 
+    <div class="trademark">
+         BitByBit UCN &copy;
+    </div>
     <script>
         $(document).ready(function() {
             // Button click event handler
