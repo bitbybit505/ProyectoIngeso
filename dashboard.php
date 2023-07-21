@@ -3,15 +3,17 @@
   if(!isset($_SESSION['user'])) header('location: login.php');
   
   $user = $_SESSION['user'];
-
+  $user_role= $user['role'];
+  function isEmployee($user_role) {
+    return $user_role === "Empleado";
+  }
 ?>
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
+<meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Dashboard</title>
+  <title>Tablero</title>
 
   <link rel="stylesheet" href="css/main.css">
   <!-- Bootstrap CSS -->
@@ -22,123 +24,195 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
   <!-- Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
-  
+  <style>
+    body {
+      background: #ffe259;
+      background: linear-gradient(to right, #FF6666, #FFFF99);
+    }
+    
+    .nav-link {
+      color: black !important; /* Cambia el valor para ajustar la intensidad del color del enlace */
+    }
+
+    .lateral-bar{
+      background-color: #FFA07A;
+    }
+  </style>
+
+<script>
+$(document).ready(function () {
+  $('.nav-link').on('click', function () {
+    var icon = $(this).find('i.fa-solid');
+
+    if (icon.hasClass('fa-caret-down')) {
+      // Si el ícono actual es fa-caret-down, cambiar a fa-caret-up
+      icon.removeClass('fa-caret-down');
+      icon.addClass('fa-caret-up');
+    } else {
+      if (icon.hasClass('fa-caret-up')) {
+      // Si el ícono actual es fa-caret-up, cambiar a fa-caret-down
+      icon.removeClass('fa-caret-up');
+      icon.addClass('fa-caret-down');
+      }
+    }
+  });
+});
+</script>
+
+<script>
+$(document).ready(function () {
+  $('#userDropdown').on('click', function () {
+    var icon = $(this).find('i').last();
+
+    var currentIconClass = icon.attr('class');
+    var originalIconClass = 'fa-solid fa-caret-down'; // Cambia esto por la clase del ícono original
+
+    // Verificar si el icono actual es el mismo que el original
+    if (currentIconClass === originalIconClass) {
+      // Si el icono actual es el mismo que el original, cambiar al ícono alternativo
+      var alternateIconClass = 'fa-solid fa-caret-down fa-rotate-180'; // Cambia esto por la clase del ícono alternativo que deseas mostrar
+      icon.removeClass(originalIconClass);
+      icon.addClass(alternateIconClass);
+    } else {
+      // Si el icono actual es diferente al original, cambiar al ícono original
+      icon.removeClass(currentIconClass);
+      icon.addClass(originalIconClass);
+    }
+  });
+});
+</script>
+
 
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand pr-3 fw-semibold" href="dashboard.php" style="margin-right: auto; margin-left: 15px;">Casa Flores</a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item dropdown">
+        <a class="navbar-brand pr-3" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <?=$user['name'] .' '.$user['last_name'] ?> <i class="fa-solid fa-caret-down"></i>
+        </a>
+        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+          <a class="dropdown-item" href="database/logout.php"><i class="fa-solid fa-right-from-bracket"></i> <span>Cerrar Sesion</span></a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-      <a class="navbar-brand" href="#">Dashboard</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link" id="homeBtn" href="#">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a href="database/logout.php" id="logoutBtn">Logout</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-
-
-  <div class="container-fluid">
+<div class="container-fluid custom-container">
   <div class="row">
-    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+    <nav class="col-md-2 d-none d-md-block lateral-bar sidebar rounded-bottom shadow">
       <div class="sidebar-sticky">
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link active" href="dashboard.php"></i>Dashboard</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#usersCollapse"><i class="fas fa-users"></i> <span>Users</span> <i class="fas fa-angle-down"></i></a>
+            <a class="nav-link fw-semibold" data-bs-toggle="collapse" href="#usersCollapse"><i class="fas fa-users"></i> <span>Usuarios</span> <i class="fa-solid fa-caret-down"></i></a>
             <div class="collapse" id="usersCollapse">
               <ul class="nav flex-column ml-3">
               <li class="nav-item">
-                  <a class="nav-link" href="display-users.php">Display users</a>
+                  <a class="nav-link" href="display-users.php"><i class="fas fa-search"></i> <span>Ver Usuarios</span></a>
                 </li>
+                <?php if (!isEmployee($user_role)): ?>
                 <li class="nav-item">
-                  <a class="nav-link" href="add-user.php">Add User</a>
+                  <a class="nav-link" href="add-user.php"><i class="fas fa-plus"></i> <span>Agregar Usuarios</span></a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Modify User</a>
-                </li>
+                <?php endif; ?>
               </ul>
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#productCollapse"><i class="fas fa-box-open"></i> <span>Products</span> <i class="fas fa-angle-down"></i></a>
+            <a class="nav-link fw-semibold" data-bs-toggle="collapse" href="#productCollapse"><i class="fas fa-box-open"></i> <span>Productos</span> <i class="fa-solid fa-caret-down"></i></a>
             <div class="collapse" id="productCollapse">
               <ul class="nav flex-column ml-3">
                 <li class="nav-item">
-                  <a class="nav-link" href="lista-productos.php">View Products</a>
+                  <a class="nav-link" href="display-products.php"><i class="fas fa-search"></i> <span>Ver Productos</span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="products.php">Add Product</a>
+                  <a class="nav-link" href="add-products.php"><i class="fas fa-plus"></i> <span>Agregar Productos</span></a>
                 </li>
               </ul>
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#suppliersCollapse"><i class="bi bi-building"></i> <span>Supplier</span> <i class="fas fa-angle-down"></i></a>
+            <a class="nav-link fw-semibold" data-bs-toggle="collapse" href="#suppliersCollapse"><i class="fas fa-truck-field"></i> <span>Proveedores</span> <i class="fa-solid fa-caret-down"></i></a>
             <div class="collapse" id="suppliersCollapse">
               <ul class="nav flex-column ml-3">
                 <li class="nav-item">
-                  <a class="nav-link" href="display-suppliers.php">View Supplier</a>
+                  <a class="nav-link" href="display-suppliers.php"><i class="fas fa-search"></i> <span>Ver Proveedores</span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="add-supplier.php">Add Supplier</a>
+                  <a class="nav-link" href="add-supplier.php"><i class="fas fa-plus"></i> <span>Agregar Proveedores</span></a>
                 </li>
               </ul>
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#"><i class="fas fa-cog"></i>Settings</a>
+            <a class="nav-link fw-semibold" data-bs-toggle="collapse" href="#brandsCollapse"><i class="fas fa-city"></i> <span>Marcas</span> <i class="fa-solid fa-caret-down"></i></a>
+            <div class="collapse" id="brandsCollapse">
+              <ul class="nav flex-column ml-3">
+                <li class="nav-item">
+                  <a class="nav-link" href="display-brands.php"><i class="fas fa-search"></i> <span>Ver Marcas</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="add-brand.php"><i class="fas fa-plus"></i> <span>Agregar Marcas</span></a>
+                </li>
+              </ul>
+            </div>
           </li>
         </ul>
       </div>
+      <br>
     </nav>
 
-    
-
-
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Dashboard</h1>
-        <span>Welcome, <?=$user['name'] .' '.$user['last_name'] ?> </span>
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-1 pb-1 mb-1">
       </div>
       <div class="row">
-        <div class="col-md-4">
-          <div class="card">
+        <div class="col-md-4 rounded ">
+          <div class="card shadow ">
             <div class="card-body">
-              <h5 class="card-title">Users</h5>
-              <p class="card-text">View and manage users.</p>
-              <a href="#" class="btn btn-primary">View Users</a>
+              <h5 class="card-title">Usuarios</h5>
+              <p class="card-text">Ver y agregar usuarios.</p>
+              <a href="display-users.php" class="btn btn-primary">Ver Usuarios</a>
+              <?php if(!isEmployee($user_role)): ?>
+                <a href="add-user.php" class="btn btn-primary">Agregar Usuarios</a>
+              <?php endif ?>
             </div>
           </div>
         </div>
-        <div class="col-md-4">
-          <div class="card">
+        <div class="col-md-4 rounded">
+          <div class="card shadow">
             <div class="card-body">
-              <h5 class="card-title">Products</h5>
-              <p class="card-text">View and manage products.</p>
-              <a href="#" class="btn btn-primary">View Products</a>
+              <h5 class="card-title">Productos</h5>
+              <p class="card-text">Ver y agregar productos.</p>
+              <a href="display-products.php" class="btn btn-primary">Ver Productos</a>
+              <a href="add-products.php" class="btn btn-primary">Agregar Productos</a>
             </div>
           </div>
         </div>
-        <div class="col-md-4">
-          <div class="card">
+        <div class="col-md-4 rounded">
+          <div class="card shadow">
             <div class="card-body">
-              <h5 class="card-title">Orders</h5>
-              <p class="card-text">View and manage orders.</p>
-              <a href="#" class="btn btn-primary">View Orders</a>
+              <h5 class="card-title">Proveedores</h5>
+              <p class="card-text">Ver y agregar proveedores.</p>
+              <a href="display-suppliers.php" class="btn btn-primary mb-1" >Ver Proveedores</a>
+              <a href="add-supplier.php" class="btn btn-primary mb-1">Agregar Proveedores</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-4 rounded" style="margin-top: 15px;">
+          <div class="card shadow">
+            <div class="card-body">
+              <h5 class="card-title">Marcas</h5>
+              <p class="card-text">Ver y agregar marcas.</p>
+              <a href="display-brands.php" class="btn btn-primary">Ver Marca</a>
+              <a href="add-brand.php" class="btn btn-primary">Agregar Marca</a>
             </div>
           </div>
         </div>
@@ -146,16 +220,5 @@
         
       </div>
     </main>
-  </div>
- </div>
-
-</div>
-
-</div>
-
-
-
-
 </body>
-
 </html>

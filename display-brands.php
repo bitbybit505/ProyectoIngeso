@@ -7,7 +7,7 @@
   function isEmployee($user_role) {
     return $user_role === "Empleado";
   }
-
+  
   // Include the connection.php file
   require_once 'database/connection.php';
 
@@ -20,7 +20,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Ver Proveedores</title>
+  <title>Ver Marcas</title>
 
   <link rel="stylesheet" href="css/main.css">
   <!-- jQuery -->
@@ -37,7 +37,7 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
   <!-- Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
-
+  <!-- EDIT BUTTON MODAL-->
   <style>
     body {
       background: #ffe259;
@@ -56,31 +56,27 @@
       border-radius: 10px; /* Ajusta el valor según la cantidad de redondeo que deseas */
       overflow: hidden; /* Evita que el contenido sobresalga del borde redondeado */
     }
-    
   </style>
-  <!-- EDIT BUTTON MODAL-->
+  
+  <script>
+    $(document).ready(function () {
 
-<script>
-  $(document).ready(function () {
+      $('.editbtn').on('click', function () {
 
-    $('.editbtn').on('click', function () {
+          $('#editmodal').modal('show');
 
-        $('#editmodal').modal('show');
+          $tr = $(this).closest('tr');
 
-        $tr = $(this).closest('tr');
+          var data = $tr.children("td").map(function () {
+              return $(this).text();
+          }).get();
 
-        var data = $tr.children("td").map(function () {
-            return $(this).text();
-        }).get();
-
-        //console.log(data[0],data[5]);
-        $('#e_id').val(data[0]);
-        $('#e_name').val(data[1]);
-        $('#e_email').val(data[2]);
-        $('#e_phone_number').val(data[3].replace(/\D/g, '').slice(-8));
+          //console.log(data[0],data[5]);
+          $('#e_id').val(data[0]);
+          $('#e_name').val(data[1]);
+      });
     });
-  });
-</script>
+  </script>
 
 
 
@@ -250,77 +246,71 @@ $(document).ready(function () {
       <table id="table" class="table table-striped table-dark">
         <?php
         //deleting a supplier
-          $supplierid = isset($_POST['supplierid']) ? $_POST['supplierid'] : "";
+          $marcaid = isset($_POST['marcaid']) ? $_POST['marcaid'] : "";
           $btnAction = isset($_POST['btnAction']) ? $_POST['btnAction'] : "";
           try{
 
-            include('database/connection.php');
+          include('database/connection.php');
+            
+          switch ($btnAction) {
               
-            switch ($btnAction) {
-               case "Borrar":
-            $supplierid = $_POST['supplierid']; // Retrieve the supplier's ID from the form
-            echo '
-            <script>
-                Swal.fire({
-                    title: "¿Estás seguro?",
-                    text: "¡No podrás revertir esto!",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    confirmButtonText: "Sí, eliminar",
-                    cancelButtonText: "Cancelar"
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // User confirmed, proceed with deletion
-                        const xhr = new XMLHttpRequest();
-                        xhr.open("POST", "database/remove-supplier.php", true);
-                        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                        xhr.onreadystatechange = function() {
-                            if (xhr.readyState === 4) {
-                                if (xhr.status === 200) {
-                                    // Handle the response
-                                    const response = xhr.responseText.trim();
-                                    if (response === "success") {
-                                        // Deletion successful
-                                        Swal.fire({
-                                            title: "Proveedor eliminado",
-                                            text: "El proveedor ha sido eliminado correctamente.",
-                                            icon: "success",
-                                            timer: 1500,
-                                            showConfirmButton: false
-                                        }).then(() => {
-                                            // Reload the page to update the supplier list
-                                            window.location.href = "display-suppliers.php";
-                                        });
-                                    } else {
-                                        // Deletion failed
-                                        Swal.fire({
-                                            title: "Error",
-                                            text: "No se pudo eliminar el proveedor.",
-                                            icon: "error",
-                                            timer: 1500,
-                                            showConfirmButton: false
-                                        });
-                                    }
-                                } else {
-                                    // Request failed
-                                    Swal.fire({
-                                        title: "Error",
-                                        text: "No se pudo completar la solicitud.",
-                                        icon: "error",
-                                        timer: 1500,
-                                        showConfirmButton: false
-                                    });
-                                }
-                            }
-                        };
-                        xhr.send("supplier_id=" + ' . $supplierid . ');
-                    }
-                });
-            </script>';
-            break;
-              }
+            
+            case "Borrar":
+              echo '
+              <script>
+                  Swal.fire({
+                      title: "¿Estás seguro?",
+                      text: "¡No podrás revertir esto!",
+                      icon: "warning",
+                      showCancelButton: true,
+                      confirmButtonColor: "#3085d6",
+                      cancelButtonColor: "#d33",
+                      confirmButtonText: "Sí, eliminar",
+                      cancelButtonText: "Cancelar"
+                  }).then((result) => {
+                      if (result.isConfirmed) {
+                          // User confirmed, proceed with deletion
+                          const xhr = new XMLHttpRequest();
+                          xhr.open("POST", "database/remove-brand.php", true);
+                          xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                          xhr.onreadystatechange = function() {
+                              if (xhr.readyState === 4 && xhr.status === 200) {
+                                  // Handle the response if needed
+                                  if (xhr.responseText === "success") {
+                                      // Brand deleted successfully
+                                      Swal.fire({
+                                          title: "Marca eliminada",
+                                          text: "La Marca ha sido eliminada correctamente.",
+                                          icon: "success",
+                                          timer: 3000,
+                                          showConfirmButton: false
+                                      }).then(() => {
+                                          // Reload the page to update the brand list
+                                          window.location.href = "display-brands.php";
+                                      });
+                                      // Find and remove the table row containing the deleted brand
+                                      const row = document.getElementById("row-' . $marcaid . '");
+                                      if (row) {
+                                          row.remove();
+                                      }
+                                  } else {
+                                      // Brand not found or deletion failed
+                                      Swal.fire({
+                                          title: "Error",
+                                          text: "No se pudo eliminar la Marca.",
+                                          icon: "error",
+                                          timer: 3000,
+                                          showConfirmButton: false
+                                      });
+                                  }
+                              }
+                          };
+                          xhr.send("brand_id=' . $marcaid . '"); // Pass the brand_id variable here
+                      }
+                  });
+              </script>';
+              break;
+            }
                         
           }
           catch(PDOException $e){
@@ -328,9 +318,9 @@ $(document).ready(function () {
           }
           
           try {
-            $stmt = $conn->prepare("SELECT * FROM supplier");
+            $stmt = $conn->prepare("SELECT * FROM marca");
             $stmt->execute();
-            $suppliers = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $marcas = $stmt->fetchAll(PDO::FETCH_ASSOC);
           } catch(PDOException $e) {
               echo "Error: " . $e->getMessage();
           }
@@ -339,26 +329,18 @@ $(document).ready(function () {
               <tr>
                   <th scope="col" class="orderable-column">ID</th>
                   <th scope="col" class="orderable-column">Nombre</th>
-                  <th scope="col">Correo</th>
-                  <th scope="col">Número de Teléfono</th>
-                  <th scope="col" class="orderable-column">Fecha Ingreso</th>
-                  <th scope="col" class="orderable-column">Fecha Actualización</th>
-                  <th scope="col">Acciones</th>
+                  <th scope="col" style="width: 200px;">Acciones</th>
               </tr>
           </thead>
           <tbody>
-              <?php foreach($suppliers as $supplier): ?>
+              <?php foreach($marcas as $marca): ?>
                   <tr>
-                    <td><?php echo $supplier['id']; ?></td>
-                    <td><?php echo $supplier['name']; ?></td>
-                    <td><?php echo $supplier['email']; ?></td>
-                    <td><?php echo $supplier['phone_number']; ?></td>
-                    <td><?php echo $supplier['created_at']; ?></td>
-                    <td><?php echo $supplier['updated_at']; ?></td>
+                    <td><?php echo $marca['id']; ?></td>
+                    <td><?php echo $marca['nombre']; ?></td>
                     <td>
                       <form method="post">
-                        <input type="hidden" name="supplierid" id="supplierid" value="<?php echo $supplier['id']; ?>">
-                        <button type="button" class="btn btn-primary editbtn"style="height:38px; width:71.6167px">Editar</button>
+                        <input type="hidden" name="marcaid" id="marcaid" value="<?php echo $marca['id']; ?>">
+                        <button type="button" class="btn btn-primary editbtn" style="height:38px; width:71.6167px">Editar</button>
                         <?php if (!isEmployee($user_role)): ?>
                             <input type="submit" name="btnAction" value="Borrar" class="btn btn-danger" style="height:38px; width:71.6167px">
                         <?php endif; ?>
@@ -374,6 +356,7 @@ $(document).ready(function () {
 </div>
 
 </div>
+
 
 <!-- MODAL -->
 <?php
@@ -409,39 +392,22 @@ if (isset($_SESSION['response'])) {
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Editar Datos de Proveedor</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Editar Datos de Marca</h5>
+                    
                 </div>
 
-                <form action="database/update-supplier.php"  method="POST">
+                <form action="database/update-brand.php"  method="POST">
 
                     <div class="modal-body">
-                  
+
                         <input type="hidden" name="e_id" id="e_id">
 
                         <div class="form-group">
                             <label>Nombre</label>
                             <input type="text" name="e_name" id="e_name" class="form-control"
-                                placeholder="Ingrese el Nombre del Proveedor">
+                                placeholder="Nombre marca">
                         </div>
 
-                        <div class="form-group mb-3">
-                          <label for="email" class="mb-1">Correo</label>
-                          <input type="email" class="form-control" id="e_email" name="e_email" placeholder="Ingrese el Correo del Proveedor" 
-                          required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{1,}">
-                        </div>
-
-
-                        <div class="form-group">
-                            <label>Número telefónico</label>
-                            <div class="input-group">
-                              <div class="input-group-prepend">
-                                <span class="input-group-text">+56 9</span>
-                              </div>
-                              <input type="text" class="form-control" id="e_phone_number" name="e_phone_number" pattern="[0-9]{8}" placeholder="Ej. 123456789" required>
-                            </div>
-                        </div>
-                        
-                        
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -453,6 +419,9 @@ if (isset($_SESSION['response'])) {
             </div>
         </div>
     </div>
+
+
+
 <!-- DataTable -->
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.css"/>  
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.js"></script>

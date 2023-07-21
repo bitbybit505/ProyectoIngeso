@@ -1,7 +1,7 @@
 <?php
   session_start();
   if(!isset($_SESSION['user'])) header('location: login.php');
-  $_SESSION['table'] = 'supplier';
+  $_SESSION['table'] = 'marca';
   $user = $_SESSION['user'];
   $user_role= $user['role'];
   function isEmployee($user_role) {
@@ -173,27 +173,13 @@ $(document).ready(function () {
 
       <div class="container-fluid col-md-6 justify-content-center pt-5">
         <div class="card">
-          <div class="card-header fw-semibold">Agregar Proveedor</div>
+          <div class="card-header fw-semibold ">Agregar Marca</div>
           <div class="card-body">
-            <form method="POST" action="database/validate-supplier.php">
+            <form method="POST" action="database/validate-brand.php">
               <div class="form-group mb-3 fw-semibold">
                 <label for="name">Nombre</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="Ingrese nombre del proveedor" required>
+                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese nombre de la marca" required>
               </div>
-              <div class="form-group mb-3 fw-semibold">
-                <label for="email" class="mb-1">Correo</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="Ingrese correo del proveedor" required>
-              </div>
-              <div class="form-group mb-3 fw-semibold">
-                <label for="phoneNumber" class="mb-1">Número de teléfono</label>
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">+56 9</span>
-                  </div>
-                  <input type="text" class="form-control" id="phone_number" name="phone_number" pattern="[0-9]{8}" placeholder="Ej: 12345678" required>
-                </div>
-              </div>
-              
               <!--<input type="hidden" name="table" value= "users" /> -->
               <button type="submit" class="btn btn-primary mb-3 ">Agregar</button>
             </form>

@@ -3,13 +3,7 @@
 
     $table_name= $_SESSION['table'];
     $name= $_POST['nombre'];
-  
-    
-        
-    /*$icommand="INSERT INTO $table_name('name','last_name','username','email','password','rol','status','created_at','updated_at') 
-                    VALUES ('".$name."','".$last_name."','".$username."','".$email."','".$encrypted_password."',NULL,1, NOW(),NOW())";
-      */              
-       
+          
     try{
 
         $icommand = "INSERT INTO $table_name (`nombre`) 
@@ -31,7 +25,7 @@
     }
 
     $_SESSION['response'] = $response;
-    header('location: ../add-marca.php');
+    header('location: ../add-brand.php');
 
 
     
