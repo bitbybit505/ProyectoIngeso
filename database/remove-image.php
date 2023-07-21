@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $response = [
             'success' => true,
-            'message' => 'Image removed successfully.'
+            'message' => 'La imagen fue eliminada correctamente.'
         ];
     } catch (PDOException $e) {
         $response = [

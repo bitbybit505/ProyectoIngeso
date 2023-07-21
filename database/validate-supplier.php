@@ -18,7 +18,7 @@
         $conn->exec($icommand);
         $response= [
             'success' => true,
-            'message' => $name .' was added successfully.'
+            'message' => $name .' fue agregado exitosamente.'
         ];
     } catch (PDOException $e){
         $response = [

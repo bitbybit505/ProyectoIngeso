@@ -173,13 +173,14 @@
     const productId = $(this).data('product-id');
 
     Swal.fire({
-      title: 'Confirmation',
-      text: 'Are you sure you want to remove the image?',
+      title: 'Confirmación',
+      text: '¿Estás seguro que quieres eliminar la imagen?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#d33',
       cancelButtonColor: '#3085d6',
-      confirmButtonText: 'Yes, remove it!'
+      confirmButtonText: '¡Sí, bórrala!',
+      cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.isConfirmed) {
         // Send AJAX request to remove-image.php
@@ -191,7 +192,7 @@
           success: function(response) {
             if (response.success) {
               Swal.fire({
-                title: 'Success',
+                title: 'Imagen eliminada',
                 text: response.message,
                 icon: 'success',
                 timer: 2000
@@ -698,7 +699,7 @@ if (isset($_SESSION['response'])) {
         // Show SweetAlert modal
         Swal.fire({
             icon: '<?= $is_success ? 'success' : 'error' ?>',
-            title: '<?= $is_success ? 'Success' : 'Error' ?>',
+            title: '<?= $is_success ? 'Éxito' : 'Error' ?>',
             text: '<?= $response_message ?>',
             timer: 3000,
             confirmButtonText: 'OK'

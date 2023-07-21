@@ -73,7 +73,7 @@ try {
 
     $response = [
         'success' => true,
-        'message' => $name . ' was updated successfully.'
+        'message' => $name . ' fue actualizado correctamente.'
     ];
 } catch (PDOException $e) {
     $response = [

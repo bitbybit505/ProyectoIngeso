@@ -41,7 +41,7 @@
             
             $response = [
                 'success' => true,
-                'message' => $name . ' ' . $last_name . ' was updated successfully.'
+                'message' => $name . ' ' . $last_name . ' fue actualizado correctamente.'
             ];
                         
                         

@@ -372,7 +372,7 @@ if (isset($_SESSION['response'])) {
         // Show SweetAlert modal
         Swal.fire({
             icon: '<?= $is_success ? 'success' : 'error' ?>',
-            title: '<?= $is_success ? 'Success' : 'Error' ?>',
+            title: '<?= $is_success ? 'Éxito' : 'Error' ?>',
             text: '<?= $response_message ?>',
             timer: 3000,
             confirmButtonText: 'OK'
