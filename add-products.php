@@ -197,8 +197,8 @@ $(document).ready(function () {
             $txtNombre=(isset($_POST['txtNombre']))?$_POST['txtNombre']:"";
             $txtImagen=(isset($_FILES['txtImagen']['name']))?$_FILES['txtImagen']['name']:"";
             $txtCantidad=(isset($_POST['txtCantidad']))?$_POST['txtCantidad']:"";
-            $txtCantidadRec=(isset($_POST['txtCantidadRec']))?$_POST['txtCantidadRec']:"";
-            $txtCantidadMin=(isset($_POST['txtCantidadMin']))?$_POST['txtCantidadMin']:"";
+            $txtCantidadRec=floatval($txtCantidad)*0.7;
+            $txtCantidadMin=floatval($txtCantidad)*0.3;
             $txtPrecio=(isset($_POST['txtPrecio']))?$_POST['txtPrecio']:"";
             $txtDescripcion=(isset($_POST['txtDescripcion']))?$_POST['txtDescripcion']:"";
             $accion=(isset($_POST['accion']))?$_POST['accion']:"";
@@ -325,14 +325,14 @@ $(document).ready(function () {
                     <input type="number" class="form-control" value="<?php echo $txtCantidad ?>" name="txtCantidad" id="txtCantidad"  placeholder="Ingrese cantidad del producto" inputmode="numeric" pattern="[0-9]+" min="0" required>
                   <div class="invalid-feedback">Por favor, ingresa un número entero positivo.</div>
                   </div>
-                  <div class="form-group mb-bitbybit fw-semibold">
-                    <label for="txtCantidad">Cantidad Recomendada</label>
-                    <input type="number" class="form-control" value="<?php echo $txtCantidadRec ?>" name="txtCantidadRec" id="txtCantidadRec"  placeholder="Ingrese cantidad recomendada del producto" inputmode="numeric" pattern="[0-9]+" min="0" required>
+                  <div class="form-group mb-bitbybit fw-semibold" displa>
+                    <!--<label for="txtCantidad">Cantidad Recomendada</label>-->
+                    <input type="hidden" type="number" class="form-control" value="<?php echo $txtCantidadRec ?>" name="txtCantidadRec" id="txtCantidadRec"  placeholder="Ingrese cantidad recomendada del producto" inputmode="numeric" pattern="[0-9]+" min="0" required>
                   <div class="invalid-feedback">Por favor, ingresa un número entero positivo.</div>
                   </div>
                   <div class="form-group mb-bitbybit fw-semibold">
-                    <label for="txtCantidad">Cantidad Mínima</label>
-                    <input type="number" class="form-control" value="<?php echo $txtCantidadMin ?>" name="txtCantidadMin" id="txtCantidadMin"  placeholder="Ingrese cantidad mínima del producto" inputmode="numeric" pattern="[0-9]+" min="0" required>
+                    <!--<label for="txtCantidad">Cantidad Mínima</label>-->
+                    <input type="hidden" type="number" class="form-control" value="<?php echo $txtCantidadMin ?>" name="txtCantidadMin" id="txtCantidadMin"  placeholder="Ingrese cantidad mínima del producto" inputmode="numeric" pattern="[0-9]+" min="0" required>
                   <div class="invalid-feedback">Por favor, ingresa un número entero positivo.</div>
                   </div>
                   <div class="form-group mb-bitbybit fw-semibold">
