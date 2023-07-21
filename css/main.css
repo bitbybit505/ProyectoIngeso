@@ -30,3 +30,78 @@ body{
     text-align: center;
 }
 
+.custom-container{
+  height: 94vh; /* Set the container height to 100% of the viewport height */
+  
+}
+
+.pt-bitbybit{
+  padding-top: 30px !important;
+}
+
+.mb-bitbybit{
+  margin-bottom: 10px;
+}
+
+.custom-container row {
+  height: 100%; /* Set the row height to 100% of the container height */
+}
+
+.custom-container .sidebar {
+  height: 100%; /* Set the sidebar height to 100% of the row height */
+}
+
+.custom-container-user{
+    height: 125vh; /* Set the container height to 100% of the viewport height */
+    overflow-y: auto; /* Add vertical scroll if content overflows */
+  }
+
+.custom-container-user .row {
+  height: 100%; /* Set the row height to 100% of the container height */
+}
+
+.custom-container-user .sidebar {
+  height: 100%; /* Set the sidebar height to 100% of the row height */
+}
+
+.main-media{
+  width: 100% !important;
+}
+
+.ul-media{
+  flex-direction: row;
+}
+
+@media (min-width: 1650px) {
+  /* Increase the sidebar width for HD screens */
+  
+  .ul-media{
+    flex-direction: column ;
+  }
+  
+  .sm-media{
+    width: 16.666667% !important;
+  }
+
+  .lateral-bar {
+    width: 195px;
+  }
+
+  /* Adjust the main content width for HD screens */
+  .col-md-11 {
+    flex: 0 0 100%;
+    max-width: 100%;
+    margin-right: 20%;
+    
+  }
+  
+  .main-media{
+    width: 82% !important;
+    
+  }
+  
+  
+  
+}
+
+

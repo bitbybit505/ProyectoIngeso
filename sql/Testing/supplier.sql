@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 19, 2023 at 11:36 PM
+-- Generation Time: Jul 21, 2023 at 02:57 AM
 -- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- PHP Version: 8.1.17
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,42 +24,34 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `marca`
+-- Table structure for table `supplier`
 --
 
-CREATE TABLE `marca` (
+CREATE TABLE `supplier` (
   `id` int(11) NOT NULL,
-  `nombre` varchar(100) NOT NULL
+  `name` varchar(100) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `phone_number` varchar(50) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `marca`
+-- Dumping data for table `supplier`
 --
 
-INSERT INTO `marca` (`id`, `nombre`) VALUES
-(2, 'coca'),
-(5, 'tesla'),
-(7, 'ASUS'),
-(9, 'Chinchon'),
-(10, 'ACERUS'),
-(11, 'PEgasus'),
-(12, 'HACHEPE'),
-(13, 'VIVO'),
-(14, 'BOOKUS'),
-(15, 'TARGET'),
-(16, 'THERMAL'),
-(17, 'BIBLIO'),
-(18, 'UCNCHILE'),
-(19, 'Peruano');
+INSERT INTO `supplier` (`id`, `name`, `email`, `phone_number`, `created_at`, `updated_at`) VALUES
+(2, 'Musicstore2', 'musicstore@gmail.com', '+56 9 1112 2233', '2023-05-31 08:22:26', '2023-07-07 15:56:45'),
+(26, 'Casa amarilla', 'casaamarilla@gmail.c', '+56 9 2569 8551', '2023-07-03 18:45:34', '2023-07-07 15:53:29');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `marca`
+-- Indexes for table `supplier`
 --
-ALTER TABLE `marca`
+ALTER TABLE `supplier`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -67,10 +59,10 @@ ALTER TABLE `marca`
 --
 
 --
--- AUTO_INCREMENT for table `marca`
+-- AUTO_INCREMENT for table `supplier`
 --
-ALTER TABLE `marca`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+ALTER TABLE `supplier`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
