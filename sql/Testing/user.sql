@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 20, 2023 at 03:39 AM
+-- Generation Time: Jul 21, 2023 at 02:56 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.1.17
 
@@ -61,7 +61,7 @@ INSERT INTO `user` (`id`, `rut`, `name`, `last_name`, `username`, `email`, `pass
 (110, '5.872.282-0', 'Samuele', 'Hanhart', 'shanhart20', 'shanhart20@google.com.br', '$2y$10$QTmtJZHNgaxqlwdpGnEy/OORSXTTuw0JFmUIhjgMGZ054DbKkvgQW', '+56 9 4921 7388', 'Empleado', 1, '0000-00-00 00:00:00', '2023-07-11 11:09:21'),
 (112, '17.116.237-8', 'Donnie', 'Adey', 'dadey22', 'dadey22@nhs.uk', '$2y$10$SrklLs35cXXFYCQH2y3xvu1y1RLvxb0Mjm1wTfMtf9AwoyivczG16', '+56 9 4736 9980', 'Empleado', 0, '0000-00-00 00:00:00', '2023-07-11 11:09:17'),
 (113, '23.518.750-7', 'Rahel', 'Dominiak', 'rdominiak23', 'rdominiak23@vimeo.com', '$2y$10$ADeRhBNmNybAFr.Tq6asQ.vHt2jGE1liFjbvHjwERjRh5KobEglVG', '+56 9 3752 4424', 'Empleado', 0, '0000-00-00 00:00:00', '2023-07-11 11:09:13'),
-(132, '7.881.102-1', 'Borrar', 'button', 'BorBu', 'Borbu@g.com', '$2y$10$vshsXbUht5GfomPv9dNV6O2LpKINcHZpNdXu962BKWC.h16F3YHpO', '+56 9 8462 5162', 'Empleado', 1, '2023-07-19 21:37:59', '2023-07-19 21:37:59');
+(133, '7.881.102-1', 'Usuario', 'Prueba', 'Usuariodeprueba', 'prueba@c.c', '$2y$10$KSGDSE/Ke7QYq50AduOzr.m78JZFJog/UQbdPx.QuSWC4CHY//u1a', '+56 9 1555 5555', 'Empleado', 1, '2023-07-20 19:00:01', '2023-07-20 19:00:01');
 
 --
 -- Indexes for dumped tables
@@ -85,7 +85,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=133;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=134;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

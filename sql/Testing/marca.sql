@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 07, 2023 at 10:00 PM
+-- Generation Time: Jul 21, 2023 at 02:58 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.1.17
 
@@ -38,19 +38,12 @@ CREATE TABLE `marca` (
 
 INSERT INTO `marca` (`id`, `nombre`) VALUES
 (10, 'ACERUS'),
-(7, 'ASUS'),
+(7, 'ASUS2'),
 (17, 'BIBLIO3'),
 (9, 'Chinchon444'),
 (2, 'coca'),
 (12, 'HACHEPE'),
-(20, 'Lippi'),
-(11, 'PEgasus'),
-(19, 'Peruano'),
-(15, 'TARGET'),
-(5, 'tesla'),
-(16, 'THERMAL'),
-(18, 'UCNCHILE'),
-(13, 'VIVO');
+(11, 'PEgasus');
 
 --
 -- Indexes for dumped tables
@@ -71,7 +64,7 @@ ALTER TABLE `marca`
 -- AUTO_INCREMENT for table `marca`
 --
 ALTER TABLE `marca`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

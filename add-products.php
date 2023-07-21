@@ -210,13 +210,21 @@ $(document).ready(function () {
             switch($accion){
               case "Agregar":
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                  $txtMarca = $_POST['txtMarca'];
-                  //echo "La marca seleccionada es: " . $txtMarca;
+                    if (isset($_POST['txtMarca'])) {
+                      $txtMarca = $_POST['txtMarca'];
+                    } else {
+                      $txtMarca = '';
+                    }
                 }
+                
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                  $txtProveedor = $_POST['txtProveedor'];
-                  //echo "el proveedor seleccionada es: " . $txtProveedor;
+                  if (isset($_POST['txtProveedor'])) {
+                    $txtProveedor = $_POST['txtProveedor'];
+                  } else {
+                    $txtProveedor = '';
+                  }
                 }
+
                 // Obtener el id de la marca seleccionada
                 try{
                   $stmt = $conn->prepare("SELECT id FROM marca WHERE nombre = :nombre_marca");
@@ -349,10 +357,6 @@ $(document).ready(function () {
                         $sentenciaSQL = $conn->prepare("SELECT nombre FROM marca");
                         $sentenciaSQL->execute();
                         $marcas=$sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
-                        //$txtMarcaName=$marca['nombre'];
-                        //$conexion = mysqli_connect("localhost", "usuario", "contraseña", "basededatos");
-                        //$query = "SELECT nombre FROM marca";
-                        //$result = mysqli_query($conexion, $query);
                         
                         // Crear una opción por cada marca existente
                         foreach ($marcas as $marca) {
@@ -373,15 +377,12 @@ $(document).ready(function () {
                         $sentenciaSQL = $conn->prepare("SELECT `name` FROM supplier");
                         $sentenciaSQL->execute();
                         $proveedores=$sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
-                        //$txtMarcaName=$marca['nombre'];
-                        //$conexion = mysqli_connect("localhost", "usuario", "contraseña", "basededatos");
-                        //$query = "SELECT nombre FROM marca";
-                        //$result = mysqli_query($conexion, $query);
                         
                         // Crear una opción por cada marca existente
                         foreach ($proveedores as $proveedor) {
                           echo "<option value='" . $proveedor['name'] . "'>" . $proveedor['name'] . "</option>";
                         }
+                        var_dump("txtProveedor");
                         // Cerrar la conexión a la base de datos
                         $conn = null;
                       ?>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 18, 2023 at 03:35 AM
+-- Generation Time: Jul 21, 2023 at 02:58 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.1.17
 
@@ -47,9 +47,10 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`id`, `name`, `cantidad`, `cantidad_rec`, `cantidad_min`, `precio`, `imagen`, `descripcion`, `fecha_ingreso`, `fecha_actualizada`, `id_marca`, `id_proveedor`) VALUES
-(1, 'Piano', 9, 9, 3, 60000, '', 'Piano con teclas negras', '2023-07-03 18:43:33', '2023-07-14 18:02:40', 9, 19),
-(3, 'GX20004 ', 7, 8, 2, 0, '', 'Laptop that has 10gb of ram', '2023-07-07 08:29:29', '2023-07-14 18:02:44', 13, 19),
-(20, 'asda', 1, 8, 2, 234, '', 'sdgf', '2023-07-10 21:32:07', '2023-07-14 18:01:40', 10, 2);
+(1, 'Piano', 7, 8, 4, 222, '1689895928_flauta.webp', 'Piano con teclas negras', '2023-07-03 18:43:33', '2023-07-20 20:03:31', 9, 26),
+(3, 'GX20004 ', 10, 9, 1, 235235, '', 'Laptop that has 10gb of ram', '2023-07-07 08:29:29', '2023-07-20 20:26:26', 10, 2),
+(24, 'ñkdjsg', 123, 123, 2, 121241, 'img.jpg', '', '2023-07-20 19:39:11', '2023-07-20 20:17:05', 10, 2),
+(25, '42124', 144, 122, 123, 123123, '', '', '2023-07-20 20:15:52', '2023-07-20 20:15:52', 10, 2);
 
 --
 -- Indexes for dumped tables
@@ -70,7 +71,7 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
