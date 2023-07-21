@@ -200,8 +200,8 @@ $(document).ready(function () {
             <div class="card-body">
               <h5 class="card-title">Proveedores</h5>
               <p class="card-text">Ver y agregar proveedores.</p>
-              <a href="display-suppliers.php" class="btn btn-primary">Ver Proveedores</a>
-              <a href="add-supplier.php" class="btn btn-primary">Agregar Proveedores</a>
+              <a href="display-suppliers.php" class="btn btn-primary mb-1" >Ver Proveedores</a>
+              <a href="add-supplier.php" class="btn btn-primary mb-1">Agregar Proveedores</a>
             </div>
           </div>
         </div>

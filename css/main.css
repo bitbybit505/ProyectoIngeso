@@ -32,7 +32,7 @@ body{
 
 .custom-container{
   height: 94vh; /* Set the container height to 100% of the viewport height */
-  overflow-y: auto; /* Add vertical scroll if content overflows */
+  
 }
 
 .custom-container row {
@@ -55,3 +55,45 @@ body{
 .custom-container-user .sidebar {
   height: 100%; /* Set the sidebar height to 100% of the row height */
 }
+
+.main-media{
+  width: 100% !important;
+}
+
+.ul-media{
+  flex-direction: row;
+}
+
+@media (min-width: 1650px) {
+  /* Increase the sidebar width for HD screens */
+  
+  .ul-media{
+    flex-direction: column ;
+  }
+  
+  .sm-media{
+    width: 16.666667% !important;
+  }
+
+  .lateral-bar {
+    width: 195px;
+  }
+
+  /* Adjust the main content width for HD screens */
+  .col-md-11 {
+    flex: 0 0 100%;
+    max-width: 100%;
+    margin-right: 20%;
+    
+  }
+  
+  .main-media{
+    width: 82% !important;
+    
+  }
+  
+  
+
+}
+
+

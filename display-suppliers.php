@@ -56,6 +56,7 @@
       border-radius: 10px; /* Ajusta el valor según la cantidad de redondeo que deseas */
       overflow: hidden; /* Evita que el contenido sobresalga del borde redondeado */
     }
+    
   </style>
   <!-- EDIT BUTTON MODAL-->
 

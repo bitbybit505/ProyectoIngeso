@@ -288,44 +288,44 @@ $(document).ready(function () {
             $sentenciaSQL->execute();
             $listaProductos=$sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
             ?>        
-            <div class="container-fluid col-md-6 justify-content-center pt-3">
+            <div class="container-fluid col-md-7 justify-content-center pt-1">
               <div class="card">
                 <div class="card-header fw-semibold">Agregar Producto</div>
                 <div class="card-body">
                   <form method="POST" enctype="multipart/form-data">
-                  <div class="form-group mb-3 fw-semibold">
+                  <div class="form-group  fw-semibold">
                     <label for="txtNombre">Nombre</label>
                     <input type="text" class="form-control" value="<?php echo $txtNombre ?>" name="txtNombre" id="txtNombre"  placeholder="Ingrese nombre del producto">
                   </div>
-                  <div class="form-group mb-3 fw-semibold">
+                  <div class="form-group fw-semibold">
                     <label for="txtCantidad">Cantidad</label>
                     <input type="number" class="form-control" value="<?php echo $txtCantidad ?>" name="txtCantidad" id="txtCantidad"  placeholder="Ingrese cantidad del producto" inputmode="numeric" pattern="[0-9]+" min="0" required>
                   <div class="invalid-feedback">Por favor, ingresa un número entero positivo.</div>
                   </div>
-                  <div class="form-group mb-3 fw-semibold">
+                  <div class="form-group fw-semibold">
                     <label for="txtCantidad">Cantidad Recomendada</label>
                     <input type="number" class="form-control" value="<?php echo $txtCantidadRec ?>" name="txtCantidadRec" id="txtCantidadRec"  placeholder="Ingrese cantidad recomendada del producto" inputmode="numeric" pattern="[0-9]+" min="0" required>
                   <div class="invalid-feedback">Por favor, ingresa un número entero positivo.</div>
                   </div>
-                  <div class="form-group mb-3 fw-semibold">
+                  <div class="form-group fw-semibold">
                     <label for="txtCantidad">Cantidad Mínima</label>
                     <input type="number" class="form-control" value="<?php echo $txtCantidadMin ?>" name="txtCantidadMin" id="txtCantidadMin"  placeholder="Ingrese cantidad mínima del producto" inputmode="numeric" pattern="[0-9]+" min="0" required>
                   <div class="invalid-feedback">Por favor, ingresa un número entero positivo.</div>
                   </div>
-                  <div class="form-group mb-3 fw-semibold">
+                  <div class="form-group fw-semibold">
                     <label for="txtPrecio">Precio</label>
                     <input type="number" class="form-control" value="<?php echo $txtPrecio ?>" name="txtPrecio" id="txtPrecio"  placeholder="Ingrese precio del producto" inputmode="numeric" pattern="[0-9]+" min="0" required>
                   <div class="invalid-feedback">Por favor, ingresa un número entero positivo.</div>
                   </div>
-                  <div class="form-group mb-3 fw-semibold">
+                  <div class="form-group  fw-semibold">
                     <label for="txtNombre">Imagen</label>
                     <input type="file" class="form-control" name="txtImagen" id="txtImagen"  placeholder="Nombre del producto" accept=".jpg, .jpeg, .png, .gif, .webp">
                   </div>
-                  <div class="form-group mb-3 fw-semibold">
+                  <div class="form-group fw-semibold">
                     <label for="txtDescripcion">Descripción</label>
                     <input type="text" class="form-control" value="<?php echo $txtDescripcion ?>" name="txtDescripcion" id="txtDescripcion"  placeholder="Ingrese descripción del producto">
                   </div>
-                  <div class="form-group mb-3 fw-semibold">
+                  <div class="form-group fw-semibold">
                     <label for="txtMarca">Marca:</label>
                     <select class="form-control" name="txtMarca" id="txtMarca">
                       <?php
@@ -373,7 +373,7 @@ $(document).ready(function () {
                     </select>
                   </div>                 
                   <div class="btn-group" role="group" aria-label="">
-                    <button type="submit" name="accion" value= "Agregar" class="btn btn-primary mb-3">Agregar</button>
+                    <button type="submit" name="accion" value= "Agregar" class="btn btn-primary mb-1">Agregar</button>
                   </div>
                   </form>
                 </div>

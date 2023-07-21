@@ -16,7 +16,7 @@ $description = $_POST['e_descripcion'];
 $quantity = $_POST['e_cantidad'];
 $quantity_rec = $_POST['e_cant_rec'];
 $quantity_min = $_POST['e_cant_min'];
-$price = $_POST['e_precio'];
+$price = (int)preg_replace('/[^0-9]/', '', $_POST['e_precio']);
 
 try {
     include('connection.php');

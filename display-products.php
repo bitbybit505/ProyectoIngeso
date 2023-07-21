@@ -122,20 +122,8 @@
       color: white; /* Color del texto en el encabezado */
     }
 
-    @media (min-width: 1200px) and (max-width: 1650px) {
-      /* Increase the sidebar width for HD screens */
-      .lateral-bar {
-        width: 190px;
-      }
-
-      /* Adjust the main content width for HD screens */
-      .col-md-9 {
-        flex: 0 0 100%;
-        max-width: 100%;
-        margin-right: 20%;
-        
-      }
-    }
+    
+    
     
   </style>
 
@@ -168,6 +156,7 @@
         var data = $tr.children("td").map(function () {
             return $(this).text();
         }).get();
+        
 
         $('#e_image').val(data[0]);
         $('#e_name').val(data[1]);
@@ -388,9 +377,9 @@ $(document).ready(function () {
 
 <div class="container-fluid custom-container">
   <div class="row">
-    <nav class="col-md-2 d-none d-md-block lateral-bar sidebar rounded-bottom shadow">
+    <nav class="col-12 d-none d-md-block lateral-bar sidebar rounded-bottom shadow sm-media" >
       <div class="sidebar-sticky">
-        <ul class="nav flex-column">
+        <ul class="nav ul-media">
           <li class="nav-item">
             <a class="nav-link fw-semibold" data-bs-toggle="collapse" href="#usersCollapse"><i class="fas fa-users"></i> <span>Usuarios</span> <i class="fa-solid fa-caret-down"></i></a>
             <div class="collapse" id="usersCollapse">
@@ -450,7 +439,7 @@ $(document).ready(function () {
       <br>
     </nav>
 
-      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+      <main role="main" class="ml-sm-auto px-1 main-media">
         <?php
           $txtID=(isset($_POST['txtID']))?$_POST['txtID']:"";
           $txtNombre=(isset($_POST['txtNombre']))?$_POST['txtNombre']:"";
@@ -469,7 +458,6 @@ $(document).ready(function () {
           include('database/connection.php');
           switch($accion){
             case "Borrar":
-              // Borrar imagen del producto
               $sentenciaSQL = $conn->prepare("SELECT * from product WHERE id=:id");
               $sentenciaSQL->bindParam(':id', $txtID);
               $sentenciaSQL->execute();
@@ -581,7 +569,7 @@ $(document).ready(function () {
           </select>
         </div>
 
-        <div class="row table-responsive">
+        <div class="row table-responsive" style="max-width: 101%">
           <table id="table" class="table table-striped">
             <thead>
               <tr>
@@ -618,19 +606,19 @@ $(document).ready(function () {
                   <td><?php echo $product['id'] ?></td>
                   <td><div class="d-flex align-items-center"
                     ><button class="btn btn-sm btn-outline-secondary" onclick="updateQuantity(<?=$product['id']?>, 'decrease')"
-                    ><i class="bi bi-arrow-down"></i></button><div class="mx-2"><?=$product['cantidad']?></div
+                    ><i class="bi bi-arrow-down"></i></button><div class="mx-1"><?=$product['cantidad']?></div
                     ><button class="btn btn-sm btn-outline-secondary" onclick="updateQuantity(<?=$product['id']?>, 'increase')"
                     ><i class="bi bi-arrow-up"></i></button></div
                     ></td>
                   <td><div class="d-flex align-items-center"
                     ><button class="btn btn-sm btn-outline-secondary" onclick="updateQuantity(<?=$product['id']?>, 'decrease_rec')"
-                    ><i class="bi bi-arrow-down"></i></button><div class="mx-2"><?=$product['cant_rec']?></div
+                    ><i class="bi bi-arrow-down"></i></button><div class="mx-1"><?=$product['cant_rec']?></div
                     ><button class="btn btn-sm btn-outline-secondary" onclick="updateQuantity(<?=$product['id']?>, 'increase_rec')"
                     ><i class="bi bi-arrow-up"></i></button></div
                     ></td>
                   <td><div class="d-flex align-items-center"
                     ><button class="btn btn-sm btn-outline-secondary" onclick="updateQuantity(<?=$product['id']?>, 'decrease_min')"
-                    ><i class="bi bi-arrow-down"></i></button><div class="mx-2"><?=$product['cant_min']?></div
+                    ><i class="bi bi-arrow-down"></i></button><div class="mx-1"><?=$product['cant_min']?></div
                     ><button class="btn btn-sm btn-outline-secondary" onclick="updateQuantity(<?=$product['id']?>, 'increase_min')"
                     ><i class="bi bi-arrow-up"></i></button></div
                     ></td>
@@ -643,9 +631,9 @@ $(document).ready(function () {
                     <form method="post">           
                       <input type="hidden" name="txtID" id="txtID" value="<?php echo $product['id']; ?>">
                       <button type="button" class="btn btn-primary editbtn"style="height:38px; width:71.6167px">Editar</button>
-                      <?php if ($user_role !== 'Empleado'): ?>
-                          <input type="submit" name="btnAction" value="Borrar" class="btn btn-danger" style="height:38px; width:71.6167px">
-                        <?php endif; ?>
+                      <?php if (!isEmployee($user_role)): ?>
+                          <input type="submit" name="accion" value="Borrar" class="btn btn-danger" style="height:38px; width:71.6167px">
+                      <?php endif; ?>
                     </form>
                   </td>
                 </tr>
@@ -729,9 +717,9 @@ if (isset($_SESSION['response'])) {
   
 
 
-  <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  <div class="modal fade " id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Editar Datos de Producto</h5>

@@ -59,19 +59,7 @@
       border-radius: 10px; /* Ajusta el valor según la cantidad de redondeo que deseas */
       overflow: hidden; /* Evita que el contenido sobresalga del borde redondeado */
     }
-    @media (min-width: 1200px) and (max-width: 1550px) {
-      /* Increase the sidebar width for HD screens */
-      .lateral-bar {
-        width: 190px;
-      }
-
-      /* Adjust the main content width for HD screens */
-      .col-md-9 {
-        flex: 0 0 75%;
-        max-width: 75%;
-        margin-right: 20%;
-      }
-    }
+    
   </style>
 
 <!-- EDIT BUTTON MODAL-->
@@ -203,9 +191,9 @@ $(document).ready(function () {
 
 <div class="container-fluid custom-container">
   <div class="row">
-    <nav class="col-md-2 d-none d-md-block lateral-bar sidebar rounded-bottom shadow">
+  <nav class="col-12 d-none d-md-block lateral-bar sidebar rounded-bottom shadow sm-media" >
       <div class="sidebar-sticky">
-        <ul class="nav flex-column">
+        <ul class="nav ul-media">
           <li class="nav-item">
             <a class="nav-link fw-semibold" data-bs-toggle="collapse" href="#usersCollapse"><i class="fas fa-users"></i> <span>Usuarios</span> <i class="fa-solid fa-caret-down"></i></a>
             <div class="collapse" id="usersCollapse">
@@ -265,7 +253,9 @@ $(document).ready(function () {
       <br>
     </nav>
 
-    <div class="container-fluid col-md-9 justify-content-center pt-3">
+    
+
+    <div class="container-fluid  justify-content-center pt-3 main-media">
       <table id="table" class="table table-striped table-dark"><!-- table-dark-->
         <?php
         //deleting a user
@@ -363,7 +353,7 @@ $(document).ready(function () {
                   <th scope="col" style="display: none;">Contraseña</th>
                   <th scope="col" class="orderable-column">Fecha Ingreso</th>
                   <th scope="col" class="orderable-column">Fecha Actualización</th>
-                  <th scope="col">Acciones</th>
+                  <th scope="col" style="width: 90px;">Acciones</th>
               </tr>
           </thead>
           <tbody>
@@ -457,6 +447,7 @@ $(document).ready(function () {
       </table>
       
     </div>
+    
  </div>
 
 </div>
